@@ -2,1014 +2,991 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#f7fbff">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5faff">
 <title>Cyber Awareness Challenge</title>
 
 <style>
-*{box-sizing:border-box}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
---blue:#1677e8;
---blue-dark:#075bb8;
---cyan:#36b9ef;
+--blue:#1478e8;
+--blue2:#31a9eb;
 --navy:#102f4c;
---text:#385166;
---muted:#788c9d;
---border:#dce9f3;
---white:#fff;
---green:#16875a;
---red:#c94747;
+--text:#29475e;
+--muted:#4f6c82;
+--line:#d5e4ef;
+--green:#14794f;
+--red:#b83e3e;
 }
-
-html,body{
-margin:0;
-min-height:100%;
-}
-
+html,body{margin:0;min-height:100%}
 body{
-font-family:"Segoe UI",Arial,sans-serif;
-background:#f7fbff;
+font-family:"Times New Roman",Times,serif;
+background:#f5faff;
 color:var(--text);
-min-height:100vh;
-min-height:100dvh;
 }
-
 button,input{font:inherit}
-
-
-/* ==============================
-   SCREENS
-============================== */
-
 .screen{
 display:none;
-width:100%;
 min-height:100vh;
 min-height:100dvh;
 align-items:center;
 justify-content:center;
-padding:28px 18px;
-position:relative;
-overflow:hidden;
-}
-
-.screen.active{
-display:flex;
-}
-
-.wrap{
-width:100%;
-max-width:1000px;
-margin:auto;
-position:relative;
-z-index:2;
-}
-
-
-/* ==============================
-   BACKGROUND
-============================== */
-
-.screen::before{
-content:"";
-position:absolute;
-width:600px;
-height:600px;
-border-radius:50%;
-top:-350px;
-right:-220px;
+padding:25px 16px;
 background:
-radial-gradient(
-circle,
-rgba(65,184,239,.13),
-rgba(65,184,239,.035) 50%,
-transparent 70%
-);
+radial-gradient(circle at 92% 5%,#dff3ff 0,transparent 28%),
+radial-gradient(circle at 4% 95%,#e6f5ff 0,transparent 27%),
+linear-gradient(135deg,#fcfeff,#f1f8fe);
 }
-
-.screen::after{
-content:"";
-position:absolute;
-width:430px;
-height:430px;
-border-radius:50%;
-bottom:-270px;
-left:-190px;
-border:1px solid rgba(23,125,215,.09);
-}
-
-.dots{
-position:absolute;
-width:145px;
-height:145px;
-background-image:
-radial-gradient(rgba(26,132,215,.20) 1.2px,transparent 1.2px);
-background-size:18px 18px;
-pointer-events:none;
-}
-
-.dots.top{
-left:4%;
-top:7%;
-}
-
-.dots.bottom{
-right:4%;
-bottom:7%;
-}
-
-
-/* ==============================
-   BUTTONS
-============================== */
-
-.btn{
-border:0;
-border-radius:9px;
-min-height:49px;
-padding:13px 24px;
-font-size:14px;
-font-weight:700;
-cursor:pointer;
-transition:.18s ease;
-}
-
-.btn-primary{
-background:linear-gradient(135deg,#1678e8,#25a0e9);
-color:white;
-box-shadow:0 10px 24px rgba(22,120,232,.20);
-}
-
-.btn-primary:hover{
-transform:translateY(-2px);
-box-shadow:0 14px 29px rgba(22,120,232,.27);
-}
-
-.btn-primary:active{
-transform:translateY(0);
-}
-
-.btn-secondary{
-background:white;
-border:1px solid #c9dce9;
-color:#557086;
-}
-
-.btn-secondary:hover{
-background:#f7fbff;
-border-color:#a8c9e1;
-}
-
-
-/* ==============================
-   INTRO
-============================== */
-
-.intro-card{
-width:100%;
-min-height:535px;
-display:grid;
-grid-template-columns:46% 54%;
-align-items:center;
-background:rgba(255,255,255,.96);
-border:1px solid #dfebf4;
-border-radius:25px;
-overflow:hidden;
-box-shadow:
-0 28px 70px rgba(48,91,124,.11),
-0 4px 15px rgba(48,91,124,.04);
-}
-
-.intro-content{
-padding:65px 25px 65px 62px;
-position:relative;
-z-index:3;
-}
-
-.intro-kicker{
-font-size:13px;
-font-weight:800;
-letter-spacing:3.2px;
-color:var(--blue);
-margin-bottom:17px;
-}
-
-.intro-content h1{
-max-width:430px;
-margin:0 0 31px;
-font-size:46px;
-line-height:1.08;
-letter-spacing:-1.5px;
-color:var(--navy);
-}
-
-.start-btn{
-padding-left:27px;
-padding-right:27px;
-}
-
-.start-arrow{
-display:inline-block;
-margin-left:8px;
-transition:transform .18s ease;
-}
-
-.start-btn:hover .start-arrow{
-transform:translateX(4px);
-}
-
-
-/* ==============================
-   HERO IMAGE
-============================== */
-
-.intro-art{
-height:100%;
-min-height:535px;
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-background:
-radial-gradient(
-circle at 50% 48%,
-#fff 0%,
-#f1f9ff 46%,
-#e9f6ff 100%
-);
-}
-
-.intro-art::before{
-content:"";
-position:absolute;
-width:390px;
-height:390px;
-border-radius:50%;
-border:1px solid rgba(22,119,232,.10);
-}
-
-.intro-art::after{
-content:"";
-position:absolute;
-width:310px;
-height:310px;
-border-radius:50%;
-background:rgba(60,181,238,.055);
-}
-
-.hero-image{
-display:block;
-position:relative;
-z-index:3;
-width:94%;
-max-width:500px;
-height:auto;
-object-fit:contain;
-filter:drop-shadow(0 20px 22px rgba(34,91,135,.12));
-}
-
-
-/* ==============================
-   CHALLENGE LABEL
-============================== */
-
+.screen.active{display:flex}
+.wrap{width:100%;max-width:1000px;margin:auto}
 .challenge-label{
 margin:0 0 14px 4px;
-font-size:13px;
-font-weight:800;
-letter-spacing:3.3px;
+font-size:15px;
+font-weight:700;
+letter-spacing:3px;
 color:var(--blue);
 }
-
-
-/* ==============================
-   EMAIL
-============================== */
-
-.email-card{
-background:white;
-border:1px solid #dae7f0;
-border-radius:17px;
-overflow:hidden;
-box-shadow:
-0 24px 60px rgba(41,84,118,.12),
-0 3px 10px rgba(41,84,118,.04);
-}
-
-.email-appbar{
-height:63px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 25px;
-background:#fbfdff;
-border-bottom:1px solid #e3ecf3;
-}
-
-.microsoft{
-display:flex;
-align-items:center;
-gap:11px;
-font-size:17px;
-font-weight:600;
-color:#344a5d;
-}
-
-.ms-logo{
-width:22px;
-height:22px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:2px;
-}
-
-.ms-logo span:nth-child(1){background:#f25022}
-.ms-logo span:nth-child(2){background:#7fba00}
-.ms-logo span:nth-child(3){background:#00a4ef}
-.ms-logo span:nth-child(4){background:#ffb900}
-
-.email-account{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:12px;
-color:#8394a2;
-}
-
-.account-avatar{
-width:32px;
-height:32px;
-border-radius:50%;
-background:#e7f2fb;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:700;
-color:#3475a8;
-}
-
-.email-content{
-padding:30px 38px 35px;
-}
-
-.email-meta{
-padding-bottom:19px;
-margin-bottom:24px;
-border-bottom:1px solid #e7eef4;
-}
-
-.email-row{
-display:flex;
-align-items:flex-start;
-gap:10px;
-margin:8px 0;
-font-size:13px;
-}
-
-.email-label{
-width:48px;
-flex-shrink:0;
-color:#8998a5;
-}
-
-.email-value{
-color:#42596d;
-word-break:break-word;
-}
-
-.email-content h2{
-margin:0 0 19px;
-font-size:25px;
-font-weight:600;
-color:#172f44;
-}
-
-.email-message{
-font-size:15px;
-line-height:1.7;
-color:#52687b;
-}
-
-.email-message p{
-margin:0 0 17px;
-}
-
-.signin-box{
-max-width:680px;
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:1px;
-margin:21px 0 23px;
-background:#e0e9f0;
-border:1px solid #e0e9f0;
-border-radius:9px;
-overflow:hidden;
-}
-
-.signin-item{
-padding:15px;
-background:#f8fbfd;
-font-size:11px;
-color:#8797a4;
-}
-
-.signin-item strong{
-display:block;
-margin-top:5px;
-font-size:13px;
-font-weight:600;
-color:#354d61;
-}
-
-.verify-btn{
+.btn{
+min-height:52px;
+padding:12px 28px;
 border:0;
-border-radius:5px;
-padding:11px 19px;
-background:#1473e6;
-color:white;
-font-size:14px;
-font-weight:600;
-cursor:pointer;
-transition:.15s;
-}
-
-.verify-btn:hover{
-background:#0d68d4;
-}
-
-.email-footer{
-margin-top:25px;
-font-size:12px;
-color:#99a8b4;
-}
-
-
-/* ==============================
-   ANSWER
-============================== */
-
-.answer-card{
-max-width:690px;
-margin:auto;
-background:white;
-border:1px solid #dbe8f2;
-border-radius:17px;
-padding:40px;
-box-shadow:
-0 24px 60px rgba(41,84,118,.11),
-0 3px 10px rgba(41,84,118,.04);
-}
-
-.question-icon{
-width:50px;
-height:50px;
-margin-bottom:20px;
-border-radius:14px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#edf7ff;
-border:1px solid #d9ebf8;
-}
-
-.search-icon{
-width:18px;
-height:18px;
-border:3px solid #278bd7;
-border-radius:50%;
-position:relative;
-}
-
-.search-icon::after{
-content:"";
-position:absolute;
-width:9px;
-height:3px;
-right:-7px;
-bottom:-4px;
-border-radius:3px;
-background:#278bd7;
-transform:rotate(45deg);
-}
-
-.answer-card h1{
-margin:0 0 24px;
-font-size:29px;
-color:var(--navy);
-}
-
-.answer-input{
-width:100%;
-height:53px;
-padding:0 16px;
-border:1px solid #cbdce9;
 border-radius:9px;
-background:#fbfdff;
-outline:none;
-font-size:15px;
-color:#2d4559;
+font-family:"Times New Roman",Times,serif;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
 transition:.18s;
 }
-
-.answer-input:focus{
-background:white;
-border-color:#3b98e9;
-box-shadow:0 0 0 4px rgba(22,119,255,.08);
+.btn-primary{
+background:linear-gradient(135deg,var(--blue),var(--blue2));
+color:#fff;
+box-shadow:0 9px 22px rgba(20,120,232,.2);
 }
-
-.answer-input::placeholder{
-color:#9aaab7;
+.btn-primary:hover{
+transform:translateY(-2px);
+box-shadow:0 13px 28px rgba(20,120,232,.27);
 }
-
-.result{
-display:none;
-margin-top:15px;
-padding:12px 14px;
-border-radius:8px;
-font-size:13px;
-font-weight:600;
-line-height:1.5;
+.btn-secondary{
+background:#fff;
+color:#405f77;
+border:1px solid #b9d1e2;
 }
-
-.result.error{
-display:block;
-color:#bd4040;
-background:#fff4f4;
-border:1px solid #f1d5d5;
+.btn-secondary:hover{
+background:#f2f9fe;
+border-color:#91bad7;
 }
-
-.result.success{
-display:block;
-color:#14794f;
-background:#eefaf4;
-border:1px solid #ccebdc;
-}
-
-.answer-actions{
+.actions{
 display:flex;
 align-items:center;
 justify-content:space-between;
 gap:12px;
-margin-top:20px;
+margin-top:21px;
 }
-
-.continue-btn{
+.result{
 display:none;
+margin-top:16px;
+padding:13px 15px;
+border-radius:9px;
+font-size:17px;
+font-weight:700;
+line-height:1.4;
+}
+.result.error{
+display:block;
+color:var(--red);
+background:#fff3f3;
+border:1px solid #efcccc;
+}
+.result.success{
+display:block;
+color:var(--green);
+background:#edf9f3;
+border:1px solid #c4e5d4;
 }
 
+/* Intro */
+.intro-card{
+min-height:535px;
+display:grid;
+grid-template-columns:46% 54%;
+overflow:hidden;
+background:#fff;
+border:1px solid var(--line);
+border-radius:25px;
+box-shadow:0 26px 65px rgba(39,80,112,.12);
+}
+.intro-content{
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:60px;
+}
+.intro-kicker{
+margin-bottom:18px;
+font-size:14px;
+font-weight:700;
+letter-spacing:3px;
+color:var(--blue);
+}
+.intro-content h1{
+margin:0 0 32px;
+font-size:48px;
+line-height:1.08;
+letter-spacing:-1px;
+color:var(--navy);
+}
+.start-arrow{
+display:inline-block;
+margin-left:8px;
+transition:.18s;
+}
+.btn:hover .start-arrow{transform:translateX(4px)}
+.intro-art{
+min-height:535px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+overflow:hidden;
+background:radial-gradient(circle,#fff 0,#edf8ff 58%,#e3f3ff 100%);
+}
+.intro-art:before{
+content:"";
+position:absolute;
+width:390px;
+height:390px;
+border:1px solid rgba(20,120,232,.11);
+border-radius:50%;
+}
+.hero-image{
+position:relative;
+z-index:1;
+width:93%;
+max-width:500px;
+display:block;
+filter:drop-shadow(0 18px 20px rgba(34,91,135,.12));
+}
 
-/* ==============================
-   MOBILE
-============================== */
+/* Challenge 1 email */
+.email-card,.answer-card,.password-card,.profile-card{
+background:#fff;
+border:1px solid var(--line);
+border-radius:19px;
+box-shadow:0 24px 60px rgba(41,84,118,.11);
+}
+.email-card{overflow:hidden}
+.email-appbar{
+height:65px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 27px;
+background:#fbfdff;
+border-bottom:1px solid #dce8f0;
+}
+.microsoft{
+display:flex;
+align-items:center;
+gap:11px;
+font-size:19px;
+font-weight:700;
+color:#304b61;
+}
+.ms-logo{
+width:23px;
+height:23px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:2px;
+}
+.ms-logo span:nth-child(1){background:#f25022}
+.ms-logo span:nth-child(2){background:#7fba00}
+.ms-logo span:nth-child(3){background:#00a4ef}
+.ms-logo span:nth-child(4){background:#ffb900}
+.email-account{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:14px;
+font-weight:600;
+color:#59758b;
+}
+.account-avatar{
+width:35px;
+height:35px;
+display:grid;
+place-items:center;
+border-radius:50%;
+background:#e2f1fb;
+color:#2472ad;
+font-weight:700;
+}
+.email-content{padding:32px 40px 35px}
+.email-meta{
+padding-bottom:19px;
+margin-bottom:24px;
+border-bottom:1px solid #dce8f0;
+}
+.email-row{
+display:flex;
+gap:11px;
+margin:9px 0;
+font-size:15px;
+}
+.email-label{
+width:51px;
+flex:none;
+font-weight:700;
+color:#526f84;
+}
+.email-value{
+font-weight:600;
+color:#304d63;
+word-break:break-word;
+}
+.email-content h2{
+margin:0 0 19px;
+font-size:29px;
+color:#172f44;
+}
+.email-message{
+font-size:17px;
+line-height:1.65;
+color:#38576e;
+}
+.email-message p{margin:0 0 17px}
+.signin-box{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:1px;
+margin:22px 0 24px;
+overflow:hidden;
+background:#d8e5ee;
+border:1px solid #d8e5ee;
+border-radius:10px;
+}
+.signin-item{
+padding:15px;
+background:#f7fbfe;
+font-size:13px;
+font-weight:700;
+color:#567288;
+}
+.signin-item strong{
+display:block;
+margin-top:5px;
+font-size:15px;
+color:#29475e;
+}
+.verify-btn{
+padding:12px 21px;
+border:0;
+border-radius:6px;
+background:#1473e6;
+color:#fff;
+font-family:"Times New Roman",Times,serif;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+}
+.verify-btn:hover{background:#0c67d2}
+.email-footer{
+margin-top:24px;
+font-size:14px;
+font-weight:600;
+color:#59758a;
+}
+.email-nav{
+display:flex;
+justify-content:flex-start;
+padding:0 40px 27px;
+}
 
+/* Challenge 1 answer */
+.answer-card{
+max-width:720px;
+margin:auto;
+padding:40px;
+}
+.question-icon{
+width:54px;
+height:54px;
+display:grid;
+place-items:center;
+margin-bottom:21px;
+border-radius:14px;
+background:#e8f5ff;
+border:1px solid #cae3f4;
+}
+.search-icon{
+width:20px;
+height:20px;
+position:relative;
+border:3px solid #278bd7;
+border-radius:50%;
+}
+.search-icon:after{
+content:"";
+position:absolute;
+width:10px;
+height:3px;
+right:-8px;
+bottom:-5px;
+border-radius:3px;
+background:#278bd7;
+transform:rotate(45deg);
+}
+.answer-card h1{
+margin:0 0 25px;
+font-size:33px;
+color:var(--navy);
+}
+.answer-input{
+width:100%;
+height:57px;
+padding:0 17px;
+border:1.5px solid #b9d1e2;
+border-radius:9px;
+background:#fbfdff;
+outline:none;
+font-size:18px;
+font-weight:600;
+color:#213f56;
+transition:.18s;
+}
+.answer-input::placeholder{color:#698398}
+.answer-input:focus{
+background:#fff;
+border-color:#318fda;
+box-shadow:0 0 0 4px rgba(22,119,255,.09);
+}
+#c1Continue{display:none}
+
+/* Challenge 2 */
+.password-card{
+max-width:950px;
+margin:auto;
+padding:32px;
+}
+.password-head{
+padding-bottom:20px;
+margin-bottom:21px;
+border-bottom:1px solid #dce8f0;
+}
+.password-head h1{
+margin:0 0 7px;
+font-size:35px;
+color:var(--navy);
+}
+.password-head p{
+margin:0;
+font-size:19px;
+font-weight:600;
+color:var(--muted);
+}
+.password-layout{
+display:grid;
+grid-template-columns:300px 1fr;
+gap:28px;
+align-items:center;
+}
+.password-visual{
+height:100%;
+min-height:390px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:22px;
+overflow:hidden;
+background:linear-gradient(145deg,#f2faff,#e5f4ff);
+border:1px solid #cee5f4;
+border-radius:16px;
+}
+.password-image{
+display:block;
+width:100%;
+max-width:260px;
+height:245px;
+object-fit:contain;
+mix-blend-mode:multiply;
+filter:drop-shadow(0 13px 17px rgba(32,94,139,.13));
+}
+.strength{
+width:100%;
+max-width:240px;
+margin-top:13px;
+}
+.strength-labels{
+display:flex;
+justify-content:space-between;
+margin-bottom:7px;
+font-family:Arial,sans-serif;
+font-size:10px;
+font-weight:700;
+letter-spacing:1px;
+color:#526f84;
+}
+.strength-line{
+height:7px;
+border-radius:20px;
+background:linear-gradient(90deg,#df5151,#efb64d,#3abb7d);
+}
+.password-list{
+display:flex;
+flex-direction:column;
+gap:9px;
+touch-action:none;
+}
+.password-item{
+min-height:59px;
+display:flex;
+align-items:center;
+gap:15px;
+padding:10px 15px;
+background:#f8fbfd;
+border:1.5px solid #d2e2ed;
+border-radius:10px;
+cursor:grab;
+user-select:none;
+-webkit-user-select:none;
+transition:.15s;
+}
+.password-item:hover{
+background:#eff8ff;
+border-color:#9dc8e4;
+box-shadow:0 5px 14px rgba(44,95,132,.08);
+}
+.password-item:active{cursor:grabbing}
+.drag-handle{
+width:24px;
+flex:none;
+display:grid;
+grid-template-columns:repeat(2,5px);
+gap:5px;
+justify-content:center;
+}
+.drag-handle i{
+width:5px;
+height:5px;
+border-radius:50%;
+background:#708da2;
+}
+.password-text{
+min-width:0;
+font-family:Consolas,"Courier New",monospace;
+font-size:18px;
+font-weight:700;
+letter-spacing:.15px;
+color:#173b55;
+overflow-wrap:anywhere;
+}
+.password-item.drag-source{
+opacity:.3;
+border-style:dashed;
+}
+.password-item.drop-before{border-top:4px solid var(--blue)}
+.password-item.drop-after{border-bottom:4px solid var(--blue)}
+.password-item.correct-card{
+background:#eef9f3;
+border-color:#92d1b1;
+}
+.drag-copy{
+position:fixed;
+z-index:9999;
+pointer-events:none;
+max-width:90vw;
+padding:13px 18px;
+overflow:hidden;
+background:#fff;
+border:2px solid #268cda;
+border-radius:10px;
+box-shadow:0 18px 45px rgba(31,77,112,.25);
+font-family:Consolas,"Courier New",monospace;
+font-size:18px;
+font-weight:700;
+color:#173b55;
+white-space:nowrap;
+transform:translate(-20px,-50%);
+}
+.drag-copy:before{
+content:"⋮⋮  ";
+font-family:Arial,sans-serif;
+color:#708da2;
+}
+#c2Continue{display:none}
+
+/* Challenge 3 */
+.profile-card{
+max-width:900px;
+margin:auto;
+padding:32px;
+}
+.profile-head{
+padding-bottom:20px;
+margin-bottom:21px;
+border-bottom:1px solid #dce8f0;
+}
+.profile-head h1{
+margin:0 0 8px;
+font-size:35px;
+color:var(--navy);
+}
+.profile-head p{
+margin:0;
+font-size:19px;
+font-weight:600;
+color:var(--muted);
+}
+.profile{
+display:grid;
+grid-template-columns:205px 1fr;
+gap:23px;
+margin-bottom:25px;
+}
+.identity{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:22px 14px;
+background:linear-gradient(145deg,#eff8ff,#e4f3ff);
+border:1px solid #c7e0f1;
+border-radius:15px;
+text-align:center;
+}
+.profile-photo{
+width:105px;
+height:105px;
+margin-bottom:15px;
+overflow:hidden;
+border:4px solid #fff;
+border-radius:50%;
+background:#dcecf7;
+box-shadow:0 8px 22px rgba(22,119,232,.2);
+}
+.profile-photo img{
+width:100%;
+height:100%;
+display:block;
+object-fit:cover;
+object-position:center 35%;
+}
+.identity h2{
+margin:0 0 5px;
+font-size:25px;
+color:var(--navy);
+}
+.identity span{
+font-size:16px;
+font-weight:600;
+color:#4d6b82;
+}
+.info-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+.info{
+min-height:74px;
+display:flex;
+align-items:center;
+gap:13px;
+padding:11px 14px;
+background:#f7fbfe;
+border:1px solid #d2e2ed;
+border-radius:11px;
+}
+.info-icon{
+width:41px;
+height:41px;
+flex:none;
+display:grid;
+place-items:center;
+border-radius:10px;
+background:#e3f2fd;
+font-family:Arial,sans-serif;
+font-size:19px;
+}
+.info small{
+display:block;
+margin-bottom:3px;
+font-size:14px;
+font-weight:700;
+color:#49677e;
+}
+.info strong{
+display:block;
+font-size:19px;
+color:#173b55;
+}
+.profile-question{
+padding-top:22px;
+border-top:1px solid #dce8f0;
+}
+.profile-question h2{
+margin:0 0 15px;
+font-size:26px;
+color:var(--navy);
+}
+.profile-answer{
+display:flex;
+gap:11px;
+}
+.profile-answer input{
+flex:1;
+min-width:0;
+font-family:Consolas,"Courier New",monospace;
+font-size:18px;
+}
+.profile-answer input.wrong{
+border-color:#d45b5b;
+background:#fffafa;
+animation:shake .3s ease;
+}
+.profile-answer input.correct{
+border-color:#51b47f;
+background:#f4fbf7;
+}
+#c3Continue{display:none}
+
+@keyframes shake{
+0%,100%{transform:translateX(0)}
+25%{transform:translateX(-5px)}
+50%{transform:translateX(5px)}
+75%{transform:translateX(-3px)}
+}
+
+/* Mobile */
 @media(max-width:700px){
-
-.screen{
-padding:18px 12px;
+.screen{padding:16px 10px}
+.challenge-label{
+font-size:13px;
+letter-spacing:2.5px;
+margin-left:2px;
 }
-
-.dots{
-display:none;
-}
+.btn{font-size:17px}
 
 .intro-card{
 grid-template-columns:1fr;
-min-height:auto;
+min-height:0;
 }
-
 .intro-art{
 grid-row:1;
-height:310px;
-min-height:310px;
-padding:12px;
+height:290px;
+min-height:290px;
 }
-
 .hero-image{
 width:88%;
 max-width:340px;
 }
-
 .intro-content{
 grid-row:2;
-padding:31px 22px 38px;
+padding:30px 21px 37px;
 text-align:center;
 }
-
 .intro-kicker{
-font-size:11px;
-letter-spacing:2.6px;
-margin-bottom:12px;
+font-size:12px;
+letter-spacing:2.4px;
 }
-
 .intro-content h1{
-max-width:350px;
+max-width:360px;
 margin:0 auto 25px;
-font-size:31px;
-line-height:1.12;
-letter-spacing:-.7px;
-}
-
-.challenge-label{
-font-size:11px;
-letter-spacing:2.7px;
-margin-left:2px;
+font-size:34px;
 }
 
 .email-appbar{
-height:56px;
+height:58px;
 padding:0 16px;
 }
-
-.email-account span{
-display:none;
-}
-
-.email-content{
-padding:23px 18px 27px;
-}
-
+.microsoft{font-size:17px}
+.email-account span{display:none}
+.email-content{padding:23px 18px 20px}
+.email-row{font-size:14px}
 .email-content h2{
-font-size:21px;
-}
-
-.email-message{
-font-size:14px;
-}
-
-.signin-box{
-grid-template-columns:1fr 1fr;
-}
-
-.answer-card{
-padding:29px 20px;
-}
-
-.answer-card h1{
 font-size:24px;
+line-height:1.2;
+}
+.email-message{font-size:16px}
+.signin-box{grid-template-columns:1fr 1fr}
+.signin-item{padding:13px}
+.email-nav{padding:0 18px 22px}
+
+.answer-card{padding:28px 19px}
+.answer-card h1{font-size:28px}
+.answer-input{
+height:55px;
+font-size:17px;
+}
+.actions .btn{flex:1}
+
+.password-card{padding:23px 14px}
+.password-head{
+padding-bottom:16px;
+margin-bottom:15px;
+}
+.password-head h1{font-size:30px}
+.password-head p{
+font-size:17px;
+line-height:1.35;
+}
+.password-layout{
+grid-template-columns:1fr;
+gap:15px;
+}
+.password-visual{
+min-height:0;
+height:150px;
+display:grid;
+grid-template-columns:150px 1fr;
+gap:15px;
+padding:10px 16px;
+}
+.password-image{
+width:145px;
+height:130px;
+}
+.strength{
+margin:0;
+max-width:none;
+}
+.password-list{gap:8px}
+.password-item{
+min-height:61px;
+padding:10px 11px;
+gap:10px;
+}
+.password-text{font-size:17px}
+.drag-handle{
+width:21px;
+grid-template-columns:repeat(2,4px);
+gap:4px;
+}
+.drag-handle i{
+width:4px;
+height:4px;
+}
+.drag-copy{
+font-size:17px;
+padding:12px 14px;
 }
 
-.answer-actions .btn{
-flex:1;
-padding-left:10px;
-padding-right:10px;
+.profile-card{padding:23px 14px}
+.profile-head{
+padding-bottom:17px;
+margin-bottom:17px;
+}
+.profile-head h1{font-size:30px}
+.profile-head p{
+font-size:17px;
+line-height:1.35;
+}
+.profile{
+grid-template-columns:1fr;
+gap:12px;
+margin-bottom:20px;
+}
+.identity{
+flex-direction:row;
+justify-content:flex-start;
+padding:14px;
+text-align:left;
+}
+.profile-photo{
+width:75px;
+height:75px;
+flex:none;
+margin:0 14px 0 0;
+}
+.identity h2{font-size:23px}
+.identity span{font-size:15px}
+.info-grid{gap:8px}
+.info{
+min-height:66px;
+padding:9px 10px;
+gap:9px;
+}
+.info-icon{
+width:35px;
+height:35px;
+font-size:17px;
+}
+.info small{font-size:13px}
+.info strong{font-size:17px}
+.profile-question{padding-top:19px}
+.profile-question h2{font-size:23px}
+.profile-answer{display:block}
+.profile-answer .btn{
+width:100%;
+margin-top:10px;
+}
 }
 
+@media(max-width:430px){
+.password-visual{
+height:135px;
+grid-template-columns:125px 1fr;
+padding:8px 12px;
 }
-
-
-/* ==============================
-   SMALL MOBILE
-============================== */
+.password-image{
+width:120px;
+height:115px;
+}
+}
 
 @media(max-width:390px){
-
+.info-grid{grid-template-columns:1fr}
 .intro-art{
-height:270px;
-min-height:270px;
+height:260px;
+min-height:260px;
+}
+.intro-content h1{font-size:31px}
+.password-text{font-size:16px}
 }
 
-.hero-image{
-width:92%;
-}
-
-.intro-content h1{
-font-size:29px;
-}
-
-.signin-item{
-padding:12px;
-}
-
-}
-
-
-/* ==============================
-   SHORT LAPTOP
-============================== */
-
-@media(min-width:701px) and (max-height:760px){
-
-.screen{
-padding-top:18px;
-padding-bottom:18px;
-}
-
-.intro-card,
-.intro-art{
-min-height:470px;
-}
-
-.intro-content{
-padding-top:45px;
-padding-bottom:45px;
-}
-
-.intro-content h1{
-font-size:41px;
-}
-
-.hero-image{
-max-width:440px;
-}
-
+@media(min-width:701px) and (max-height:780px){
+.screen{padding-top:15px;padding-bottom:15px}
+.intro-card,.intro-art{min-height:465px}
+.intro-content{padding:44px}
+.intro-content h1{font-size:42px}
+.hero-image{max-width:430px}
 .email-content{
-padding-top:22px;
-padding-bottom:24px;
+padding-top:21px;
+padding-bottom:20px;
 }
-
-.signin-box{
-margin-top:16px;
-margin-bottom:18px;
+.signin-box{margin:16px 0 18px}
+.password-card,.profile-card{padding:21px 27px}
+.password-head,.profile-head{
+padding-bottom:13px;
+margin-bottom:13px;
 }
-
+.password-visual{min-height:335px}
+.password-image{height:205px}
+.password-item{
+min-height:50px;
+padding-top:7px;
+padding-bottom:7px;
+}
+.profile{margin-bottom:16px}
+.info{min-height:58px}
+.profile-photo{
+width:82px;
+height:82px;
+}
 }
 </style>
 </head>
 
 <body>
 
-
-<!-- ============================================
-     INTRO SCREEN
-============================================ -->
-
-<section class="screen active" id="introScreen">
-
-<div class="dots top"></div>
-<div class="dots bottom"></div>
-
+<!-- Intro -->
+<section class="screen active" id="intro">
 <div class="wrap">
-
 <div class="intro-card">
 
-
 <div class="intro-content">
-
-<div class="intro-kicker">
-CYBER AWARENESS CHALLENGE
-</div>
-
-<h1>
-Ready to Test Your Cyber Skills?
-</h1>
-
-<button
-class="btn btn-primary start-btn"
-onclick="startChallenge()"
->
-START CHALLENGE
-<span class="start-arrow">→</span>
+<div class="intro-kicker">CYBER AWARENESS CHALLENGE</div>
+<h1>Ready to Test Your Cyber Skills?</h1>
+<button class="btn btn-primary" onclick="startChallenge()">
+START CHALLENGE <span class="start-arrow">→</span>
 </button>
-
 </div>
-
 
 <div class="intro-art">
-
-<img
-src="cyber-challenge-hero.png"
-class="hero-image"
-alt="Cybersecurity protection illustration"
->
-
-</div>
-
-
+<img src="cyber-challenge-hero.png" class="hero-image" alt="Cybersecurity illustration">
 </div>
 
 </div>
-
+</div>
 </section>
 
-
-
-<!-- ============================================
-     CHALLENGE 01 — EMAIL
-============================================ -->
-
-<section class="screen" id="emailScreen">
-
-<div class="dots top"></div>
-
+<!-- Challenge 01 Email -->
+<section class="screen" id="c1Email">
 <div class="wrap">
 
-<div class="challenge-label">
-CHALLENGE 01
-</div>
-
+<div class="challenge-label">CHALLENGE 01</div>
 
 <div class="email-card">
 
-
 <div class="email-appbar">
-
-
 <div class="microsoft">
-
 <div class="ms-logo">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
+<span></span><span></span><span></span><span></span>
 </div>
-
 Microsoft 365
-
 </div>
-
 
 <div class="email-account">
-
-<span>
-Student Account
-</span>
-
-<div class="account-avatar">
-S
+<span>Student Account</span>
+<div class="account-avatar">S</div>
 </div>
-
 </div>
-
-
-</div>
-
 
 <div class="email-content">
 
-
 <div class="email-meta">
-
+<div class="email-row">
+<div class="email-label">From:</div>
+<div class="email-value">account-security@micros0ft.com</div>
+</div>
 
 <div class="email-row">
-
-<div class="email-label">
-From:
+<div class="email-label">To:</div>
+<div class="email-value">5593833@bkbck.edu.in</div>
 </div>
-
-<div class="email-value">
-account-security@micros0ft.com
-</div>
-
-</div>
-
 
 <div class="email-row">
-
-<div class="email-label">
-To:
+<div class="email-label">Date:</div>
+<div class="email-value">30 Sep 2026, 10:42 AM</div>
+</div>
 </div>
 
-<div class="email-value">
-5593833@bkbck.edu.in
-</div>
-
-</div>
-
-
-<div class="email-row">
-
-<div class="email-label">
-Date:
-</div>
-
-<div class="email-value">
-30 Sep 2026, 10:42 AM
-</div>
-
-</div>
-
-
-</div>
-
-
-<h2>
-Unusual sign-in activity detected
-</h2>
-
+<h2>Unusual sign-in activity detected</h2>
 
 <div class="email-message">
+<p>Hello,</p>
 
-
-<p>
-Hello,
-</p>
-
-
-<p>
-We detected an unusual sign-in attempt on your Microsoft account.
-If this was not you, please verify your account immediately.
-</p>
-
+<p>We detected an unusual sign-in attempt on your Microsoft account. If this was not you, please verify your account immediately.</p>
 
 <div class="signin-box">
-
-
-<div class="signin-item">
-
-Date
-
-<strong>
-30 Sep 2026
-</strong>
-
+<div class="signin-item">Date<strong>30 Sep 2026</strong></div>
+<div class="signin-item">Location<strong>Mumbai, India</strong></div>
+<div class="signin-item">Device<strong>Windows PC</strong></div>
+<div class="signin-item">Browser<strong>Microsoft Edge</strong></div>
 </div>
 
-
-<div class="signin-item">
-
-Location
-
-<strong>
-Mumbai, India
-</strong>
-
-</div>
-
-
-<div class="signin-item">
-
-Device
-
-<strong>
-Windows PC
-</strong>
-
-</div>
-
-
-<div class="signin-item">
-
-Browser
-
-<strong>
-Microsoft Edge
-</strong>
-
-</div>
-
-
-</div>
-
-
-<button
-class="verify-btn"
-onclick="openAnswer()"
->
+<button class="verify-btn" onclick="openC1Answer()">
 Verify My Account
 </button>
 
-
-<div class="email-footer">
-Microsoft Account Security Team
+<div class="email-footer">Microsoft Account Security Team</div>
+</div>
 </div>
 
-
-</div>
-
-</div>
-
+<div class="email-nav">
+<button class="btn btn-secondary" onclick="backToIntro()">Previous</button>
 </div>
 
 </div>
-
+</div>
 </section>
 
-
-
-<!-- ============================================
-     CHALLENGE 01 — ANSWER
-============================================ -->
-
-<section class="screen" id="answerScreen">
-
-<div class="dots bottom"></div>
-
+<!-- Challenge 01 Answer -->
+<section class="screen" id="c1Answer">
 <div class="wrap">
 
-
-<div class="challenge-label">
-CHALLENGE 01
-</div>
-
+<div class="challenge-label">CHALLENGE 01</div>
 
 <div class="answer-card">
-
 
 <div class="question-icon">
 <div class="search-icon"></div>
 </div>
 
-
-<h1>
-Find the phishing mistake.
-</h1>
-
+<h1>Find the phishing mistake.</h1>
 
 <input
-id="answer"
+id="c1Input"
 class="answer-input"
 type="text"
 placeholder="Enter your answer..."
@@ -1017,284 +994,616 @@ autocomplete="off"
 spellcheck="false"
 >
 
+<div id="c1Result" class="result"></div>
 
-<div
-id="result"
-class="result"
-></div>
-
-
-<div class="answer-actions">
-
+<div class="actions">
 
 <button
 class="btn btn-secondary"
-id="previousBtn"
-onclick="previousScreen()"
+id="c1Previous"
+onclick="backToC1Email()"
 >
 Previous
 </button>
 
+<button
+class="btn btn-primary"
+id="c1Submit"
+onclick="checkC1()"
+>
+SUBMIT ANSWER
+</button>
 
 <button
 class="btn btn-primary"
-id="submitBtn"
-onclick="checkAnswer()"
->
-Submit Answer
-</button>
-
-
-<button
-class="btn btn-primary continue-btn"
-id="continueBtn"
-onclick="nextChallenge()"
+id="c1Continue"
+onclick="openC2()"
 >
 CONTINUE
 </button>
 
-
 </div>
 
 </div>
-
 </div>
-
 </section>
 
+<!-- Challenge 02 -->
+<section class="screen" id="c2">
+<div class="wrap">
 
+<div class="challenge-label">CHALLENGE 02</div>
+
+<div class="password-card">
+
+<div class="password-head">
+<h1>Password Power</h1>
+<p>Arrange the passwords from <strong>weakest to strongest.</strong></p>
+</div>
+
+<div class="password-layout">
+
+<div class="password-visual">
+
+<img
+src="password-security.png"
+class="password-image"
+alt="Password security illustration"
+>
+
+<div class="strength">
+<div class="strength-labels">
+<span>WEAK</span>
+<span>STRONG</span>
+</div>
+<div class="strength-line"></div>
+</div>
+
+</div>
+
+<div class="password-list" id="passwordList"></div>
+
+</div>
+
+<div id="c2Result" class="result"></div>
+
+<div class="actions">
+
+<button
+class="btn btn-secondary"
+onclick="backToC1()"
+>
+Previous
+</button>
+
+<button
+class="btn btn-primary"
+id="c2Check"
+onclick="checkC2()"
+>
+CHECK ORDER
+</button>
+
+<button
+class="btn btn-primary"
+id="c2Continue"
+onclick="openC3()"
+>
+CONTINUE
+</button>
+
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Challenge 03 -->
+<section class="screen" id="c3">
+<div class="wrap">
+
+<div class="challenge-label">CHALLENGE 03</div>
+
+<div class="profile-card">
+
+<div class="profile-head">
+<h1>Can You Guess the Password?</h1>
+<p>Rahul is careless and likes simple passwords.</p>
+</div>
+
+<div class="profile">
+
+<div class="identity">
+
+<div class="profile-photo">
+<img src="rahul-profile.png" alt="Rahul Sharma">
+</div>
+
+<div>
+<h2>Rahul Sharma</h2>
+<span>Student Profile</span>
+</div>
+
+</div>
+
+<div class="info-grid">
+
+<div class="info">
+<div class="info-icon">🎂</div>
+<div>
+<small>Date of Birth</small>
+<strong>23 Jan 2008</strong>
+</div>
+</div>
+
+<div class="info">
+<div class="info-icon">🏏</div>
+<div>
+<small>Favorite Sport</small>
+<strong>Cricket</strong>
+</div>
+</div>
+
+<div class="info">
+<div class="info-icon">🐾</div>
+<div>
+<small>Pet's Name</small>
+<strong>Bruno</strong>
+</div>
+</div>
+
+<div class="info">
+<div class="info-icon">📍</div>
+<div>
+<small>City</small>
+<strong>Mumbai</strong>
+</div>
+</div>
+
+<div class="info">
+<div class="info-icon">🎬</div>
+<div>
+<small>Favorite Movie</small>
+<strong>3 Idiots</strong>
+</div>
+</div>
+
+<div class="info">
+<div class="info-icon">🍛</div>
+<div>
+<small>Favorite Food</small>
+<strong>Biryani</strong>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="profile-question">
+
+<h2>What is Rahul's Google account password?</h2>
+
+<div class="profile-answer">
+
+<input
+id="c3Input"
+class="answer-input"
+type="text"
+placeholder="Enter password..."
+autocomplete="off"
+spellcheck="false"
+>
+
+<button
+class="btn btn-primary"
+id="c3Submit"
+onclick="checkC3()"
+>
+SUBMIT ANSWER
+</button>
+
+</div>
+
+<div id="c3Result" class="result"></div>
+
+<div class="actions">
+
+<button
+class="btn btn-secondary"
+onclick="backToC2()"
+>
+Previous
+</button>
+
+<button
+class="btn btn-primary"
+id="c3Continue"
+onclick="finishC3()"
+>
+CONTINUE
+</button>
+
+</div>
+
+</div>
+</div>
+</div>
+</section>
 
 <script>
-
-/* ==============================
-   SCREEN SYSTEM
-============================== */
-
-const screens=[
-"introScreen",
-"emailScreen",
-"answerScreen"
-];
-
+const screens=["intro","c1Email","c1Answer","c2","c3"];
 
 function showScreen(id){
-
-screens.forEach(screen=>{
-
-document
-.getElementById(screen)
-.classList.remove("active");
-
-});
-
-document
-.getElementById(id)
-.classList.add("active");
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
+screens.forEach(x=>document.getElementById(x).classList.remove("active"));
+document.getElementById(id).classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
-
-/* ==============================
-   START
-============================== */
+/* Navigation */
 
 function startChallenge(){
-
-resetChallenge();
-
-showScreen("emailScreen");
-
+resetC1();
+resetC2();
+resetC3();
+showScreen("c1Email");
 }
 
-
-/* ==============================
-   EMAIL
-============================== */
-
-function openAnswer(){
-
-showScreen("answerScreen");
-
-setTimeout(()=>{
-
-document
-.getElementById("answer")
-.focus();
-
-},250);
-
+function backToIntro(){
+resetC1();
+resetC2();
+resetC3();
+showScreen("intro");
 }
 
-
-/* ==============================
-   PREVIOUS
-============================== */
-
-function previousScreen(){
-
-resetAnswer();
-
-showScreen("emailScreen");
-
+function openC1Answer(){
+resetC1Answer();
+showScreen("c1Answer");
+setTimeout(()=>document.getElementById("c1Input").focus(),200);
 }
 
+function backToC1Email(){
+resetC1Answer();
+showScreen("c1Email");
+}
 
-/* ==============================
-   CHECK ANSWER
-============================== */
+function openC2(){
+resetC2();
+shufflePasswords();
+showScreen("c2");
+}
 
-function checkAnswer(){
+function backToC1(){
+resetC2();
+resetC1();
+showScreen("c1Answer");
+setTimeout(()=>document.getElementById("c1Input").focus(),200);
+}
 
-const input=
-document.getElementById("answer");
+function openC3(){
+resetC3();
+showScreen("c3");
+setTimeout(()=>document.getElementById("c3Input").focus(),200);
+}
 
-const answer=
-input.value
-.trim()
-.toLowerCase();
+function backToC2(){
+resetC3();
+resetC2();
+shufflePasswords();
+showScreen("c2");
+}
 
-const result=
-document.getElementById("result");
+function finishC3(){
+alert("Challenge 03 completed!");
+}
 
+/* Challenge 1 */
 
-const correctAnswers=[
-
+const c1Correct=[
 "micros0ft",
 "micros0ft.com",
 "@micros0ft.com",
 "account-security@micros0ft.com"
-
 ];
 
+function checkC1(){
+const input=document.getElementById("c1Input");
+const result=document.getElementById("c1Result");
+const answer=input.value.trim().toLowerCase();
 
-if(correctAnswers.includes(answer)){
-
+if(c1Correct.includes(answer)){
 result.className="result success";
-
-result.innerHTML=
-"✓ Correct! <strong>micros0ft.com</strong> uses 0 instead of o.";
-
+result.innerHTML="✓ Correct! <strong>micros0ft.com</strong> uses 0 instead of o.";
 
 input.disabled=true;
 
-
-document
-.getElementById("previousBtn")
-.style.display="none";
-
-
-document
-.getElementById("submitBtn")
-.style.display="none";
-
-
-document
-.getElementById("continueBtn")
-.style.display="block";
-
-}
-
-else{
-
+document.getElementById("c1Previous").style.display="none";
+document.getElementById("c1Submit").style.display="none";
+document.getElementById("c1Continue").style.display="block";
+}else{
 result.className="result error";
-
-result.textContent = "Wrong answer. Try again.";
+result.textContent="Wrong answer. Try again.";
+}
 }
 
-}
-
-
-/* ==============================
-   ENTER KEY
-============================== */
-
-document
-.getElementById("answer")
-.addEventListener(
-"keydown",
-function(event){
-
-if(
-event.key==="Enter" &&
-!this.disabled
-){
-
-checkAnswer();
-
-}
-
-}
-);
-
-
-/* ==============================
-   RESET
-============================== */
-
-function resetAnswer(){
-
-const input=
-document.getElementById("answer");
-
-const result=
-document.getElementById("result");
-
+function resetC1Answer(){
+const input=document.getElementById("c1Input");
+const result=document.getElementById("c1Result");
 
 input.value="";
 input.disabled=false;
 
-
-result.textContent="";
 result.className="result";
+result.textContent="";
 
-
-document
-.getElementById("previousBtn")
-.style.display="block";
-
-
-document
-.getElementById("submitBtn")
-.style.display="block";
-
-
-document
-.getElementById("continueBtn")
-.style.display="none";
-
+document.getElementById("c1Previous").style.display="block";
+document.getElementById("c1Submit").style.display="block";
+document.getElementById("c1Continue").style.display="none";
 }
 
-
-function resetChallenge(){
-
-resetAnswer();
-
+function resetC1(){
+resetC1Answer();
 }
 
+document.getElementById("c1Input").addEventListener("keydown",e=>{
+if(e.key==="Enter"&&!e.target.disabled)checkC1();
+});
 
-/* ==============================
-   CHALLENGE 02
-============================== */
+/* Challenge 2 */
 
-function nextChallenge(){
+const correctOrder=[
+"12345678",
+"qwerty123",
+"akash2004",
+"Mumbai@2026",
+"P@ssword123!",
+"Blue-Coffee-Train-47",
+"vR7#qL2!xM9@pK4$"
+];
 
-/*
-Challenge 02 will connect here later.
+const list=document.getElementById("passwordList");
 
-Example:
+let dragged=null;
+let ghost=null;
+let target=null;
+let placeAfter=false;
 
-showScreen("challenge2Screen");
-*/
+function createPasswordCard(password){
+const card=document.createElement("div");
+card.className="password-item";
+card.dataset.password=password;
 
-showScreen("introScreen");
+const handle=document.createElement("div");
+handle.className="drag-handle";
 
+for(let i=0;i<6;i++){
+handle.appendChild(document.createElement("i"));
 }
 
+const text=document.createElement("div");
+text.className="password-text";
+text.textContent=password;
+
+card.append(handle,text);
+card.addEventListener("pointerdown",startDrag);
+
+return card;
+}
+
+function shufflePasswords(){
+let order;
+
+do{
+order=[...correctOrder];
+
+for(let i=order.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1));
+[order[i],order[j]]=[order[j],order[i]];
+}
+}while(order.every((x,i)=>x===correctOrder[i]));
+
+list.innerHTML="";
+
+order.forEach(password=>{
+list.appendChild(createPasswordCard(password));
+});
+}
+
+function startDrag(e){
+if(e.pointerType==="mouse"&&e.button!==0)return;
+
+dragged=e.currentTarget;
+dragged.setPointerCapture(e.pointerId);
+dragged.classList.add("drag-source");
+
+ghost=document.createElement("div");
+ghost.className="drag-copy";
+ghost.textContent=dragged.dataset.password;
+document.body.appendChild(ghost);
+
+moveGhost(e.clientX,e.clientY);
+
+dragged.addEventListener("pointermove",dragMove);
+dragged.addEventListener("pointerup",endDrag);
+dragged.addEventListener("pointercancel",endDrag);
+
+clearC2Result();
+e.preventDefault();
+}
+
+function dragMove(e){
+if(!dragged)return;
+
+moveGhost(e.clientX,e.clientY);
+clearDrop();
+
+if(ghost)ghost.style.display="none";
+const element=document.elementFromPoint(e.clientX,e.clientY);
+if(ghost)ghost.style.display="block";
+
+const card=element?.closest(".password-item");
+
+if(!card||card===dragged){
+target=null;
+return;
+}
+
+target=card;
+
+const rect=card.getBoundingClientRect();
+placeAfter=e.clientY>rect.top+rect.height/2;
+
+card.classList.add(placeAfter?"drop-after":"drop-before");
+}
+
+function endDrag(e){
+if(!dragged)return;
+
+if(target){
+if(placeAfter)target.after(dragged);
+else target.before(dragged);
+}
+
+try{
+if(dragged.hasPointerCapture(e.pointerId)){
+dragged.releasePointerCapture(e.pointerId);
+}
+}catch{}
+
+dragged.classList.remove("drag-source");
+
+dragged.removeEventListener("pointermove",dragMove);
+dragged.removeEventListener("pointerup",endDrag);
+dragged.removeEventListener("pointercancel",endDrag);
+
+if(ghost)ghost.remove();
+
+clearDrop();
+
+dragged=null;
+ghost=null;
+target=null;
+placeAfter=false;
+}
+
+function moveGhost(x,y){
+if(!ghost)return;
+
+const maxX=window.innerWidth-ghost.offsetWidth-10;
+const left=Math.max(10,Math.min(x+20,maxX));
+
+ghost.style.left=left+"px";
+ghost.style.top=y+"px";
+}
+
+function clearDrop(){
+document.querySelectorAll(".password-item").forEach(card=>{
+card.classList.remove("drop-before","drop-after");
+});
+}
+
+function checkC2(){
+const current=[...list.children].map(card=>card.dataset.password);
+const correct=current.every((password,i)=>password===correctOrder[i]);
+const result=document.getElementById("c2Result");
+
+if(correct){
+result.className="result success";
+result.textContent="✓ Correct! Passwords arranged from weakest to strongest.";
+
+document.querySelectorAll(".password-item").forEach(card=>{
+card.classList.add("correct-card");
+});
+
+document.getElementById("c2Check").style.display="none";
+document.getElementById("c2Continue").style.display="block";
+}else{
+result.className="result error";
+result.textContent="Wrong order. Try again.";
+}
+}
+
+function clearC2Result(){
+const result=document.getElementById("c2Result");
+
+result.className="result";
+result.textContent="";
+
+document.querySelectorAll(".password-item").forEach(card=>{
+card.classList.remove("correct-card");
+});
+
+document.getElementById("c2Check").style.display="block";
+document.getElementById("c2Continue").style.display="none";
+}
+
+function resetC2(){
+clearC2Result();
+list.innerHTML="";
+}
+
+/* Challenge 3 */
+
+function checkC3(){
+const input=document.getElementById("c3Input");
+const result=document.getElementById("c3Result");
+
+input.classList.remove("wrong","correct");
+
+if(input.value.trim().toLowerCase()==="rahul@2008"){
+input.classList.add("correct");
+input.disabled=true;
+
+result.className="result success";
+result.textContent="✓ Correct! Personal information can make passwords easy to guess.";
+
+document.getElementById("c3Submit").style.display="none";
+document.getElementById("c3Continue").style.display="block";
+}else{
+void input.offsetWidth;
+
+input.classList.add("wrong");
+
+result.className="result error";
+result.textContent="Wrong password. Try again.";
+
+input.focus();
+}
+}
+
+function resetC3(){
+const input=document.getElementById("c3Input");
+const result=document.getElementById("c3Result");
+
+input.value="";
+input.disabled=false;
+input.classList.remove("wrong","correct");
+
+result.className="result";
+result.textContent="";
+
+document.getElementById("c3Submit").style.display="block";
+document.getElementById("c3Continue").style.display="none";
+}
+
+document.getElementById("c3Input").addEventListener("input",()=>{
+const input=document.getElementById("c3Input");
+const result=document.getElementById("c3Result");
+
+input.classList.remove("wrong");
+
+if(result.classList.contains("error")){
+result.className="result";
+result.textContent="";
+}
+});
+
+document.getElementById("c3Input").addEventListener("keydown",e=>{
+if(e.key==="Enter"&&!e.target.disabled)checkC3();
+});
+
+resetC1();
+resetC2();
+resetC3();
 </script>
 
 </body>
