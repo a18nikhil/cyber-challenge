@@ -3,110 +3,324 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Cyber Security Challenge</title>
+<meta name="theme-color" content="#f7fbff">
+
+<title>Cyber Awareness Challenge</title>
 
 <style>
 *{box-sizing:border-box}
 
-body{
+:root{
+--blue:#1677e8;
+--blue-dark:#075bb8;
+--cyan:#36b9ef;
+--navy:#102f4c;
+--text:#385166;
+--muted:#788c9d;
+--border:#dce9f3;
+--white:#fff;
+--green:#16875a;
+--red:#c94747;
+}
+
+html,body{
 margin:0;
-background:#050a12;
-color:#e8f4ff;
-font-family:Arial,sans-serif;
+min-height:100%;
+}
+
+body{
+font-family:"Segoe UI",Arial,sans-serif;
+background:#f7fbff;
+color:var(--text);
 min-height:100vh;
-padding:25px 15px;
-background-image:radial-gradient(circle at 50% 0%,rgba(0,140,255,.13),transparent 35%);
+min-height:100dvh;
 }
 
-.container{
+button,input{font:inherit}
+
+
+/* ==============================
+   SCREENS
+============================== */
+
+.screen{
+display:none;
 width:100%;
-max-width:700px;
-margin:auto;
-}
-
-.challenge{
-text-align:center;
-font-size:14px;
-font-weight:bold;
-letter-spacing:4px;
-color:#00aaff;
-text-shadow:0 0 8px #008cff,0 0 18px #0066ff;
-margin-bottom:10px;
-}
-
-.progress{
-height:4px;
-background:#101a27;
-border-radius:10px;
+min-height:100vh;
+min-height:100dvh;
+align-items:center;
+justify-content:center;
+padding:28px 18px;
+position:relative;
 overflow:hidden;
-margin-bottom:22px;
 }
 
-.progress-fill{
-height:100%;
-background:#00aaff;
-box-shadow:0 0 10px #008cff;
-}
-
-.card{
-background:rgba(10,18,30,.96);
-border:1px solid #1b334b;
-border-radius:12px;
-padding:24px;
-box-shadow:0 0 25px rgba(0,120,255,.08);
-}
-
-h1{
-font-size:24px;
-margin:0 0 18px;
-text-align:center;
-}
-
-h2{
-font-size:20px;
-margin:0 0 18px;
-}
-
-p{
-line-height:1.6;
-color:#b9c9d8;
-}
-
-.email-top{
-border-bottom:1px solid #203346;
-padding-bottom:15px;
-margin-bottom:16px;
-}
-
-.email-row{
+.screen.active{
 display:flex;
-gap:8px;
-margin:7px 0;
+}
+
+.wrap{
+width:100%;
+max-width:1000px;
+margin:auto;
+position:relative;
+z-index:2;
+}
+
+
+/* ==============================
+   BACKGROUND
+============================== */
+
+.screen::before{
+content:"";
+position:absolute;
+width:600px;
+height:600px;
+border-radius:50%;
+top:-350px;
+right:-220px;
+background:
+radial-gradient(
+circle,
+rgba(65,184,239,.13),
+rgba(65,184,239,.035) 50%,
+transparent 70%
+);
+}
+
+.screen::after{
+content:"";
+position:absolute;
+width:430px;
+height:430px;
+border-radius:50%;
+bottom:-270px;
+left:-190px;
+border:1px solid rgba(23,125,215,.09);
+}
+
+.dots{
+position:absolute;
+width:145px;
+height:145px;
+background-image:
+radial-gradient(rgba(26,132,215,.20) 1.2px,transparent 1.2px);
+background-size:18px 18px;
+pointer-events:none;
+}
+
+.dots.top{
+left:4%;
+top:7%;
+}
+
+.dots.bottom{
+right:4%;
+bottom:7%;
+}
+
+
+/* ==============================
+   BUTTONS
+============================== */
+
+.btn{
+border:0;
+border-radius:9px;
+min-height:49px;
+padding:13px 24px;
 font-size:14px;
+font-weight:700;
+cursor:pointer;
+transition:.18s ease;
 }
 
-.label{
-color:#6f8498;
-min-width:65px;
+.btn-primary{
+background:linear-gradient(135deg,#1678e8,#25a0e9);
+color:white;
+box-shadow:0 10px 24px rgba(22,120,232,.20);
 }
 
-.value{
-color:#dcecff;
-word-break:break-word;
+.btn-primary:hover{
+transform:translateY(-2px);
+box-shadow:0 14px 29px rgba(22,120,232,.27);
+}
+
+.btn-primary:active{
+transform:translateY(0);
+}
+
+.btn-secondary{
+background:white;
+border:1px solid #c9dce9;
+color:#557086;
+}
+
+.btn-secondary:hover{
+background:#f7fbff;
+border-color:#a8c9e1;
+}
+
+
+/* ==============================
+   INTRO
+============================== */
+
+.intro-card{
+width:100%;
+min-height:535px;
+display:grid;
+grid-template-columns:46% 54%;
+align-items:center;
+background:rgba(255,255,255,.96);
+border:1px solid #dfebf4;
+border-radius:25px;
+overflow:hidden;
+box-shadow:
+0 28px 70px rgba(48,91,124,.11),
+0 4px 15px rgba(48,91,124,.04);
+}
+
+.intro-content{
+padding:65px 25px 65px 62px;
+position:relative;
+z-index:3;
+}
+
+.intro-kicker{
+font-size:13px;
+font-weight:800;
+letter-spacing:3.2px;
+color:var(--blue);
+margin-bottom:17px;
+}
+
+.intro-content h1{
+max-width:430px;
+margin:0 0 31px;
+font-size:46px;
+line-height:1.08;
+letter-spacing:-1.5px;
+color:var(--navy);
+}
+
+.start-btn{
+padding-left:27px;
+padding-right:27px;
+}
+
+.start-arrow{
+display:inline-block;
+margin-left:8px;
+transition:transform .18s ease;
+}
+
+.start-btn:hover .start-arrow{
+transform:translateX(4px);
+}
+
+
+/* ==============================
+   HERO IMAGE
+============================== */
+
+.intro-art{
+height:100%;
+min-height:535px;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+background:
+radial-gradient(
+circle at 50% 48%,
+#fff 0%,
+#f1f9ff 46%,
+#e9f6ff 100%
+);
+}
+
+.intro-art::before{
+content:"";
+position:absolute;
+width:390px;
+height:390px;
+border-radius:50%;
+border:1px solid rgba(22,119,232,.10);
+}
+
+.intro-art::after{
+content:"";
+position:absolute;
+width:310px;
+height:310px;
+border-radius:50%;
+background:rgba(60,181,238,.055);
+}
+
+.hero-image{
+display:block;
+position:relative;
+z-index:3;
+width:94%;
+max-width:500px;
+height:auto;
+object-fit:contain;
+filter:drop-shadow(0 20px 22px rgba(34,91,135,.12));
+}
+
+
+/* ==============================
+   CHALLENGE LABEL
+============================== */
+
+.challenge-label{
+margin:0 0 14px 4px;
+font-size:13px;
+font-weight:800;
+letter-spacing:3.3px;
+color:var(--blue);
+}
+
+
+/* ==============================
+   EMAIL
+============================== */
+
+.email-card{
+background:white;
+border:1px solid #dae7f0;
+border-radius:17px;
+overflow:hidden;
+box-shadow:
+0 24px 60px rgba(41,84,118,.12),
+0 3px 10px rgba(41,84,118,.04);
+}
+
+.email-appbar{
+height:63px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 25px;
+background:#fbfdff;
+border-bottom:1px solid #e3ecf3;
 }
 
 .microsoft{
 display:flex;
 align-items:center;
-gap:10px;
-font-size:18px;
-font-weight:bold;
-margin-bottom:18px;
+gap:11px;
+font-size:17px;
+font-weight:600;
+color:#344a5d;
 }
 
 .ms-logo{
-width:18px;
-height:18px;
+width:22px;
+height:22px;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:2px;
@@ -117,638 +331,398 @@ gap:2px;
 .ms-logo span:nth-child(3){background:#00a4ef}
 .ms-logo span:nth-child(4){background:#ffb900}
 
-.email-body{
-line-height:1.7;
-color:#c9d6e3;
-}
-
-.signin{
-margin:18px 0;
-padding:15px;
-background:#0b1420;
-border:1px solid #1c3348;
-border-radius:8px;
-}
-
-.signin-title{
-font-weight:bold;
-color:#fff;
-margin-bottom:10px;
-}
-
-.signin-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
+.email-account{
+display:flex;
+align-items:center;
 gap:10px;
+font-size:12px;
+color:#8394a2;
+}
+
+.account-avatar{
+width:32px;
+height:32px;
+border-radius:50%;
+background:#e7f2fb;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+color:#3475a8;
+}
+
+.email-content{
+padding:30px 38px 35px;
+}
+
+.email-meta{
+padding-bottom:19px;
+margin-bottom:24px;
+border-bottom:1px solid #e7eef4;
+}
+
+.email-row{
+display:flex;
+align-items:flex-start;
+gap:10px;
+margin:8px 0;
+font-size:13px;
+}
+
+.email-label{
+width:48px;
+flex-shrink:0;
+color:#8998a5;
+}
+
+.email-value{
+color:#42596d;
+word-break:break-word;
+}
+
+.email-content h2{
+margin:0 0 19px;
+font-size:25px;
+font-weight:600;
+color:#172f44;
+}
+
+.email-message{
+font-size:15px;
+line-height:1.7;
+color:#52687b;
+}
+
+.email-message p{
+margin:0 0 17px;
+}
+
+.signin-box{
+max-width:680px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:1px;
+margin:21px 0 23px;
+background:#e0e9f0;
+border:1px solid #e0e9f0;
+border-radius:9px;
+overflow:hidden;
 }
 
 .signin-item{
-font-size:13px;
-color:#9eb1c3;
+padding:15px;
+background:#f8fbfd;
+font-size:11px;
+color:#8797a4;
 }
 
 .signin-item strong{
 display:block;
-color:#dcecff;
-margin-top:3px;
-}
-
-.btn{
-border:0;
-border-radius:7px;
-padding:12px 18px;
-font-weight:bold;
-cursor:pointer;
-font-size:14px;
-}
-
-.primary{
-background:#008cff;
-color:#fff;
-box-shadow:0 0 12px rgba(0,140,255,.35);
-}
-
-.primary:hover{
-background:#009cff;
-}
-
-.secondary{
-background:#101c29;
-border:1px solid #284158;
-color:#bcd0e2;
-}
-
-.buttons{
-display:flex;
-justify-content:space-between;
-gap:10px;
-margin-top:20px;
-}
-
-input{
-width:100%;
-padding:13px;
-background:#070e17;
-border:1px solid #29435a;
-border-radius:7px;
-color:#fff;
-outline:none;
-font-size:15px;
-}
-
-input:focus{
-border-color:#009cff;
-box-shadow:0 0 8px rgba(0,156,255,.2);
-}
-
-.result{
-margin-top:14px;
-text-align:center;
-font-size:14px;
-min-height:20px;
-}
-
-.success{color:#35e68b}
-.error{color:#ff5f6d}
-
-.info{
-background:#0b1521;
-border:1px solid #1d344a;
-border-radius:8px;
-padding:15px;
-margin:15px 0;
-}
-
-.info-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.info-item{
+margin-top:5px;
 font-size:13px;
-color:#91a7ba;
-}
-
-.info-item strong{
-display:block;
-color:#e4f1ff;
-margin-top:3px;
-}
-
-.question{
-font-weight:bold;
-color:#fff;
-margin:20px 0 10px;
-}
-
-
-/* TREASURE HUNT INTRO */
-
-.treasure-intro{
-text-align:center;
-padding:30px 20px;
-}
-
-.treasure-title{
-color:#00aaff;
-font-size:14px;
-font-weight:700;
-letter-spacing:3px;
-margin-bottom:20px;
-}
-
-.treasure-intro h1{
-font-size:28px;
-margin-bottom:15px;
-}
-
-.treasure-intro p{
-max-width:550px;
-margin:0 auto 25px;
-line-height:1.6;
-}
-
-
-/* CHALLENGE 03 */
-
-.password-list{
-display:flex;
-flex-direction:column;
-gap:9px;
-margin-top:20px;
-position:relative;
-}
-
-.password-card{
-display:flex;
-align-items:center;
-gap:12px;
-min-height:58px;
-padding:11px 14px;
-background:#0c1724;
-border:1px solid #29445b;
-border-radius:9px;
-cursor:grab;
-user-select:none;
--webkit-user-select:none;
-touch-action:none;
-position:relative;
-transition:border-color .15s,background .15s,box-shadow .15s;
-}
-
-.password-card:hover{
-border-color:#008cff;
-background:#0e1c2b;
-}
-
-.password-card:active{
-cursor:grabbing;
-}
-
-.password-card.dragging{
-opacity:.15;
-}
-
-.password-card.drag-source{
-border-color:#00aaff;
-box-shadow:0 0 15px rgba(0,160,255,.25);
-}
-
-.handle{
-font-size:20px;
-color:#4d7899;
-width:22px;
-text-align:center;
-flex-shrink:0;
-}
-
-.rank{
-display:flex;
-align-items:center;
-justify-content:center;
-width:29px;
-height:29px;
-border-radius:50%;
-background:#12283a;
-color:#00aaff;
-font-size:13px;
-font-weight:bold;
-flex-shrink:0;
-}
-
-.password{
-font-family:monospace;
-font-size:15px;
-color:#e5f3ff;
-word-break:break-all;
-}
-
-.drop-zone{
-height:6px;
-margin:-3px 4px;
-border-radius:5px;
-background:#00aaff;
-box-shadow:0 0 12px #008cff;
-opacity:0;
-transition:opacity .1s,height .1s;
-}
-
-.drop-zone.active{
-opacity:1;
-height:7px;
-}
-
-.drag-ghost{
-position:fixed;
-z-index:9999;
-pointer-events:none;
-width:min(650px,calc(100vw - 40px));
-background:#0d1d2d;
-border:1px solid #00aaff;
-border-radius:9px;
-padding:14px;
-box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 18px rgba(0,140,255,.3);
-transform:translate(-50%,-50%) scale(1.02);
-}
-
-.drag-ghost .rank{
-display:inline-flex;
-margin-right:10px;
-}
-
-.drag-ghost .password{
-font-family:monospace;
-font-size:15px;
-}
-
-
-/* CHALLENGE 04 */
-
-.rapid-intro{
-text-align:center;
-padding:20px 5px;
-}
-
-.rapid-intro h1{
-font-size:28px;
-margin-bottom:15px;
-}
-
-.rapid-intro p{
-max-width:550px;
-margin:0 auto 25px;
-}
-
-.rapid-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
-
-.question-number{
-font-size:14px;
-color:#91a7ba;
-}
-
-.timer-circle{
-width:56px;
-height:56px;
-border:2px solid #00aaff;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:17px;
-font-weight:bold;
-color:#dff6ff;
-box-shadow:0 0 10px rgba(0,140,255,.12);
-transition:.2s;
-}
-
-.timer-circle.warning{
-border-color:#facc15;
-color:#facc15;
-}
-
-.timer-circle.danger{
-border-color:#ef4444;
-color:#ef4444;
-}
-
-.timer-track{
-width:100%;
-height:4px;
-background:#101a27;
-border-radius:10px;
-overflow:hidden;
-margin-bottom:32px;
-}
-
-.timer-bar{
-height:100%;
-width:100%;
-background:#00aaff;
-box-shadow:0 0 8px #008cff;
-transition:width 1s linear,background .2s;
-}
-
-.timer-bar.warning{
-background:#facc15;
-box-shadow:0 0 8px #facc15;
-}
-
-.timer-bar.danger{
-background:#ef4444;
-box-shadow:0 0 8px #ef4444;
-}
-
-.rapid-question{
-font-size:22px;
-line-height:1.5;
 font-weight:600;
-margin-bottom:24px;
+color:#354d61;
 }
 
-.options{
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
-.option{
-width:100%;
-text-align:left;
-padding:15px;
-border:1px solid #26384e;
-border-radius:8px;
-background:#0d1a2b;
-color:#fff;
-font-size:15px;
+.verify-btn{
+border:0;
+border-radius:5px;
+padding:11px 19px;
+background:#1473e6;
+color:white;
+font-size:14px;
+font-weight:600;
 cursor:pointer;
 transition:.15s;
 }
 
-.option:hover{
-background:#13243a;
-border-color:#55708f;
-transform:translateX(2px);
+.verify-btn:hover{
+background:#0d68d4;
 }
 
-.option.correct{
-background:#123d2a;
-border-color:#22c55e;
-color:#86efac;
-}
-
-.option.wrong{
-background:#431d24;
-border-color:#ef4444;
-color:#fca5a5;
-}
-
-.option.disabled{
-cursor:default;
-}
-
-.option.disabled:hover{
-transform:none;
-}
-
-.option-letter{
-font-weight:bold;
-margin-right:8px;
-}
-
-.rapid-result{
-text-align:center;
-}
-
-.final-score{
-font-size:55px;
-font-weight:bold;
-margin:20px 0;
-}
-
-.final-message{
-font-size:15px;
-line-height:1.5;
-color:#9fb1c4;
-margin-bottom:25px;
+.email-footer{
+margin-top:25px;
+font-size:12px;
+color:#99a8b4;
 }
 
 
-/* FINAL TREASURE */
+/* ==============================
+   ANSWER
+============================== */
 
-.treasure-screen{
-width:100%;
-max-width:700px;
-text-align:center;
-position:relative;
-padding:20px 0;
-}
-
-.treasure-glow{
-position:absolute;
-width:300px;
-height:300px;
-left:50%;
-top:40px;
-transform:translateX(-50%);
-background:rgba(255,190,0,.12);
-filter:blur(70px);
-border-radius:50%;
-pointer-events:none;
-}
-
-.treasure-screen h1{
-margin:0;
-font-size:42px;
-line-height:1.15;
-color:#ffd84d;
-text-shadow:
-0 0 8px rgba(255,190,0,.7),
-0 0 25px rgba(255,160,0,.35);
-}
-
-.treasure-subtitle{
-margin:12px auto 0;
-font-size:18px;
-color:#e5d8a9;
-}
-
-.treasure{
-position:relative;
-width:190px;
-height:145px;
-margin:42px auto 0;
-}
-
-.chest{
-position:absolute;
-left:50%;
-bottom:0;
-transform:translateX(-50%);
-width:165px;
-height:92px;
-background:linear-gradient(to bottom,#9b5d13,#63350b);
-border:3px solid #d99a25;
-border-radius:8px 8px 14px 14px;
+.answer-card{
+max-width:690px;
+margin:auto;
+background:white;
+border:1px solid #dbe8f2;
+border-radius:17px;
+padding:40px;
 box-shadow:
-0 0 20px rgba(255,174,0,.45),
-inset 0 5px 10px rgba(255,215,90,.15);
+0 24px 60px rgba(41,84,118,.11),
+0 3px 10px rgba(41,84,118,.04);
 }
 
-.chest::before{
-content:"";
-position:absolute;
-left:-3px;
-top:-54px;
-width:165px;
-height:58px;
-background:linear-gradient(to bottom,#b87318,#77420d);
-border:3px solid #d99a25;
-border-bottom:0;
-border-radius:85px 85px 0 0;
-box-shadow:inset 0 5px 10px rgba(255,215,90,.15);
+.question-icon{
+width:50px;
+height:50px;
+margin-bottom:20px;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#edf7ff;
+border:1px solid #d9ebf8;
 }
 
-.chest-band{
-position:absolute;
-left:50%;
-top:0;
-transform:translateX(-50%);
-width:20px;
-height:92px;
-background:#e4a928;
-box-shadow:0 0 8px rgba(255,193,7,.3);
-}
-
-.lock{
-position:absolute;
-left:50%;
-top:30px;
-transform:translateX(-50%);
-width:30px;
-height:35px;
-background:#ffd34e;
-border:3px solid #a9680d;
-border-radius:5px;
-z-index:3;
-box-shadow:0 0 12px rgba(255,215,80,.6);
-}
-
-.lock::before{
-content:"";
-position:absolute;
-left:5px;
-top:-19px;
-width:14px;
+.search-icon{
+width:18px;
 height:18px;
-border:4px solid #ffd34e;
-border-bottom:0;
-border-radius:12px 12px 0 0;
-}
-
-.gold{
-position:absolute;
-left:50%;
-top:-35px;
-transform:translateX(-50%);
-font-size:42px;
-letter-spacing:5px;
-color:#ffd83d;
-text-shadow:
-0 0 8px #ffd83d,
-0 0 20px #ffae00;
-z-index:4;
-animation:float 2s ease-in-out infinite;
-}
-
-@keyframes float{
-0%,100%{
-transform:translateX(-50%) translateY(0);
-}
-50%{
-transform:translateX(-50%) translateY(-8px);
-}
-}
-
-.spark{
-position:absolute;
-width:5px;
-height:5px;
+border:3px solid #278bd7;
 border-radius:50%;
-background:#ffd84d;
-box-shadow:0 0 10px #ffc400;
-animation:sparkle 2s infinite ease-in-out;
+position:relative;
 }
 
-.s1{left:20px;top:15px;animation-delay:.2s}
-.s2{right:18px;top:30px;animation-delay:.8s}
-.s3{left:35px;bottom:30px;animation-delay:1.2s}
-.s4{right:35px;bottom:15px;animation-delay:1.6s}
-.s5{left:5px;top:75px;animation-delay:.5s}
-.s6{right:5px;top:85px;animation-delay:1s}
-
-@keyframes sparkle{
-0%,100%{
-opacity:.15;
-transform:scale(.6);
-}
-50%{
-opacity:1;
-transform:scale(1.4);
-}
+.search-icon::after{
+content:"";
+position:absolute;
+width:9px;
+height:3px;
+right:-7px;
+bottom:-4px;
+border-radius:3px;
+background:#278bd7;
+transform:rotate(45deg);
 }
 
-
-@media(max-width:500px){
-
-.card{
-padding:18px;
+.answer-card h1{
+margin:0 0 24px;
+font-size:29px;
+color:var(--navy);
 }
 
-.signin-grid,
-.info-grid{
+.answer-input{
+width:100%;
+height:53px;
+padding:0 16px;
+border:1px solid #cbdce9;
+border-radius:9px;
+background:#fbfdff;
+outline:none;
+font-size:15px;
+color:#2d4559;
+transition:.18s;
+}
+
+.answer-input:focus{
+background:white;
+border-color:#3b98e9;
+box-shadow:0 0 0 4px rgba(22,119,255,.08);
+}
+
+.answer-input::placeholder{
+color:#9aaab7;
+}
+
+.result{
+display:none;
+margin-top:15px;
+padding:12px 14px;
+border-radius:8px;
+font-size:13px;
+font-weight:600;
+line-height:1.5;
+}
+
+.result.error{
+display:block;
+color:#bd4040;
+background:#fff4f4;
+border:1px solid #f1d5d5;
+}
+
+.result.success{
+display:block;
+color:#14794f;
+background:#eefaf4;
+border:1px solid #ccebdc;
+}
+
+.answer-actions{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-top:20px;
+}
+
+.continue-btn{
+display:none;
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media(max-width:700px){
+
+.screen{
+padding:18px 12px;
+}
+
+.dots{
+display:none;
+}
+
+.intro-card{
 grid-template-columns:1fr;
+min-height:auto;
 }
 
-h1{
+.intro-art{
+grid-row:1;
+height:310px;
+min-height:310px;
+padding:12px;
+}
+
+.hero-image{
+width:88%;
+max-width:340px;
+}
+
+.intro-content{
+grid-row:2;
+padding:31px 22px 38px;
+text-align:center;
+}
+
+.intro-kicker{
+font-size:11px;
+letter-spacing:2.6px;
+margin-bottom:12px;
+}
+
+.intro-content h1{
+max-width:350px;
+margin:0 auto 25px;
+font-size:31px;
+line-height:1.12;
+letter-spacing:-.7px;
+}
+
+.challenge-label{
+font-size:11px;
+letter-spacing:2.7px;
+margin-left:2px;
+}
+
+.email-appbar{
+height:56px;
+padding:0 16px;
+}
+
+.email-account span{
+display:none;
+}
+
+.email-content{
+padding:23px 18px 27px;
+}
+
+.email-content h2{
 font-size:21px;
 }
 
-.buttons .btn{
-flex:1;
-}
-
-.password{
-font-size:13px;
-}
-
-.drag-ghost{
-width:calc(100vw - 36px);
-}
-
-.rapid-question{
-font-size:19px;
-}
-
-.option{
+.email-message{
 font-size:14px;
 }
 
-.treasure-screen h1{
-font-size:32px;
+.signin-box{
+grid-template-columns:1fr 1fr;
 }
 
-.treasure-subtitle{
-font-size:16px;
+.answer-card{
+padding:29px 20px;
 }
 
-.treasure{
-margin-top:38px;
+.answer-card h1{
+font-size:24px;
+}
+
+.answer-actions .btn{
+flex:1;
+padding-left:10px;
+padding-right:10px;
+}
+
+}
+
+
+/* ==============================
+   SMALL MOBILE
+============================== */
+
+@media(max-width:390px){
+
+.intro-art{
+height:270px;
+min-height:270px;
+}
+
+.hero-image{
+width:92%;
+}
+
+.intro-content h1{
+font-size:29px;
+}
+
+.signin-item{
+padding:12px;
+}
+
+}
+
+
+/* ==============================
+   SHORT LAPTOP
+============================== */
+
+@media(min-width:701px) and (max-height:760px){
+
+.screen{
+padding-top:18px;
+padding-bottom:18px;
+}
+
+.intro-card,
+.intro-art{
+min-height:470px;
+}
+
+.intro-content{
+padding-top:45px;
+padding-bottom:45px;
+}
+
+.intro-content h1{
+font-size:41px;
+}
+
+.hero-image{
+max-width:440px;
+}
+
+.email-content{
+padding-top:22px;
+padding-bottom:24px;
+}
+
+.signin-box{
+margin-top:16px;
+margin-bottom:18px;
 }
 
 }
@@ -757,45 +731,81 @@ margin-top:38px;
 
 <body>
 
-<div class="container">
+
+<!-- ============================================
+     INTRO SCREEN
+============================================ -->
+
+<section class="screen active" id="introScreen">
+
+<div class="dots top"></div>
+<div class="dots bottom"></div>
+
+<div class="wrap">
+
+<div class="intro-card">
 
 
-<!-- TREASURE HUNT INTRO -->
+<div class="intro-content">
 
-<section id="screen0">
-
-<div class="card treasure-intro">
-
-<div class="treasure-title">
-CYBER TREASURE HUNT
+<div class="intro-kicker">
+CYBER AWARENESS CHALLENGE
 </div>
 
-<h1>Let's Begin</h1>
+<h1>
+Ready to Test Your Cyber Skills?
+</h1>
 
-<p>
-Solve different cybersecurity challenges, make the right decisions,
-and complete your journey to reach the final treasure.
-</p>
-
-<button class="btn primary" onclick="startTreasureHunt()">
-START TREASURE HUNT
+<button
+class="btn btn-primary start-btn"
+onclick="startChallenge()"
+>
+START CHALLENGE
+<span class="start-arrow">→</span>
 </button>
 
 </div>
+
+
+<div class="intro-art">
+
+<img
+src="assets/cyber-challenge-hero.png"
+class="hero-image"
+alt="Cybersecurity protection illustration"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
 </section>
 
 
-<!-- SCREEN 1 -->
 
-<section id="screen1" style="display:none">
+<!-- ============================================
+     CHALLENGE 01 — EMAIL
+============================================ -->
 
-<div class="challenge">CHALLENGE 01</div>
+<section class="screen" id="emailScreen">
 
-<div class="progress">
-<div class="progress-fill" style="width:50%"></div>
+<div class="dots top"></div>
+
+<div class="wrap">
+
+<div class="challenge-label">
+CHALLENGE 01
 </div>
 
-<div class="card">
+
+<div class="email-card">
+
+
+<div class="email-appbar">
+
 
 <div class="microsoft">
 
@@ -810,368 +820,240 @@ Microsoft 365
 
 </div>
 
-<div class="email-top">
+
+<div class="email-account">
+
+<span>
+Student Account
+</span>
+
+<div class="account-avatar">
+S
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="email-content">
+
+
+<div class="email-meta">
+
 
 <div class="email-row">
-<span class="label">From:</span>
-<span class="value">account-security@micros0ft.com</span>
+
+<div class="email-label">
+From:
 </div>
+
+<div class="email-value">
+account-security@micros0ft.com
+</div>
+
+</div>
+
 
 <div class="email-row">
-<span class="label">To:</span>
-<span class="value">5593833@bkbck.edu.in</span>
+
+<div class="email-label">
+To:
 </div>
+
+<div class="email-value">
+5593833@bkbck.edu.in
+</div>
+
+</div>
+
 
 <div class="email-row">
-<span class="label">Date:</span>
-<span class="value">18 Sep 2026, 10:42 AM</span>
+
+<div class="email-label">
+Date:
+</div>
+
+<div class="email-value">
+30 Sep 2026, 10:42 AM
 </div>
 
 </div>
 
-<h2>Unusual sign-in activity detected</h2>
 
-<div class="email-body">
+</div>
+
+
+<h2>
+Unusual sign-in activity detected
+</h2>
+
+
+<div class="email-message">
+
+
+<p>
+Hello,
+</p>
+
 
 <p>
 We detected an unusual sign-in attempt on your Microsoft account.
 If this was not you, please verify your account immediately.
 </p>
 
-<div class="signin">
 
-<div class="signin-title">Sign-in details</div>
+<div class="signin-box">
 
-<div class="signin-grid">
 
 <div class="signin-item">
+
 Date
-<strong>18 Sep 2026</strong>
+
+<strong>
+30 Sep 2026
+</strong>
+
 </div>
 
+
 <div class="signin-item">
+
 Location
-<strong>Mumbai, India</strong>
+
+<strong>
+Mumbai, India
+</strong>
+
 </div>
 
+
 <div class="signin-item">
+
 Device
-<strong>Windows PC</strong>
+
+<strong>
+Windows PC
+</strong>
+
 </div>
+
 
 <div class="signin-item">
+
 Browser
-<strong>Microsoft Edge</strong>
-</div>
+
+<strong>
+Microsoft Edge
+</strong>
 
 </div>
-</div>
+
 
 </div>
 
-<button class="btn primary" onclick="showScreen(2)">
+
+<button
+class="verify-btn"
+onclick="openAnswer()"
+>
 Verify My Account
 </button>
 
+
+<div class="email-footer">
+Microsoft Account Security Team
 </div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
 
-<!-- SCREEN 2 -->
 
-<section id="screen2" style="display:none">
+<!-- ============================================
+     CHALLENGE 01 — ANSWER
+============================================ -->
 
-<div class="challenge">CHALLENGE 01</div>
+<section class="screen" id="answerScreen">
 
-<div class="progress">
-<div class="progress-fill" style="width:100%"></div>
+<div class="dots bottom"></div>
+
+<div class="wrap">
+
+
+<div class="challenge-label">
+CHALLENGE 01
 </div>
 
-<div class="card">
 
-<h1>Find the phishing mistake</h1>
+<div class="answer-card">
+
+
+<div class="question-icon">
+<div class="search-icon"></div>
+</div>
+
+
+<h1>
+Find the phishing mistake.
+</h1>
+
 
 <input
 id="answer"
-placeholder="Enter the mistake..."
+class="answer-input"
+type="text"
+placeholder="Enter your answer..."
 autocomplete="off"
+spellcheck="false"
 >
 
-<div id="result" class="result"></div>
 
-<div class="buttons">
+<div
+id="result"
+class="result"
+></div>
 
-<button class="btn secondary" onclick="previousScreen(1)">
+
+<div class="answer-actions">
+
+
+<button
+class="btn btn-secondary"
+id="previousBtn"
+onclick="previousScreen()"
+>
 Previous
 </button>
 
-<button class="btn primary" onclick="checkAnswer()">
+
+<button
+class="btn btn-primary"
+id="submitBtn"
+onclick="checkAnswer()"
+>
 Submit Answer
 </button>
 
-</div>
 
-</div>
-</section>
-
-
-<!-- SCREEN 3 -->
-
-<section id="screen3" style="display:none">
-
-<div class="challenge">CHALLENGE 02</div>
-
-<div class="card">
-
-<h1>Can You Guess the Password?</h1>
-
-<div class="info">
-
-<div class="info-grid">
-
-<div class="info-item">
-Name
-<strong>Rahul Sharma</strong>
-</div>
-
-<div class="info-item">
-DOB
-<strong>23 Jan, 2008</strong>
-</div>
-
-<div class="info-item">
-Favorite Athlete
-<strong>Virat Kohli</strong>
-</div>
-
-<div class="info-item">
-Favorite Number
-<strong>7</strong>
-</div>
-
-<div class="info-item">
-Pet's Name
-<strong>Bruno</strong>
-</div>
-
-<div class="info-item">
-Favorite Colour
-<strong>Blue</strong>
-</div>
-
-<div class="info-item">
-Favorite Movie
-<strong>3 Idiots</strong>
-</div>
-
-<div class="info-item">
-Favorite Food
-<strong>Biryani</strong>
-</div>
-
-</div>
-</div>
-
-<p>
-Rahul is careless about password security. He likes keeping passwords simple and easy to remember.
-</p>
-
-<div class="question">
-What is Rahul's Google account password?
-</div>
-
-<input
-id="password"
-placeholder="Enter password..."
-autocomplete="off"
+<button
+class="btn btn-primary continue-btn"
+id="continueBtn"
+onclick="nextChallenge()"
 >
-
-<div id="passwordResult" class="result"></div>
-
-<div class="buttons">
-
-<button class="btn secondary" onclick="previousScreen(2)">
-Previous
+CONTINUE
 </button>
 
-<button class="btn primary" onclick="checkPassword()">
-Submit Answer
-</button>
 
-</div>
-
-</div>
-</section>
-
-
-<!-- SCREEN 4 -->
-
-<section id="screen4" style="display:none">
-
-<div class="challenge">CHALLENGE 03</div>
-
-<div class="card">
-
-<h1>Arrange the Passwords</h1>
-
-<p>
-Arrange the passwords from <strong>weakest</strong> to <strong>strongest</strong>.
-Drag each password to its correct position.
-</p>
-
-<div id="passwordList" class="password-list"></div>
-
-<div id="orderResult" class="result"></div>
-
-<div class="buttons">
-
-<button class="btn secondary" onclick="previousScreen(3)">
-Previous
-</button>
-
-<button class="btn primary" onclick="checkOrder()">
-Submit Order
-</button>
-
-</div>
-
-</div>
-</section>
-
-
-<!-- SCREEN 5 - CHALLENGE 04 INTRO -->
-
-<section id="screen5" style="display:none">
-
-<div class="challenge">CHALLENGE 04</div>
-
-<div class="card">
-
-<div class="rapid-intro">
-
-<h1>Rapid Fire</h1>
-
-<p>
-Answer 7 cybersecurity situations correctly.
-You have 30 seconds for each question.
-</p>
-
-<div class="buttons">
-
-<button class="btn secondary" onclick="previousScreen(4)">
-Previous
-</button>
-
-<button class="btn primary" onclick="startRapidFire()">
-START CHALLENGE
-</button>
-
-</div>
-
-</div>
-
-</div>
-</section>
-
-
-<!-- SCREEN 6 - CHALLENGE 04 QUESTIONS -->
-
-<section id="screen6" style="display:none">
-
-<div class="challenge">CHALLENGE 04</div>
-
-<div class="card">
-
-<div class="rapid-header">
-
-<div class="question-number" id="questionNumber">
-Question 1 / 7
-</div>
-
-<div class="timer-circle" id="timerCircle">
-30
-</div>
-
-</div>
-
-<div class="timer-track">
-
-<div class="timer-bar" id="timerBar"></div>
-
-</div>
-
-<div class="rapid-question" id="rapidQuestion"></div>
-
-<div class="options" id="options"></div>
-
-</div>
-</section>
-
-
-<!-- SCREEN 7 - CHALLENGE 04 SCORE -->
-
-<section id="screen7" style="display:none">
-
-<div class="challenge">CHALLENGE 04</div>
-
-<div class="card">
-
-<div class="rapid-result">
-
-<h1>Challenge Complete</h1>
-
-<div class="final-score" id="score">
-0 / 7
-</div>
-
-<div class="final-message" id="resultText"></div>
-
-<div class="buttons">
-
-<button class="btn secondary" onclick="restartGame()">
-TRY AGAIN
-</button>
-
-<button class="btn primary" onclick="showScreen(8)">
-NEXT
-</button>
-
-</div>
-
-</div>
-
-</div>
-</section>
-
-
-<!-- SCREEN 8 - FINAL TREASURE -->
-
-<section id="screen8" style="display:none">
-
-<div class="treasure-screen">
-
-<div class="treasure-glow"></div>
-
-<h1>CONGRATULATIONS!</h1>
-
-<div class="treasure-subtitle">
-You completed the Cyber Treasure Hunt.
-</div>
-
-<div class="treasure">
-
-<div class="spark s1"></div>
-<div class="spark s2"></div>
-<div class="spark s3"></div>
-<div class="spark s4"></div>
-<div class="spark s5"></div>
-<div class="spark s6"></div>
-
-<div class="gold">◆ ✦ ◆</div>
-
-<div class="chest">
-<div class="chest-band"></div>
-<div class="lock"></div>
 </div>
 
 </div>
@@ -1180,100 +1062,107 @@ You completed the Cyber Treasure Hunt.
 
 </section>
 
-
-</div>
 
 
 <script>
 
+/* ==============================
+   SCREEN SYSTEM
+============================== */
 
-/* NAVIGATION */
+const screens=[
+"introScreen",
+"emailScreen",
+"answerScreen"
+];
 
-const screens=[0,1,2,3,4,5,6,7,8];
 
-function showScreen(n){
+function showScreen(id){
 
-screens.forEach(i=>{
-document.getElementById("screen"+i).style.display="none";
+screens.forEach(screen=>{
+
+document
+.getElementById(screen)
+.classList.remove("active");
+
 });
 
-document.getElementById("screen"+n).style.display="block";
+document
+.getElementById(id)
+.classList.add("active");
 
-window.scrollTo(0,0);
-
-}
-
-
-function startTreasureHunt(){
-
-showScreen(1);
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
 
-function clearResult(id){
+/* ==============================
+   START
+============================== */
 
-const result=
-document.getElementById(id);
+function startChallenge(){
 
-result.textContent="";
-result.className="result";
+resetChallenge();
 
-}
-
-
-function resetScreen(n){
-
-if(n===2){
-
-document.getElementById("answer").value="";
-
-clearResult("result");
-
-}
-
-if(n===3){
-
-document.getElementById("password").value="";
-
-clearResult("passwordResult");
-
-}
-
-if(n===4){
-
-clearResult("orderResult");
-
-createPasswords();
-
-}
+showScreen("emailScreen");
 
 }
 
 
-function previousScreen(n){
+/* ==============================
+   EMAIL
+============================== */
 
-resetScreen(n);
+function openAnswer(){
 
-showScreen(n);
+showScreen("answerScreen");
+
+setTimeout(()=>{
+
+document
+.getElementById("answer")
+.focus();
+
+},250);
 
 }
 
 
-/* CHALLENGE 01 */
+/* ==============================
+   PREVIOUS
+============================== */
+
+function previousScreen(){
+
+resetAnswer();
+
+showScreen("emailScreen");
+
+}
+
+
+/* ==============================
+   CHECK ANSWER
+============================== */
 
 function checkAnswer(){
 
-let answer=
-document.getElementById("answer")
-.value
+const input=
+document.getElementById("answer");
+
+const answer=
+input.value
 .trim()
 .toLowerCase();
 
-let result=
+const result=
 document.getElementById("result");
 
-let correct=[
+
+const correctAnswers=[
 
 "micros0ft",
 "micros0ft.com",
@@ -1282,851 +1171,129 @@ let correct=[
 
 ];
 
-if(correct.includes(answer)){
 
-result.className=
-"result success";
+if(correctAnswers.includes(answer)){
 
-result.textContent="Correct!";
+result.className="result success";
 
-setTimeout(()=>{
+result.innerHTML=
+"✓ Correct! <strong>micros0ft.com</strong> uses 0 instead of o.";
 
-resetScreen(2);
 
-showScreen(3);
+input.disabled=true;
 
-},500);
-
-}else{
-
-result.className=
-"result error";
-
-result.textContent=
-"Incorrect. Check the email again.";
-
-}
-
-}
-
-
-/* CHALLENGE 02 */
-
-function checkPassword(){
-
-let answer=
-document.getElementById("password")
-.value
-.trim();
-
-let result=
-document.getElementById("passwordResult");
-
-if(answer==="Rahul@2008"){
-
-result.className=
-"result success";
-
-result.textContent="Correct!";
-
-setTimeout(()=>{
-
-resetScreen(3);
-
-showScreen(4);
-
-},500);
-
-}else{
-
-result.className=
-"result error";
-
-result.textContent=
-"Incorrect. Try again.";
-
-}
-
-}
-
-
-/* CHALLENGE 03 */
-
-const passwords=[
-
-"12345678",
-"qwerty123",
-"akash2004",
-"Mumbai@2026",
-"P@ssword123!",
-"Blue-Coffee-Train-47",
-"vR7#qL2!xM9@pK4$"
-
-];
-
-const list=
-document.getElementById("passwordList");
-
-let draggedCard=null;
-let ghost=null;
-let dropZone=null;
-let offsetX=0;
-let offsetY=0;
-
-
-function createPasswords(){
-
-list.innerHTML="";
-
-let shuffled=
-[...passwords]
-.sort(()=>Math.random()-.5);
-
-shuffled.forEach((password,index)=>{
-
-let item=
-document.createElement("div");
-
-item.className="password-card";
-
-item.dataset.password=password;
-
-item.innerHTML=
-'<span class="handle">☷</span>'+
-'<span class="rank">'+
-(index+1)+
-'</span>'+
-'<span class="password">'+
-password+
-'</span>';
-
-item.addEventListener(
-"pointerdown",
-startDrag
-);
-
-list.appendChild(item);
-
-});
-
-updateRanks();
-
-}
-
-
-function startDrag(e){
-
-if(e.button!==0)return;
-
-draggedCard=e.currentTarget;
-
-let rect=
-draggedCard.getBoundingClientRect();
-
-offsetX=
-e.clientX-
-(rect.left+rect.width/2);
-
-offsetY=
-e.clientY-
-(rect.top+rect.height/2);
-
-draggedCard.classList.add(
-"dragging",
-"drag-source"
-);
-
-ghost=
-document.createElement("div");
-
-ghost.className="drag-ghost";
-
-ghost.innerHTML=
-'<span class="rank">'+
-draggedCard.querySelector(".rank").textContent+
-'</span>'+
-'<span class="password">'+
-draggedCard.dataset.password+
-'</span>';
-
-document.body.appendChild(ghost);
-
-moveGhost(
-e.clientX,
-e.clientY
-);
-
-document.addEventListener(
-"pointermove",
-dragMove
-);
-
-document.addEventListener(
-"pointerup",
-endDrag,
-{once:true}
-);
-
-}
-
-
-function moveGhost(x,y){
-
-if(!ghost)return;
-
-ghost.style.left=
-(x-offsetX)+"px";
-
-ghost.style.top=
-(y-offsetY)+"px";
-
-}
-
-
-function dragMove(e){
-
-if(!draggedCard)return;
-
-e.preventDefault();
-
-moveGhost(
-e.clientX,
-e.clientY
-);
-
-let target=
-getDropTarget(
-e.clientX,
-e.clientY
-);
-
-showDropPosition(
-target,
-e.clientY
-);
-
-}
-
-
-function getDropTarget(x,y){
-
-let cards=[
-...document.querySelectorAll(
-".password-card:not(.dragging)"
-)
-];
-
-let closest=null;
-let distance=Infinity;
-
-cards.forEach(card=>{
-
-let rect=
-card.getBoundingClientRect();
-
-let center=
-rect.top+
-rect.height/2;
-
-let distanceFromCenter=
-Math.abs(y-center);
-
-if(distanceFromCenter<distance){
-
-distance=
-distanceFromCenter;
-
-closest=
-card;
-
-}
-
-});
-
-return closest;
-
-}
-
-
-function showDropPosition(target,y){
-
-removeDropZone();
-
-if(!target)return;
-
-let rect=
-target.getBoundingClientRect();
-
-dropZone=
-document.createElement("div");
-
-dropZone.className=
-"drop-zone active";
-
-if(y>
-rect.top+
-rect.height/2){
-
-target.after(dropZone);
-
-}else{
-
-target.before(dropZone);
-
-}
-
-}
-
-
-function removeDropZone(){
-
-if(dropZone){
-
-dropZone.remove();
-
-dropZone=null;
-
-}
-
-}
-
-
-function endDrag(e){
-
-if(!draggedCard)return;
-
-let target=
-getDropTarget(
-e.clientX,
-e.clientY
-);
-
-if(target){
-
-let rect=
-target.getBoundingClientRect();
-
-if(e.clientY>
-rect.top+
-rect.height/2){
-
-target.after(draggedCard);
-
-}else{
-
-target.before(draggedCard);
-
-}
-
-}
-
-removeDropZone();
-
-draggedCard.classList.remove(
-"dragging",
-"drag-source"
-);
-
-if(ghost){
-
-ghost.remove();
-
-ghost=null;
-
-}
-
-document.removeEventListener(
-"pointermove",
-dragMove
-);
-
-updateRanks();
-
-draggedCard=null;
-
-}
-
-
-function updateRanks(){
 
 document
-.querySelectorAll(".password-card")
-.forEach((item,index)=>{
+.getElementById("previousBtn")
+.style.display="none";
 
-item.querySelector(".rank")
-.textContent=index+1;
 
-});
+document
+.getElementById("submitBtn")
+.style.display="none";
+
+
+document
+.getElementById("continueBtn")
+.style.display="block";
+
+}
+
+else{
+
+result.className="result error";
+
+result.textContent = "Wrong answer. Try again.";
+}
 
 }
 
 
-function checkOrder(){
+/* ==============================
+   ENTER KEY
+============================== */
 
-let current=[
-...document.querySelectorAll(
-".password-card"
-)
-].map(
-item=>item.dataset.password
-);
-
-let result=
-document.getElementById(
-"orderResult"
-);
+document
+.getElementById("answer")
+.addEventListener(
+"keydown",
+function(event){
 
 if(
-current.every(
-(password,index)=>
-password===passwords[index]
-)
+event.key==="Enter" &&
+!this.disabled
 ){
 
-result.className=
-"result success";
-
-result.textContent=
-"Correct! Passwords arranged from weakest to strongest.";
-
-setTimeout(()=>{
-
-showScreen(5);
-
-},700);
-
-}else{
-
-result.className=
-"result error";
-
-result.textContent=
-"Incorrect order. Try again.";
+checkAnswer();
 
 }
-
-}
-
-
-/* CHALLENGE 04 */
-
-const rapidQuestions=[
-
-{
-
-question:
-"You get a message saying your bank account will be blocked unless you click a link. What should you do?",
-
-options:[
-"Click the link quickly",
-"Reply to the message",
-"Check your bank's official app or website",
-"Forward the message to a friend"
-],
-
-answer:2
-
-},
-
-{
-
-question:
-"Which action gives your account extra protection if someone gets your password?",
-
-options:[
-"Use the same password everywhere",
-"Turn on two-factor authentication",
-"Save your password in messages",
-"Change your password once a year"
-],
-
-answer:1
-
-},
-
-{
-
-question:
-"A website asks for your UPI PIN to receive money. What should you do?",
-
-options:[
-"Enter the PIN",
-"Enter it if the website looks real",
-"Do not enter the PIN",
-"Enter it and check your bank account"
-],
-
-answer:2
-
-},
-
-{
-
-question:
-"You get a login alert for your account, but you did not log in. What should you do first?",
-
-options:[
-"Ignore the alert",
-"Change your password and secure the account",
-"Reply to the alert",
-"Delete the notification"
-],
-
-answer:1
-
-},
-
-{
-
-question:
-"You want to install a new mobile app. Where is the safest place to get it?",
-
-options:[
-"A random website",
-"A link from an SMS",
-"The official app store",
-"A file sent by a stranger"
-],
-
-answer:2
-
-},
-
-{
-
-question:
-"A simple calculator app asks for access to your contacts and microphone. What should you do?",
-
-options:[
-"Allow everything",
-"Allow it because it is a calculator",
-"Deny unnecessary permissions",
-"Give permission temporarily"
-],
-
-answer:2
-
-},
-
-{
-
-question:
-"A friend suddenly asks you for money by message. What should you do before sending it?",
-
-options:[
-"Send it because you know them",
-"Ask them for their OTP",
-"Call them and check first",
-"Send a small amount first"
-],
-
-answer:2
-
-}
-
-];
-
-
-let currentQuestion=0;
-let score=0;
-let timeLeft=30;
-let timer=null;
-let answered=false;
-
-
-function startRapidFire(){
-
-clearInterval(timer);
-
-currentQuestion=0;
-score=0;
-
-showScreen(6);
-
-showRapidQuestion();
-
-}
-
-
-function showRapidQuestion(){
-
-clearInterval(timer);
-
-answered=false;
-timeLeft=30;
-
-let question=
-rapidQuestions[currentQuestion];
-
-document.getElementById(
-"questionNumber"
-).textContent=
-`Question ${currentQuestion+1} / ${rapidQuestions.length}`;
-
-document.getElementById(
-"rapidQuestion"
-).textContent=
-question.question;
-
-let options=
-document.getElementById("options");
-
-options.innerHTML="";
-
-const letters=["A","B","C","D"];
-
-question.options.forEach(
-(option,index)=>{
-
-let button=
-document.createElement("button");
-
-button.className="option";
-
-button.innerHTML=
-`<span class="option-letter">
-${letters[index]}.
-</span>${option}`;
-
-button.onclick=()=>{
-
-selectRapidAnswer(
-index,
-button
-);
-
-};
-
-options.appendChild(button);
 
 }
 );
 
-updateRapidTimer();
 
-timer=setInterval(()=>{
+/* ==============================
+   RESET
+============================== */
 
-timeLeft--;
+function resetAnswer(){
 
-updateRapidTimer();
+const input=
+document.getElementById("answer");
 
-if(timeLeft<=0){
-
-clearInterval(timer);
-
-rapidTimeout();
-
-}
-
-},1000);
-
-}
+const result=
+document.getElementById("result");
 
 
-function updateRapidTimer(){
+input.value="";
+input.disabled=false;
 
-let circle=
-document.getElementById(
-"timerCircle"
-);
 
-let bar=
-document.getElementById(
-"timerBar"
-);
+result.textContent="";
+result.className="result";
 
-circle.textContent=
-timeLeft;
 
-bar.style.width=
-(timeLeft/30*100)+"%";
+document
+.getElementById("previousBtn")
+.style.display="block";
 
-circle.classList.remove(
-"warning",
-"danger"
-);
 
-bar.classList.remove(
-"warning",
-"danger"
-);
+document
+.getElementById("submitBtn")
+.style.display="block";
 
-if(timeLeft<=5){
 
-circle.classList.add("danger");
-bar.classList.add("danger");
-
-}else if(timeLeft<=10){
-
-circle.classList.add("warning");
-bar.classList.add("warning");
-
-}
+document
+.getElementById("continueBtn")
+.style.display="none";
 
 }
 
 
-function selectRapidAnswer(
-selectedIndex,
-selectedButton
-){
+function resetChallenge(){
 
-if(answered)return;
-
-answered=true;
-
-clearInterval(timer);
-
-let question=
-rapidQuestions[currentQuestion];
-
-let options=
-document.querySelectorAll(".option");
-
-options.forEach(button=>{
-button.classList.add("disabled");
-});
-
-if(
-selectedIndex===
-question.answer
-){
-
-selectedButton.classList.add(
-"correct"
-);
-
-score++;
-
-}else{
-
-selectedButton.classList.add(
-"wrong"
-);
-
-options[
-question.answer
-].classList.add(
-"correct"
-);
-
-}
-
-setTimeout(
-nextRapidQuestion,
-1200
-);
+resetAnswer();
 
 }
 
 
-function rapidTimeout(){
+/* ==============================
+   CHALLENGE 02
+============================== */
 
-if(answered)return;
+function nextChallenge(){
 
-answered=true;
+/*
+Challenge 02 will connect here later.
 
-let options=
-document.querySelectorAll(
-".option"
-);
+Example:
 
-options.forEach(button=>{
-button.classList.add(
-"disabled"
-);
-});
+showScreen("challenge2Screen");
+*/
 
-setTimeout(
-nextRapidQuestion,
-1200
-);
+showScreen("introScreen");
 
 }
-
-
-function nextRapidQuestion(){
-
-currentQuestion++;
-
-if(
-currentQuestion>=
-rapidQuestions.length
-){
-
-showRapidResult();
-
-}else{
-
-showRapidQuestion();
-
-}
-
-}
-
-
-function showRapidResult(){
-
-clearInterval(timer);
-
-showScreen(7);
-
-document.getElementById(
-"score"
-).textContent=
-`${score} / ${rapidQuestions.length}`;
-
-let message;
-
-if(score===7){
-
-message=
-"Excellent work. You made safe choices throughout.";
-
-}else if(score>=5){
-
-message=
-"Good work. Your cyber awareness is strong.";
-
-}else if(score>=3){
-
-message=
-"Good attempt. Review the situations you missed.";
-
-}else{
-
-message=
-"Review the questions and try again.";
-
-}
-
-document.getElementById(
-"resultText"
-).textContent=
-message;
-
-}
-
-
-/* RETRY */
-
-function restartGame(){
-
-clearInterval(timer);
-
-currentQuestion=0;
-score=0;
-
-showScreen(5);
-
-}
-
-
-/* START */
-
-createPasswords();
-
-showScreen(0);
 
 </script>
 
