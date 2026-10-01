@@ -4,15 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#dff3ff">
-
 <title>Cyber Awareness Challenge</title>
 
 <style>
-*{
-box-sizing:border-box;
--webkit-tap-highlight-color:transparent;
-}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
 --blue:#1478e8;
 --blue-soft:#eaf6fe;
@@ -23,1627 +18,997 @@ box-sizing:border-box;
 --green:#16805a;
 --red:#bd4141;
 }
-
-html,body{
-margin:0;
-min-height:100%;
-}
-
+html,body{margin:0;min-height:100%}
 body{
 font-family:"Segoe UI",Arial,sans-serif;
 color:var(--text);
 font-weight:400;
-
 background:
 linear-gradient(rgba(235,248,255,.15),rgba(235,248,255,.15)),
 url("cyber-background.png") center center / cover fixed no-repeat;
 }
+button,input{font:inherit}
+button{-webkit-user-select:none;user-select:none}
 
-button,input{
-font:inherit;
-}
-
-button{
--webkit-user-select:none;
-user-select:none;
-}
-
-/* =====================================================
-   GLOBAL SCREENS
-===================================================== */
+/* GLOBAL */
 
 .screen{
 display:none;
-
 min-height:100vh;
 min-height:100dvh;
-
 align-items:center;
 justify-content:center;
-
 padding:24px 18px;
 }
-
-.screen.active{
-display:flex;
-}
-
-.container{
-width:100%;
-max-width:1000px;
-margin:auto;
-}
-
+.screen.active{display:flex}
+.container{width:100%;max-width:1000px;margin:auto}
 .challenge-label{
 display:inline-block;
-
 margin:0 0 12px 5px;
-
 padding:6px 11px;
-
 border:1px solid rgba(76,159,215,.32);
 border-radius:7px;
-
 background:rgba(255,255,255,.76);
-
 box-shadow:0 4px 14px rgba(43,94,130,.07);
-
 font-size:13px;
 font-weight:600;
 letter-spacing:2.7px;
-
 color:#1778ba;
-
 backdrop-filter:blur(7px);
--webkit-backdrop-filter:blur(7px);
 }
-
 .card{
 background:rgba(255,255,255,.95);
-
 border:1px solid rgba(176,208,229,.9);
 border-radius:20px;
-
-box-shadow:
-0 20px 50px rgba(38,88,124,.17),
-0 4px 12px rgba(38,88,124,.07);
-
+box-shadow:0 20px 50px rgba(38,88,124,.17),0 4px 12px rgba(38,88,124,.07);
 backdrop-filter:blur(7px);
 -webkit-backdrop-filter:blur(7px);
-}
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-.btn{
-min-height:42px;
-
-padding:9px 19px;
-
-border-radius:8px;
-
-font-size:14px;
-font-weight:600;
-
-cursor:pointer;
-
-transition:
-background .18s,
-border-color .18s,
-transform .18s,
-box-shadow .18s;
-}
-
-.btn-primary{
-border:1px solid #68addb;
-
-background:#eaf6fe;
-
-color:#176da8;
-}
-
-.btn-primary:hover{
-background:#dceffc;
-border-color:#4398d0;
-
-box-shadow:0 5px 12px rgba(39,119,172,.12);
-
-transform:translateY(-1px);
-}
-
-.btn-secondary{
-border:1px solid #c3d6e3;
-
-background:#f8fbfd;
-
-color:#506b7e;
-}
-
-.btn-secondary:hover{
-background:#edf5fa;
-
-border-color:#a8c6da;
-}
-
-.actions{
-display:flex;
-align-items:center;
-justify-content:space-between;
-
-gap:10px;
-
-margin-top:17px;
-}
-
-.result{
-display:none;
-
-margin-top:13px;
-padding:10px 13px;
-
-border-radius:8px;
-
-font-size:15px;
-font-weight:500;
-}
-
-.result.wrong{
-display:block;
-
-background:#fff4f4;
-
-border:1px solid #edcccc;
-
-color:#ae3e3e;
-}
-
-/* =====================================================
-   INTRO
-===================================================== */
-
-.intro-card{
-display:grid;
-
-grid-template-columns:46% 54%;
-
-min-height:475px;
-
-overflow:hidden;
-}
-
-.intro-visual{
-display:flex;
-align-items:center;
-justify-content:center;
-
-padding:34px;
-
-background:
-linear-gradient(
-145deg,
-rgba(229,246,255,.92),
-rgba(244,251,255,.76)
-);
-
-border-right:1px solid rgba(190,218,235,.8);
-}
-
-.intro-visual img{
-display:block;
-
-width:100%;
-max-width:385px;
-height:auto;
-
-object-fit:contain;
-
-filter:
-drop-shadow(0 12px 18px rgba(38,111,159,.08));
-}
-
-.intro-content{
-display:flex;
-flex-direction:column;
-justify-content:center;
-
-padding:48px;
-}
-
-.intro-content h1{
-margin:0 0 13px;
-
-font-size:38px;
-font-weight:600;
-line-height:1.12;
-
-letter-spacing:-.4px;
-
-color:var(--navy);
-}
-
-.intro-content h2{
-margin:0 0 27px;
-
-font-size:20px;
-font-weight:400;
-line-height:1.45;
-
-color:#58758a;
-}
-
-.intro-content .btn{
-align-self:flex-start;
-}
-
-/* =====================================================
-   SUCCESS
-===================================================== */
-
-.success-card{
-max-width:620px;
-
-margin:auto;
-
-padding:45px 30px;
-
-text-align:center;
-}
-
-.success-icon{
-width:80px;
-height:80px;
-
-display:grid;
-place-items:center;
-
-margin:0 auto 20px;
-
-border:1px solid #b8e0cc;
-border-radius:50%;
-
-background:#e9f8f1;
-
-box-shadow:
-0 8px 22px rgba(44,137,98,.09);
-
-font-size:37px;
-font-weight:600;
-
-color:var(--green);
-
-animation:successPop .4s ease;
-}
-
-.success-card h1{
-margin:0 0 9px;
-
-font-size:28px;
-font-weight:600;
-
-color:var(--navy);
-}
-
-.success-card p{
-margin:0 0 25px;
-
-font-size:16px;
-font-weight:400;
-line-height:1.5;
-
-color:var(--muted);
-}
-
-.success-actions{
-display:flex;
-justify-content:center;
-
-gap:10px;
-}
-
-@keyframes successPop{
-0%{
-transform:scale(.65);
-opacity:0;
-}
-
-70%{
-transform:scale(1.07);
-}
-
-100%{
-transform:scale(1);
-opacity:1;
-}
-}
-
-/* =====================================================
-   CHALLENGE 01 EMAIL
-===================================================== */
-
-.email-card{
-max-width:850px;
-
-margin:auto;
-
-overflow:hidden;
-}
-
-.mail-top{
-display:flex;
-align-items:center;
-
-gap:11px;
-
-padding:15px 22px;
-
-background:rgba(246,250,253,.95);
-
-border-bottom:1px solid #dce8f0;
-}
-
-.microsoft-logo{
-display:grid;
-
-grid-template-columns:repeat(2,10px);
-grid-template-rows:repeat(2,10px);
-
-gap:2px;
-
-width:22px;
-height:22px;
-}
-
-.microsoft-logo span:nth-child(1){
-background:#f35325;
-}
-
-.microsoft-logo span:nth-child(2){
-background:#81bc06;
-}
-
-.microsoft-logo span:nth-child(3){
-background:#05a6f0;
-}
-
-.microsoft-logo span:nth-child(4){
-background:#ffba08;
-}
-
-.mail-brand{
-font-size:16px;
-font-weight:500;
-
-color:#3c5364;
-}
-
-.email-body{
-padding:27px 32px 29px;
-}
-
-.email-subject{
-margin:0 0 20px;
-
-font-size:27px;
-font-weight:600;
-
-color:var(--navy);
-}
-
-.sender{
-display:flex;
-align-items:center;
-
-gap:12px;
-
-padding-bottom:18px;
-margin-bottom:19px;
-
-border-bottom:1px solid #e2ebf1;
-}
-
-.sender-avatar{
-width:43px;
-height:43px;
-
-display:grid;
-place-items:center;
-
-flex:none;
-
-border-radius:50%;
-
-background:#dcefff;
-
-font-size:17px;
-font-weight:600;
-
-color:#1972b5;
-}
-
-.sender-name{
-font-size:16px;
-font-weight:500;
-
-color:#28485f;
-}
-
-.sender-address{
-margin-top:3px;
-
-font-size:14px;
-font-weight:400;
-
-color:#687f91;
-
-word-break:break-all;
-}
-
-.email-text{
-font-size:16px;
-font-weight:400;
-line-height:1.6;
-
-color:#405c71;
-}
-
-.signin-box{
-margin:19px 0;
-
-padding:15px 18px;
-
-border-left:3px solid #2495df;
-border-radius:6px;
-
-background:#f3f9fd;
-}
-
-.signin-row{
-display:grid;
-
-grid-template-columns:90px 1fr;
-
-gap:10px;
-
-margin:7px 0;
-
-font-size:14px;
-font-weight:400;
-}
-
-.signin-row span:first-child{
-font-weight:500;
-
-color:#385a72;
-}
-
-.verify-btn{
-display:inline-block;
-
-margin-top:4px;
-padding:9px 17px;
-
-border:1px solid #70b4df;
-border-radius:7px;
-
-background:#edf7fe;
-
-font-size:14px;
-font-weight:600;
-
-color:#126caf;
-
-cursor:pointer;
-
-transition:.18s;
-}
-
-.verify-btn:hover{
-background:#dff1fc;
-}
-
-/* =====================================================
-   CHALLENGE 01 ANSWER
-===================================================== */
-
-.answer-card{
-max-width:680px;
-
-margin:auto;
-
-padding:32px;
-}
-
-.answer-card h1{
-margin:0 0 21px;
-
-font-size:28px;
-font-weight:600;
-
-color:var(--navy);
-}
-
-.answer-input{
-width:100%;
-height:53px;
-
-padding:0 15px;
-
-border:1.5px solid #b7d0df;
-border-radius:9px;
-
-outline:none;
-
-background:#fff;
-
-font-size:17px;
-font-weight:400;
-
-color:#193b54;
-
-transition:.18s;
-}
-
-.answer-input:focus{
-border-color:#3599dd;
-
-box-shadow:
-0 0 0 4px rgba(53,153,221,.10);
-}
-
-/* =====================================================
-   CHALLENGE 02
-===================================================== */
-
-.password-card{
-padding:28px;
-}
-
-.password-heading{
-margin:0 0 21px;
-
-font-size:28px;
-font-weight:600;
-
-color:var(--navy);
-}
-
-.password-layout{
-display:grid;
-
-grid-template-columns:285px 1fr;
-
-gap:28px;
-
-align-items:center;
-}
-
-/* VISUAL */
-
-.password-visual{
-padding:22px 20px;
-
-border:1px solid #c9dfed;
-border-radius:15px;
-
-background:
-linear-gradient(
-145deg,
-rgba(237,249,255,.95),
-rgba(225,244,255,.88)
-);
-
-text-align:center;
-}
-
-.password-visual img{
-display:block;
-
-width:100%;
-max-width:225px;
-height:205px;
-
-margin:0 auto 15px;
-
-object-fit:contain;
-}
-
-.strength-labels{
-display:flex;
-justify-content:space-between;
-
-margin-bottom:7px;
-
-font-size:10px;
-font-weight:600;
-letter-spacing:.8px;
-
-color:#617e92;
-}
-
-.strength-line{
-height:7px;
-
-border-radius:10px;
-
-background:
-linear-gradient(
-90deg,
-#c9d9e5,
-#76b9e6,
-#1478e8
-);
-}
-
-/* PASSWORD LIST */
-
-.password-list{
-display:flex;
-flex-direction:column;
-
-gap:8px;
-
-touch-action:none;
-}
-
-.password-item{
-position:relative;
-
-min-height:50px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-padding:9px 48px;
-
-border:1.5px solid #c6d9e6;
-border-radius:9px;
-
-background:#fff;
-
-box-shadow:
-0 3px 9px rgba(43,78,104,.05);
-
-font-family:
-"SFMono-Regular",
-Consolas,
-"Liberation Mono",
-monospace;
-
-font-size:16px;
-font-weight:600;
-
-text-align:center;
-
-color:#17384f;
-
-cursor:grab;
-
-touch-action:none;
-user-select:none;
-
-transition:
-border-color .12s,
-box-shadow .12s,
-transform .12s;
-}
-
-.password-item:hover{
-border-color:#78b8e1;
-
-box-shadow:
-0 6px 15px rgba(37,100,144,.10);
-}
-
-.password-item:active{
-cursor:grabbing;
-}
-
-.drag-handle{
-position:absolute;
-
-top:50%;
-
-width:17px;
-
-display:grid;
-
-grid-template-columns:repeat(2,4px);
-
-gap:3px;
-
-transform:translateY(-50%);
-
-pointer-events:none;
-}
-
-.drag-left{
-left:15px;
-}
-
-.drag-right{
-right:15px;
-}
-
-.drag-handle i{
-width:4px;
-height:4px;
-
-border-radius:50%;
-
-background:#88a4b7;
-}
-
-.password-item.drag-source{
-opacity:.25;
-}
-
-.password-item.drop-before:before,
-.password-item.drop-after:after{
-content:"";
-
-position:absolute;
-
-left:5px;
-right:5px;
-
-height:4px;
-
-border-radius:5px;
-
-background:#1688df;
-
-box-shadow:
-0 0 0 2px #dff2ff;
-
-z-index:5;
-}
-
-.password-item.drop-before:before{
-top:-6px;
-}
-
-.password-item.drop-after:after{
-bottom:-6px;
-}
-
-.drag-copy{
-position:fixed;
-
-z-index:9999;
-
-width:340px;
-max-width:calc(100vw - 30px);
-
-padding:13px 48px;
-
-border:1.5px solid #4da6df;
-border-radius:9px;
-
-background:#fff;
-
-box-shadow:
-0 17px 38px rgba(32,77,108,.25);
-
-font-family:
-"SFMono-Regular",
-Consolas,
-"Liberation Mono",
-monospace;
-
-font-size:16px;
-font-weight:600;
-
-text-align:center;
-
-color:#17384f;
-
-pointer-events:none;
-
-transform:
-translate(-50%,-50%)
-rotate(1deg);
-}
-
-/* =====================================================
-   CHALLENGE 03
-===================================================== */
-
-.profile-card{
-padding:28px;
-}
-
-.profile-heading{
-margin:0 0 21px;
-
-font-size:28px;
-font-weight:600;
-
-color:var(--navy);
-}
-
-.profile-layout{
-display:grid;
-
-grid-template-columns:225px 1fr;
-
-gap:25px;
-
-align-items:stretch;
-}
-
-/* PROFILE */
-
-.profile-identity{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-
-padding:24px 18px;
-
-border:1px solid #c9dfed;
-border-radius:15px;
-
-background:
-linear-gradient(
-145deg,
-rgba(238,249,255,.96),
-rgba(224,244,255,.9)
-);
-
-text-align:center;
-}
-
-.profile-photo{
-width:102px;
-height:102px;
-
-overflow:hidden;
-
-margin-bottom:13px;
-
-border:4px solid #fff;
-border-radius:50%;
-
-box-shadow:
-0 9px 22px rgba(36,92,130,.15);
-}
-
-.profile-photo img{
-display:block;
-
-width:100%;
-height:100%;
-
-object-fit:cover;
-object-position:center 35%;
-}
-
-.profile-name{
-margin-bottom:4px;
-
-font-size:20px;
-font-weight:600;
-
-color:var(--navy);
-}
-
-.profile-role{
-font-size:11px;
-font-weight:500;
-letter-spacing:.9px;
-
-color:#6a8496;
-}
-
-/* DETAILS */
-
-.profile-details{
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:9px;
-}
-
-.detail{
-display:flex;
-align-items:center;
-
-gap:11px;
-
-min-height:61px;
-
-padding:10px 13px;
-
-border:1px solid #d5e4ed;
-border-radius:9px;
-
-background:#fbfdff;
-}
-
-.detail-emoji{
-width:35px;
-height:35px;
-
-display:grid;
-place-items:center;
-
-flex:none;
-
-border-radius:8px;
-
-background:#eaf6fe;
-
-font-size:18px;
-}
-
-.detail-info{
-min-width:0;
-}
-
-.detail-label{
-margin-bottom:3px;
-
-font-size:10px;
-font-weight:500;
-letter-spacing:.45px;
-
-color:#738da0;
-}
-
-.detail-value{
-font-size:15px;
-font-weight:500;
-
-color:#284a62;
-}
-
-.profile-note{
-grid-column:1/-1;
-
-padding:11px 14px;
-
-border:1px solid #d9eaf4;
-border-radius:8px;
-
-background:#edf7fe;
-
-font-size:14px;
-font-weight:400;
-line-height:1.5;
-
-color:#45667d;
-}
-
-/* QUESTION */
-
-.password-question{
-margin-top:20px;
-padding-top:19px;
-
-border-top:1px solid #dde9f1;
-}
-
-.password-question h2{
-margin:0 0 12px;
-
-font-size:21px;
-font-weight:500;
-
-color:var(--navy);
-}
-
-.password-question .answer-input{
-font-family:
-"SFMono-Regular",
-Consolas,
-"Liberation Mono",
-monospace;
-
-font-size:18px;
-font-weight:600;
-
-letter-spacing:.2px;
-
-color:#102f4c;
-}
-
-.password-question .answer-input::placeholder{
-font-family:"Segoe UI",Arial,sans-serif;
-
-font-size:16px;
-font-weight:400;
-
-letter-spacing:0;
-
-color:#8aa0b0;
-}
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:700px){
-
-body{
-background:
-linear-gradient(
-rgba(235,248,255,.20),
-rgba(235,248,255,.20)
-),
-url("cyber-background.png") center center / cover fixed no-repeat;
-}
-
-.screen{
-padding:15px 10px;
-}
-
-.container{
-max-width:520px;
-}
-
-.challenge-label{
-margin:0 0 9px 2px;
-
-padding:5px 9px;
-
-font-size:11px;
-
-letter-spacing:2.2px;
-}
-
-.card{
-border-radius:16px;
-
-box-shadow:
-0 14px 35px rgba(38,88,124,.16),
-0 3px 9px rgba(38,88,124,.06);
-}
-
-/* INTRO */
-
-.intro-card{
-grid-template-columns:1fr;
-
-min-height:0;
-}
-
-.intro-visual{
-height:220px;
-
-padding:18px;
-
-border-right:0;
-border-bottom:1px solid #d4e5ef;
-}
-
-.intro-visual img{
-max-width:255px;
-max-height:195px;
-}
-
-.intro-content{
-padding:26px 20px 29px;
-
-text-align:center;
-}
-
-.intro-content h1{
-font-size:29px;
-}
-
-.intro-content h2{
-margin-bottom:21px;
-
-font-size:18px;
-}
-
-.intro-content .btn{
-align-self:center;
-}
-
-/* EMAIL */
-
-.email-body{
-padding:21px 17px 23px;
-}
-
-.mail-top{
-padding:13px 17px;
-}
-
-.email-subject{
-font-size:23px;
-}
-
-.email-text{
-font-size:15px;
-}
-
-.signin-row{
-grid-template-columns:75px 1fr;
-
-font-size:13px;
-}
-
-/* ANSWER */
-
-.answer-card{
-padding:25px 17px;
-}
-
-.answer-card h1{
-font-size:25px;
 }
 
 /* BUTTONS */
 
 .btn{
-min-height:40px;
-
-padding:8px 14px;
-
+min-height:42px;
+padding:9px 19px;
+border-radius:8px;
 font-size:14px;
+font-weight:600;
+cursor:pointer;
+transition:.18s;
 }
-
+.btn-primary{
+border:1px solid #68addb;
+background:#eaf6fe;
+color:#176da8;
+}
+.btn-primary:hover{
+background:#dceffc;
+border-color:#4398d0;
+box-shadow:0 5px 12px rgba(39,119,172,.12);
+transform:translateY(-1px);
+}
+.btn-secondary{
+border:1px solid #c3d6e3;
+background:#f8fbfd;
+color:#506b7e;
+}
+.btn-secondary:hover{background:#edf5fa;border-color:#a8c6da}
 .actions{
-gap:8px;
-
-margin-top:15px;
-}
-
-/* C2 */
-
-.password-card,
-.profile-card{
-padding:20px 14px;
-}
-
-.password-heading,
-.profile-heading{
-font-size:25px;
-
-margin-bottom:17px;
-}
-
-.password-layout{
-grid-template-columns:1fr;
-
-gap:15px;
-}
-
-.password-visual{
-display:grid;
-
-grid-template-columns:90px 1fr;
-
+display:flex;
 align-items:center;
-
-gap:13px;
-
-padding:11px 13px;
-
-text-align:left;
-}
-
-.password-visual img{
-width:90px;
-height:85px;
-
-margin:0;
-}
-
-.password-strength{
-width:100%;
-}
-
-.password-item{
-min-height:47px;
-
-padding-left:43px;
-padding-right:43px;
-
-font-size:15px;
-}
-
-/* C3 */
-
-.profile-layout{
-grid-template-columns:1fr;
-
-gap:13px;
-}
-
-.profile-identity{
-flex-direction:row;
-
-justify-content:flex-start;
-
-gap:14px;
-
-padding:14px;
-
-text-align:left;
-}
-
-.profile-photo{
-width:72px;
-height:72px;
-
-margin:0;
-
-flex:none;
-}
-
-.profile-details{
-grid-template-columns:1fr 1fr;
-
-gap:8px;
-}
-
-.detail{
-min-height:56px;
-
-padding:9px 10px;
-
-gap:9px;
-}
-
-.detail-emoji{
-width:31px;
-height:31px;
-
-font-size:16px;
-}
-
-.detail-label{
-font-size:9px;
-}
-
-.detail-value{
-font-size:13px;
-}
-
-.profile-note{
-font-size:13px;
-}
-
-.password-question{
+justify-content:space-between;
+gap:10px;
 margin-top:17px;
-padding-top:16px;
+}
+.result{
+display:none;
+margin-top:13px;
+padding:10px 13px;
+border-radius:8px;
+font-size:15px;
+font-weight:500;
+}
+.result.wrong{
+display:block;
+background:#fff4f4;
+border:1px solid #edcccc;
+color:#ae3e3e;
 }
 
-.password-question h2{
-font-size:19px;
-}
+/* INTRO */
 
-.password-question .answer-input{
-font-size:18px;
+.intro-card{
+display:grid;
+grid-template-columns:46% 54%;
+min-height:475px;
+overflow:hidden;
 }
+.intro-visual{
+display:flex;
+align-items:center;
+justify-content:center;
+padding:34px;
+background:linear-gradient(145deg,rgba(229,246,255,.92),rgba(244,251,255,.76));
+border-right:1px solid rgba(190,218,235,.8);
+}
+.intro-visual img{
+display:block;
+width:100%;
+max-width:385px;
+height:auto;
+object-fit:contain;
+filter:drop-shadow(0 12px 18px rgba(38,111,159,.08));
+}
+.intro-content{
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:48px;
+}
+.intro-content h1{
+margin:0 0 13px;
+font-size:38px;
+font-weight:600;
+line-height:1.12;
+letter-spacing:-.4px;
+color:var(--navy);
+}
+.intro-content h2{
+margin:0 0 27px;
+font-size:20px;
+font-weight:400;
+line-height:1.45;
+color:#58758a;
+}
+.intro-content .btn{align-self:flex-start}
 
 /* SUCCESS */
 
 .success-card{
-padding:38px 18px;
+max-width:620px;
+margin:auto;
+padding:45px 30px;
+text-align:center;
 }
-
 .success-icon{
-width:73px;
-height:73px;
-
-font-size:34px;
+width:80px;height:80px;
+display:grid;
+place-items:center;
+margin:0 auto 20px;
+border:1px solid #b8e0cc;
+border-radius:50%;
+background:#e9f8f1;
+box-shadow:0 8px 22px rgba(44,137,98,.09);
+font-size:37px;
+font-weight:600;
+color:var(--green);
+animation:successPop .4s ease;
 }
-
 .success-card h1{
-font-size:25px;
+margin:0 0 9px;
+font-size:28px;
+font-weight:600;
+color:var(--navy);
 }
-
 .success-card p{
-font-size:15px;
+margin:0 0 25px;
+font-size:16px;
+line-height:1.5;
+color:var(--muted);
+}
+.success-actions{display:flex;justify-content:center;gap:10px}
+@keyframes successPop{
+0%{transform:scale(.65);opacity:0}
+70%{transform:scale(1.07)}
+100%{transform:scale(1);opacity:1}
 }
 
-.success-actions{
-flex-direction:column-reverse;
+/* C1 */
 
+.email-card{max-width:850px;margin:auto;overflow:hidden}
+.mail-top{
+display:flex;align-items:center;gap:11px;
+padding:15px 22px;
+background:rgba(246,250,253,.95);
+border-bottom:1px solid #dce8f0;
+}
+.microsoft-logo{
+display:grid;
+grid-template-columns:repeat(2,10px);
+grid-template-rows:repeat(2,10px);
+gap:2px;width:22px;height:22px;
+}
+.microsoft-logo span:nth-child(1){background:#f35325}
+.microsoft-logo span:nth-child(2){background:#81bc06}
+.microsoft-logo span:nth-child(3){background:#05a6f0}
+.microsoft-logo span:nth-child(4){background:#ffba08}
+.mail-brand{font-size:16px;font-weight:500;color:#3c5364}
+.email-body{padding:27px 32px 29px}
+.email-subject{
+margin:0 0 20px;
+font-size:27px;font-weight:600;color:var(--navy);
+}
+.sender{
+display:flex;align-items:center;gap:12px;
+padding-bottom:18px;margin-bottom:19px;
+border-bottom:1px solid #e2ebf1;
+}
+.sender-avatar{
+width:43px;height:43px;
+display:grid;place-items:center;flex:none;
+border-radius:50%;background:#dcefff;
+font-size:17px;font-weight:600;color:#1972b5;
+}
+.sender-name{font-size:16px;font-weight:500;color:#28485f}
+.sender-address{
+margin-top:3px;font-size:14px;color:#687f91;word-break:break-all;
+}
+.email-text{font-size:16px;line-height:1.6;color:#405c71}
+.signin-box{
+margin:19px 0;padding:15px 18px;
+border-left:3px solid #2495df;
+border-radius:6px;background:#f3f9fd;
+}
+.signin-row{
+display:grid;grid-template-columns:90px 1fr;
+gap:10px;margin:7px 0;font-size:14px;
+}
+.signin-row span:first-child{font-weight:500;color:#385a72}
+.verify-btn{
+display:inline-block;margin-top:4px;padding:9px 17px;
+border:1px solid #70b4df;border-radius:7px;
+background:#edf7fe;font-size:14px;font-weight:600;
+color:#126caf;cursor:pointer;
+}
+.verify-btn:hover{background:#dff1fc}
+.answer-card{max-width:680px;margin:auto;padding:32px}
+.answer-card h1{
+margin:0 0 21px;font-size:28px;font-weight:600;color:var(--navy);
+}
+.answer-input{
+width:100%;height:53px;padding:0 15px;
+border:1.5px solid #b7d0df;border-radius:9px;
+outline:none;background:#fff;
+font-size:17px;color:#193b54;
+}
+.answer-input:focus{
+border-color:#3599dd;
+box-shadow:0 0 0 4px rgba(53,153,221,.10);
+}
+
+/* C2 */
+
+.password-card{padding:28px}
+.password-heading,.profile-heading{
+margin:0 0 21px;
+font-size:28px;font-weight:600;color:var(--navy);
+}
+.password-layout{
+display:grid;
+grid-template-columns:285px 1fr;
+gap:28px;
 align-items:center;
 }
-
-.success-actions .btn{
-width:auto;
-
-min-width:170px;
+.password-visual{
+padding:22px 20px;
+border:1px solid #c9dfed;
+border-radius:15px;
+background:linear-gradient(145deg,rgba(237,249,255,.95),rgba(225,244,255,.88));
+text-align:center;
+}
+.password-visual img{
+display:block;width:100%;max-width:225px;height:205px;
+margin:0 auto 15px;object-fit:contain;
+}
+.strength-labels{
+display:flex;justify-content:space-between;
+margin-bottom:7px;font-size:10px;font-weight:600;
+letter-spacing:.8px;color:#617e92;
+}
+.strength-line{
+height:7px;border-radius:10px;
+background:linear-gradient(90deg,#c9d9e5,#76b9e6,#1478e8);
+}
+.password-list{
+display:flex;
+flex-direction:column;
+gap:8px;
+touch-action:none;
+position:relative;
+}
+.password-item{
+position:relative;
+min-height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:9px 48px;
+border:1.5px solid #c6d9e6;
+border-radius:9px;
+background:#fff;
+box-shadow:0 3px 9px rgba(43,78,104,.05);
+font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+font-size:16px;
+font-weight:600;
+text-align:center;
+color:#17384f;
+cursor:grab;
+touch-action:none;
+user-select:none;
+transition:transform .16s ease,border-color .16s,box-shadow .16s,opacity .16s;
+}
+.password-item:hover{
+border-color:#78b8e1;
+box-shadow:0 6px 15px rgba(37,100,144,.10);
+}
+.password-item.dragging{
+opacity:.18;
+}
+.password-item.shift-up{transform:translateY(-8px)}
+.password-item.shift-down{transform:translateY(8px)}
+.drag-handle{
+position:absolute;top:50%;
+width:17px;
+display:grid;
+grid-template-columns:repeat(2,4px);
+gap:3px;
+transform:translateY(-50%);
+pointer-events:none;
+}
+.drag-left{left:15px}
+.drag-right{right:15px}
+.drag-handle i{
+width:4px;height:4px;border-radius:50%;background:#88a4b7;
+}
+.drag-ghost{
+position:fixed;
+z-index:9999;
+display:flex;
+align-items:center;
+justify-content:center;
+height:50px;
+padding:9px 48px;
+border:1.5px solid #4da6df;
+border-radius:9px;
+background:#fff;
+box-shadow:0 18px 38px rgba(32,77,108,.24);
+font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+font-size:16px;
+font-weight:600;
+color:#17384f;
+pointer-events:none;
+transform:translate(-50%,-50%) scale(1.02);
+}
+.drop-line{
+height:4px;
+margin:-2px 4px;
+border-radius:6px;
+background:#1688df;
+box-shadow:0 0 0 2px #dff2ff;
+pointer-events:none;
 }
 
+/* C3 */
+
+.profile-card{padding:28px}
+.profile-layout{
+display:grid;
+grid-template-columns:225px 1fr;
+gap:25px;
+align-items:stretch;
+}
+.profile-identity{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:24px 18px;
+border:1px solid #c9dfed;
+border-radius:15px;
+background:linear-gradient(145deg,rgba(238,249,255,.96),rgba(224,244,255,.9));
+text-align:center;
+}
+.profile-photo{
+width:102px;height:102px;
+overflow:hidden;margin-bottom:13px;
+border:4px solid #fff;border-radius:50%;
+box-shadow:0 9px 22px rgba(36,92,130,.15);
+}
+.profile-photo img{
+display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%;
+}
+.profile-name{margin-bottom:4px;font-size:20px;font-weight:600;color:var(--navy)}
+.profile-role{font-size:11px;font-weight:500;letter-spacing:.9px;color:#6a8496}
+.profile-details{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+}
+.detail{
+display:flex;align-items:center;gap:11px;
+min-height:61px;padding:10px 13px;
+border:1px solid #d5e4ed;border-radius:9px;background:#fbfdff;
+}
+.detail-emoji{
+width:35px;height:35px;
+display:grid;place-items:center;flex:none;
+border-radius:8px;background:#eaf6fe;font-size:18px;
+}
+.detail-info{min-width:0}
+.detail-label{
+margin-bottom:3px;font-size:10px;font-weight:500;
+letter-spacing:.45px;color:#738da0;
+}
+.detail-value{font-size:15px;font-weight:500;color:#284a62}
+.profile-note{
+grid-column:1/-1;
+padding:11px 14px;
+border:1px solid #d9eaf4;border-radius:8px;
+background:#edf7fe;
+font-size:14px;line-height:1.5;color:#45667d;
+}
+.password-question{
+margin-top:20px;padding-top:19px;border-top:1px solid #dde9f1;
+}
+.password-question h2{
+margin:0 0 12px;font-size:21px;font-weight:500;color:var(--navy);
+}
+.password-question .answer-input{
+font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+font-size:18px;font-weight:600;color:#102f4c;
+}
+
+/* C4 PROFILE */
+
+.c4-card{
+max-width:920px;
+margin:auto;
+overflow:hidden;
+}
+.c4-cover{
+height:185px;
+position:relative;
+overflow:hidden;
+background:#dceefa;
+}
+.c4-cover img{
+width:100%;
+height:100%;
+display:block;
+object-fit:cover;
+}
+.c4-profile-head{
+position:relative;
+display:flex;
+align-items:flex-end;
+gap:17px;
+padding:0 28px 19px;
+border-bottom:1px solid #e0eaf0;
+}
+.c4-avatar{
+width:118px;
+height:118px;
+flex:none;
+margin-top:-52px;
+overflow:hidden;
+border:5px solid #fff;
+border-radius:50%;
+background:#fff;
+box-shadow:0 7px 20px rgba(29,75,108,.16);
+position:relative;
+z-index:2;
+}
+.c4-avatar img{
+width:100%;height:100%;display:block;object-fit:cover;
+}
+.c4-main-info{
+flex:1;
+padding-top:13px;
+}
+.c4-main-info h1{
+margin:0;
+font-size:25px;
+font-weight:600;
+color:var(--navy);
+}
+.c4-handle{
+margin-top:2px;
+font-size:13px;
+color:#738b9b;
+}
+.c4-role{
+margin-top:5px;
+font-size:14px;
+color:#48687d;
+}
+.c4-interests{
+margin-top:8px;
+font-size:13px;
+color:#58788d;
+}
+.following-btn{
+margin-bottom:4px;
+border:1px solid #c8d9e4;
+background:#f7fafc;
+color:#536e80;
+border-radius:8px;
+padding:8px 16px;
+font-size:13px;
+font-weight:600;
+}
+.c4-stats{
+display:flex;
+gap:31px;
+padding:15px 28px;
+border-bottom:1px solid #e3ecf1;
+}
+.stat strong{
+display:block;
+font-size:17px;
+font-weight:600;
+color:#294c63;
+}
+.stat span{
+font-size:11px;
+color:#7c929f;
+}
+.c4-task{
+margin:17px 28px;
+padding:13px 15px;
+border:1px solid #d7e8f2;
+border-radius:10px;
+background:#f1f9fe;
+font-size:14px;
+line-height:1.55;
+color:#45677d;
+}
+.c4-review{
+display:flex;
+justify-content:flex-end;
+padding:0 28px 18px;
+}
+.c4-content{
+display:grid;
+grid-template-columns:1.15fr .85fr;
+gap:18px;
+padding:0 28px 27px;
+}
+.section-title{
+margin:0 0 11px;
+font-size:13px;
+font-weight:600;
+letter-spacing:.4px;
+color:#47677c;
+}
+.posts{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+}
+.post-card{
+overflow:hidden;
+border:1px solid #d8e5ed;
+border-radius:10px;
+background:#fff;
+}
+.post-image{
+aspect-ratio:1/1;
+overflow:hidden;
+background:#edf4f8;
+}
+.post-image img{
+width:100%;height:100%;display:block;object-fit:cover;
+}
+.post-text{
+padding:9px;
+font-size:10px;
+line-height:1.45;
+color:#587286;
+}
+.post-location{
+display:block;
+margin-bottom:4px;
+font-size:9px;
+font-weight:600;
+color:#3180b1;
+}
+.tag-card{
+overflow:hidden;
+border:1px solid #d8e5ed;
+border-radius:10px;
+background:#fff;
+}
+.tag-image{
+height:145px;
+overflow:hidden;
+background:#edf4f8;
+}
+.tag-image img{
+width:100%;height:100%;display:block;object-fit:cover;
+}
+.tag-info{padding:11px}
+.tag-info strong{
+display:block;
+margin-bottom:4px;
+font-size:12px;
+font-weight:600;
+color:#34576d;
+}
+.tag-info p{
+margin:0;
+font-size:10px;
+line-height:1.45;
+color:#738a99;
+}
+.c4-footer{padding:0 28px 24px}
+
+/* C4 PRIVACY */
+
+.privacy-card{
+max-width:830px;
+margin:auto;
+padding:26px;
+}
+.privacy-list{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:11px;
+}
+.privacy-row{
+display:flex;
+align-items:center;
+gap:12px;
+min-height:78px;
+padding:13px;
+border:1px solid #d6e4ec;
+border-radius:11px;
+background:#fbfdff;
+}
+.privacy-icon{
+width:42px;height:42px;
+flex:none;
+display:grid;
+place-items:center;
+border-radius:10px;
+background:#eaf6fe;
+font-size:20px;
+}
+.privacy-info{flex:1;min-width:0}
+.privacy-name{
+font-size:11px;
+font-weight:600;
+letter-spacing:.5px;
+color:#607e91;
+}
+.privacy-state{
+margin-top:4px;
+font-size:14px;
+font-weight:500;
+color:#31556d;
+}
+.setting-btn{
+flex:none;
+min-width:104px;
+min-height:37px;
+padding:7px 10px;
+border:1px solid #e0b7b7;
+border-radius:7px;
+background:#fff4f4;
+font-size:11px;
+font-weight:600;
+color:#ad4b4b;
+cursor:pointer;
+}
+.setting-btn.safe{
+border-color:#abd8c1;
+background:#eef9f3;
+color:#257655;
+}
+.privacy-check{
+margin-top:15px;
+padding:14px;
+border:1px solid #d7e6ee;
+border-radius:11px;
+background:#f8fbfd;
+}
+.privacy-check-title{
+margin-bottom:9px;
+font-size:11px;
+font-weight:600;
+letter-spacing:.6px;
+color:#557589;
+}
+.check-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+}
+.check-item{
+padding:9px 7px;
+border:1px solid #e0e9ee;
+border-radius:8px;
+background:#fff;
+text-align:center;
+}
+.check-item span{
+display:block;
+font-size:9px;
+color:#8195a1;
+}
+.check-item strong{
+display:block;
+margin-top:4px;
+font-size:10px;
+font-weight:600;
+color:#ad5656;
+}
+.check-item.safe strong{color:var(--green)}
+
+/* MOBILE */
+
+@media(max-width:700px){
+body{
+background:
+linear-gradient(rgba(235,248,255,.20),rgba(235,248,255,.20)),
+url("cyber-background.png") center center / cover fixed no-repeat;
+}
+.screen{padding:15px 10px}
+.container{max-width:520px}
+.challenge-label{
+margin:0 0 9px 2px;
+padding:5px 9px;
+font-size:11px;
+letter-spacing:2.2px;
+}
+.card{border-radius:16px}
+.intro-card{grid-template-columns:1fr;min-height:0}
+.intro-visual{
+height:220px;padding:18px;border-right:0;border-bottom:1px solid #d4e5ef;
+}
+.intro-visual img{max-width:255px;max-height:195px}
+.intro-content{padding:26px 20px 29px;text-align:center}
+.intro-content h1{font-size:29px}
+.intro-content h2{margin-bottom:21px;font-size:18px}
+.intro-content .btn{align-self:center}
+.email-body{padding:21px 17px 23px}
+.mail-top{padding:13px 17px}
+.email-subject{font-size:23px}
+.email-text{font-size:15px}
+.signin-row{grid-template-columns:75px 1fr;font-size:13px}
+.answer-card{padding:25px 17px}
+.answer-card h1{font-size:25px}
+.btn{min-height:40px;padding:8px 14px;font-size:14px}
+.actions{gap:8px;margin-top:15px}
+
+.password-card,.profile-card{padding:20px 14px}
+.password-heading,.profile-heading{font-size:25px;margin-bottom:17px}
+.password-layout{grid-template-columns:1fr;gap:15px}
+.password-visual{
+display:grid;
+grid-template-columns:90px 1fr;
+align-items:center;
+gap:13px;
+padding:11px 13px;
+text-align:left;
+}
+.password-visual img{width:90px;height:85px;margin:0}
+.password-strength{width:100%}
+.password-item{
+min-height:48px;
+padding-left:43px;
+padding-right:43px;
+font-size:14px;
+}
+.drag-ghost{
+height:48px;
+font-size:14px;
+padding-left:43px;
+padding-right:43px;
+}
+
+.profile-layout{grid-template-columns:1fr;gap:13px}
+.profile-identity{
+flex-direction:row;
+justify-content:flex-start;
+gap:14px;
+padding:14px;
+text-align:left;
+}
+.profile-photo{width:72px;height:72px;margin:0;flex:none}
+.profile-details{grid-template-columns:1fr 1fr;gap:8px}
+.detail{min-height:56px;padding:9px 10px;gap:9px}
+.detail-emoji{width:31px;height:31px;font-size:16px}
+.detail-label{font-size:9px}
+.detail-value{font-size:13px}
+.profile-note{font-size:13px}
+.password-question{margin-top:17px;padding-top:16px}
+.password-question h2{font-size:19px}
+
+.success-card{padding:38px 18px}
+.success-icon{width:73px;height:73px;font-size:34px}
+.success-card h1{font-size:25px}
+.success-card p{font-size:15px}
+.success-actions{flex-direction:column-reverse;align-items:center}
+.success-actions .btn{min-width:170px}
+
+/* C4 MOBILE */
+
+.c4-cover{height:125px}
+.c4-profile-head{
+align-items:center;
+gap:11px;
+padding:0 14px 14px;
+}
+.c4-avatar{
+width:82px;height:82px;
+margin-top:-34px;
+border-width:4px;
+}
+.c4-main-info{padding-top:9px}
+.c4-main-info h1{font-size:20px}
+.c4-handle{font-size:11px}
+.c4-role{font-size:12px}
+.c4-interests{font-size:11px;line-height:1.4}
+.following-btn{display:none}
+.c4-stats{
+justify-content:space-around;
+gap:0;
+padding:12px 14px;
+text-align:center;
+}
+.stat strong{font-size:15px}
+.stat span{font-size:9px}
+.c4-task{
+margin:13px 14px;
+padding:11px;
+font-size:12px;
+}
+.c4-review{padding:0 14px 14px}
+.c4-review .btn{width:100%}
+.c4-content{
+grid-template-columns:1fr;
+gap:15px;
+padding:0 14px 18px;
+}
+.posts{gap:6px}
+.post-text{padding:7px;font-size:9px}
+.tag-image{height:auto;aspect-ratio:4/3}
+.c4-footer{padding:0 14px 17px}
+
+.privacy-card{padding:18px 13px}
+.privacy-list{grid-template-columns:1fr}
+.privacy-row{min-height:68px;padding:11px}
+.privacy-icon{width:38px;height:38px;font-size:18px}
+.setting-btn{min-width:94px;font-size:10px}
+.check-grid{grid-template-columns:1fr 1fr}
 }
 
 @media(max-width:430px){
-
-.profile-details{
-grid-template-columns:1fr 1fr;
-
-gap:7px;
-}
-
-.password-visual{
-grid-template-columns:78px 1fr;
-}
-
-.password-visual img{
-width:78px;
-height:74px;
-}
-
-.detail{
-padding:8px;
-}
-
-.detail-emoji{
-width:29px;
-height:29px;
-
-font-size:15px;
-}
-
+.profile-details{grid-template-columns:1fr 1fr;gap:7px}
+.password-visual{grid-template-columns:78px 1fr}
+.password-visual img{width:78px;height:74px}
+.detail{padding:8px}
+.detail-emoji{width:29px;height:29px;font-size:15px}
+.posts{grid-template-columns:1fr 1fr}
+.posts .post-card:last-child{grid-column:1/-1}
 }
 
 @media(max-width:370px){
-
-.profile-details{
-grid-template-columns:1fr;
+.profile-details{grid-template-columns:1fr}
+.actions{flex-direction:column}
+.actions .btn{width:100%}
+.c4-profile-head{align-items:flex-start}
+.c4-avatar{width:70px;height:70px}
+.check-grid{grid-template-columns:1fr}
 }
-
-.actions{
-flex-direction:column;
-}
-
-.actions .btn{
-width:100%;
-}
-
-}
-
-/* =====================================================
-   SHORT LAPTOP
-===================================================== */
 
 @media(min-width:701px) and (max-height:780px){
-
-.screen{
-padding-top:12px;
-padding-bottom:12px;
-}
-
-.intro-card{
-min-height:430px;
-}
-
-.intro-content{
-padding-top:32px;
-padding-bottom:32px;
-}
-
-.intro-content h1{
-font-size:35px;
-}
-
-.password-card,
-.profile-card{
-padding-top:20px;
-padding-bottom:20px;
-}
-
-.password-heading,
-.profile-heading{
-font-size:26px;
-
-margin-bottom:14px;
-}
-
-.password-visual img{
-height:165px;
-}
-
-.password-item{
-min-height:43px;
-
-padding-top:7px;
-padding-bottom:7px;
-
-font-size:15px;
-}
-
+.screen{padding-top:12px;padding-bottom:12px}
+.intro-card{min-height:430px}
+.intro-content{padding-top:32px;padding-bottom:32px}
+.intro-content h1{font-size:35px}
+.password-card,.profile-card{padding-top:20px;padding-bottom:20px}
+.password-heading,.profile-heading{font-size:26px;margin-bottom:14px}
+.password-visual img{height:165px}
+.password-item{min-height:43px;padding-top:7px;padding-bottom:7px;font-size:15px}
+.c4-cover{height:145px}
+.c4-avatar{width:100px;height:100px;margin-top:-42px}
+.c4-task{margin-top:12px;margin-bottom:12px}
+.c4-content{padding-bottom:18px}
+.tag-image{height:115px}
 }
 </style>
 </head>
 
-
 <body>
 
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<!-- INTRO -->
 
 <section class="screen active" id="intro">
-
 <div class="container">
-
 <div class="card intro-card">
 
 <div class="intro-visual">
-
-<img
-src="cyber-challenge-hero.png"
-alt="Cyber security illustration">
-
+<img src="cyber-challenge-hero.png" alt="Cyber security illustration">
 </div>
 
 <div class="intro-content">
-
 <h1>CYBER AWARENESS CHALLENGE</h1>
-
 <h2>Ready to Test Your Cyber Skills?</h2>
-
-<button
-class="btn btn-primary"
-onclick="startChallenge()">
-START CHALLENGE
-</button>
-
+<button class="btn btn-primary" onclick="startChallenge()">START CHALLENGE</button>
 </div>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     CHALLENGE 01 EMAIL
-===================================================== -->
+<!-- CHALLENGE 01 EMAIL -->
 
 <section class="screen" id="c1Email">
-
 <div class="container">
 
-<div class="challenge-label">
-CHALLENGE 01
-</div>
+<div class="challenge-label">CHALLENGE 01</div>
 
 <div class="card email-card">
 
 <div class="mail-top">
-
 <div class="microsoft-logo">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
+<span></span><span></span><span></span><span></span>
 </div>
-
-<div class="mail-brand">
-Microsoft 365
+<div class="mail-brand">Microsoft 365</div>
 </div>
-
-</div>
-
 
 <div class="email-body">
 
-<h1 class="email-subject">
-Unusual sign-in activity
-</h1>
+<h1 class="email-subject">Unusual sign-in activity</h1>
 
 <div class="sender">
-
-<div class="sender-avatar">
-M
-</div>
-
+<div class="sender-avatar">M</div>
 <div>
-
-<div class="sender-name">
-Microsoft Account Team
+<div class="sender-name">Microsoft Account Team</div>
+<div class="sender-address">account-security@micros0ft.com</div>
 </div>
-
-<div class="sender-address">
-account-security@micros0ft.com
 </div>
-
-</div>
-
-</div>
-
 
 <div class="email-text">
 
 <p>Hello,</p>
 
-<p>
-We detected unusual sign-in activity on your Microsoft 365 account.
-</p>
+<p>We detected unusual sign-in activity on your Microsoft 365 account.</p>
 
 <div class="signin-box">
-
-<div class="signin-row">
-<span>Account</span>
-<span>5593833@bkbck.edu.in</span>
+<div class="signin-row"><span>Account</span><span>5593833@bkbck.edu.in</span></div>
+<div class="signin-row"><span>Date</span><span>30 September 2026</span></div>
+<div class="signin-row"><span>Location</span><span>Mumbai, India</span></div>
+<div class="signin-row"><span>Device</span><span>Windows PC</span></div>
+<div class="signin-row"><span>Browser</span><span>Chrome</span></div>
 </div>
 
-<div class="signin-row">
-<span>Date</span>
-<span>30 September 2026</span>
-</div>
+<p>If this activity was not performed by you, verify your account.</p>
 
-<div class="signin-row">
-<span>Location</span>
-<span>Mumbai, India</span>
-</div>
-
-<div class="signin-row">
-<span>Device</span>
-<span>Windows PC</span>
-</div>
-
-<div class="signin-row">
-<span>Browser</span>
-<span>Chrome</span>
-</div>
+<button class="verify-btn" onclick="openC1Answer()">Verify My Account</button>
 
 </div>
-
-<p>
-If this activity was not performed by you, verify your account.
-</p>
-
-<button
-class="verify-btn"
-onclick="openC1Answer()">
-Verify My Account
-</button>
-
 </div>
-
 </div>
-
-</div>
-
 
 <div class="actions">
-
-<button
-class="btn btn-secondary"
-onclick="backToIntro()">
-Previous
-</button>
-
+<button class="btn btn-secondary" onclick="backToIntro()">Previous</button>
 </div>
 
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     CHALLENGE 01 ANSWER
-===================================================== -->
+<!-- CHALLENGE 01 ANSWER -->
 
 <section class="screen" id="c1Answer">
-
 <div class="container">
 
-<div class="challenge-label">
-CHALLENGE 01
-</div>
+<div class="challenge-label">CHALLENGE 01</div>
 
 <div class="card answer-card">
 
-<h1>
-Find the phishing mistake.
-</h1>
+<h1>Find the phishing mistake.</h1>
 
 <input
 id="c1Input"
@@ -1653,399 +1018,188 @@ placeholder="Enter your answer..."
 autocomplete="off"
 spellcheck="false">
 
-<div
-class="result"
-id="c1Result">
-</div>
+<div class="result" id="c1Result"></div>
 
 <div class="actions">
-
-<button
-class="btn btn-secondary"
-onclick="backToC1Email()">
-Previous
-</button>
-
-<button
-class="btn btn-primary"
-onclick="checkC1()">
-SUBMIT
-</button>
-
+<button class="btn btn-secondary" onclick="backToC1Email()">Previous</button>
+<button class="btn btn-primary" onclick="checkC1()">SUBMIT</button>
 </div>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     CHALLENGE 01 SUCCESS
-===================================================== -->
+<!-- C1 SUCCESS -->
 
 <section class="screen" id="c1Success">
-
 <div class="container">
 
-<div class="challenge-label">
-CHALLENGE 01
-</div>
+<div class="challenge-label">CHALLENGE 01</div>
 
 <div class="card success-card">
-
-<div class="success-icon">
-✓
-</div>
-
-<h1>
-Congratulations!
-</h1>
-
-<p>
-You successfully completed Challenge 01.
-</p>
+<div class="success-icon">✓</div>
+<h1>Congratulations!</h1>
+<p>You successfully completed Challenge 01.</p>
 
 <div class="success-actions">
-
-<button
-class="btn btn-secondary"
-onclick="backFromC1Success()">
-Previous
-</button>
-
-<button
-class="btn btn-primary"
-onclick="openC2()">
-MOVE TO CHALLENGE 02
-</button>
-
+<button class="btn btn-secondary" onclick="backFromC1Success()">Previous</button>
+<button class="btn btn-primary" onclick="openC2()">MOVE TO CHALLENGE 02</button>
 </div>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     CHALLENGE 02
-===================================================== -->
+<!-- CHALLENGE 02 -->
 
 <section class="screen" id="c2">
-
 <div class="container">
 
-<div class="challenge-label">
-CHALLENGE 02
-</div>
+<div class="challenge-label">CHALLENGE 02</div>
 
 <div class="card password-card">
 
-<h1 class="password-heading">
-Arrange the Passwords
-</h1>
+<h1 class="password-heading">Arrange the Passwords</h1>
 
 <div class="password-layout">
 
 <div class="password-visual">
 
-<img
-src="password-security.png"
-alt="Password security illustration">
+<img src="password-security.png" alt="Password security illustration">
 
 <div class="password-strength">
-
 <div class="strength-labels">
 <span>WEAK</span>
 <span>STRONG</span>
 </div>
-
 <div class="strength-line"></div>
-
 </div>
 
 </div>
-
 
 <div>
-
-<div
-class="password-list"
-id="passwordList">
-</div>
-
-<div
-class="result"
-id="c2Result">
+<div class="password-list" id="passwordList"></div>
+<div class="result" id="c2Result"></div>
 </div>
 
 </div>
-
-</div>
-
 
 <div class="actions">
-
-<button
-class="btn btn-secondary"
-onclick="backToC1()">
-Previous
-</button>
-
-<button
-class="btn btn-primary"
-onclick="checkC2()">
-VERIFY
-</button>
-
+<button class="btn btn-secondary" onclick="backToC1()">Previous</button>
+<button class="btn btn-primary" onclick="checkC2()">VERIFY</button>
 </div>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     CHALLENGE 02 SUCCESS
-===================================================== -->
+<!-- C2 SUCCESS -->
 
 <section class="screen" id="c2Success">
-
 <div class="container">
 
-<div class="challenge-label">
-CHALLENGE 02
-</div>
+<div class="challenge-label">CHALLENGE 02</div>
 
 <div class="card success-card">
-
-<div class="success-icon">
-✓
-</div>
-
-<h1>
-Congratulations!
-</h1>
-
-<p>
-You successfully completed Challenge 02.
-</p>
+<div class="success-icon">✓</div>
+<h1>Congratulations!</h1>
+<p>You successfully completed Challenge 02.</p>
 
 <div class="success-actions">
-
-<button
-class="btn btn-secondary"
-onclick="backFromC2Success()">
-Previous
-</button>
-
-<button
-class="btn btn-primary"
-onclick="openC3()">
-MOVE TO CHALLENGE 03
-</button>
-
+<button class="btn btn-secondary" onclick="backFromC2Success()">Previous</button>
+<button class="btn btn-primary" onclick="openC3()">MOVE TO CHALLENGE 03</button>
 </div>
 
 </div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     CHALLENGE 03
-===================================================== -->
+<!-- CHALLENGE 03 -->
 
 <section class="screen" id="c3">
-
 <div class="container">
 
-<div class="challenge-label">
-CHALLENGE 03
-</div>
+<div class="challenge-label">CHALLENGE 03</div>
 
 <div class="card profile-card">
 
-<h1 class="profile-heading">
-Can You Guess the Password?
-</h1>
+<h1 class="profile-heading">Can You Guess the Password?</h1>
 
 <div class="profile-layout">
 
 <div class="profile-identity">
 
 <div class="profile-photo">
-
-<img
-src="rahul-profile.png"
-alt="Rahul profile">
-
+<img src="rahul-profile.png" alt="Rahul profile">
 </div>
 
 <div>
-
-<div class="profile-name">
-Rahul Sharma
-</div>
-
-<div class="profile-role">
-STUDENT PROFILE
+<div class="profile-name">Rahul Sharma</div>
+<div class="profile-role">STUDENT PROFILE</div>
 </div>
 
 </div>
-
-</div>
-
 
 <div class="profile-details">
 
 <div class="detail">
-
-<div class="detail-emoji">
-🎂
-</div>
-
+<div class="detail-emoji">🎂</div>
 <div class="detail-info">
-
-<div class="detail-label">
-DATE OF BIRTH
+<div class="detail-label">DATE OF BIRTH</div>
+<div class="detail-value">23 Jan 2008</div>
 </div>
-
-<div class="detail-value">
-23 Jan 2008
 </div>
-
-</div>
-
-</div>
-
 
 <div class="detail">
-
-<div class="detail-emoji">
-🏏
-</div>
-
+<div class="detail-emoji">🏏</div>
 <div class="detail-info">
-
-<div class="detail-label">
-FAVORITE SPORT
+<div class="detail-label">FAVORITE SPORT</div>
+<div class="detail-value">Cricket</div>
 </div>
-
-<div class="detail-value">
-Cricket
 </div>
-
-</div>
-
-</div>
-
 
 <div class="detail">
-
-<div class="detail-emoji">
-🐶
-</div>
-
+<div class="detail-emoji">🐶</div>
 <div class="detail-info">
-
-<div class="detail-label">
-PET'S NAME
+<div class="detail-label">PET'S NAME</div>
+<div class="detail-value">Bruno</div>
 </div>
-
-<div class="detail-value">
-Bruno
 </div>
-
-</div>
-
-</div>
-
 
 <div class="detail">
-
-<div class="detail-emoji">
-📍
-</div>
-
+<div class="detail-emoji">📍</div>
 <div class="detail-info">
-
-<div class="detail-label">
-CITY
+<div class="detail-label">CITY</div>
+<div class="detail-value">Mumbai</div>
 </div>
-
-<div class="detail-value">
-Mumbai
 </div>
-
-</div>
-
-</div>
-
 
 <div class="detail">
-
-<div class="detail-emoji">
-🎬
-</div>
-
+<div class="detail-emoji">🎬</div>
 <div class="detail-info">
-
-<div class="detail-label">
-FAVORITE MOVIE
+<div class="detail-label">FAVORITE MOVIE</div>
+<div class="detail-value">3 Idiots</div>
 </div>
-
-<div class="detail-value">
-3 Idiots
 </div>
-
-</div>
-
-</div>
-
 
 <div class="detail">
-
-<div class="detail-emoji">
-🍛
-</div>
-
+<div class="detail-emoji">🍛</div>
 <div class="detail-info">
-
-<div class="detail-label">
-FAVORITE FOOD
+<div class="detail-label">FAVORITE FOOD</div>
+<div class="detail-value">Biryani</div>
 </div>
-
-<div class="detail-value">
-Biryani
 </div>
-
-</div>
-
-</div>
-
 
 <div class="profile-note">
 Rahul is careless and likes simple passwords.
 </div>
 
 </div>
-
 </div>
-
 
 <div class="password-question">
 
-<h2>
-What is Rahul's Google account password?
-</h2>
+<h2>What is Rahul's Google account password?</h2>
 
 <input
 id="c3Input"
@@ -2055,251 +1209,358 @@ placeholder="Enter password..."
 autocomplete="off"
 spellcheck="false">
 
-<div
-class="result"
-id="c3Result">
-</div>
+<div class="result" id="c3Result"></div>
 
 <div class="actions">
-
-<button
-class="btn btn-secondary"
-onclick="backToC2()">
-Previous
-</button>
-
-<button
-class="btn btn-primary"
-onclick="checkC3()">
-SUBMIT
-</button>
-
+<button class="btn btn-secondary" onclick="backToC2()">Previous</button>
+<button class="btn btn-primary" onclick="checkC3()">SUBMIT</button>
 </div>
 
 </div>
-
 </div>
-
 </div>
-
 </section>
 
-
-<!-- =====================================================
-     CHALLENGE 03 SUCCESS
-===================================================== -->
+<!-- C3 SUCCESS -->
 
 <section class="screen" id="c3Success">
-
 <div class="container">
 
-<div class="challenge-label">
-CHALLENGE 03
+<div class="challenge-label">CHALLENGE 03</div>
+
+<div class="card success-card">
+<div class="success-icon">✓</div>
+<h1>Congratulations!</h1>
+<p>You successfully completed Challenge 03.</p>
+
+<div class="success-actions">
+<button class="btn btn-secondary" onclick="backFromC3Success()">Previous</button>
+<button class="btn btn-primary" onclick="openC4()">MOVE TO CHALLENGE 04</button>
 </div>
+
+</div>
+</div>
+</section>
+
+<!-- CHALLENGE 04 PROFILE -->
+
+<section class="screen" id="c4Profile">
+<div class="container">
+
+<div class="challenge-label">CHALLENGE 04</div>
+
+<div class="card c4-card">
+
+<div class="c4-cover">
+<img src="arjun-cover.png" alt="Arjun profile cover">
+</div>
+
+<div class="c4-profile-head">
+
+<div class="c4-avatar">
+<img src="arjun-profile.png" alt="Arjun Mehta">
+</div>
+
+<div class="c4-main-info">
+<h1>Arjun Mehta</h1>
+<div class="c4-handle">@arjun.mehta24</div>
+<div class="c4-role">College Student</div>
+<div class="c4-interests">📷 Photography &nbsp;•&nbsp; ⚽ Football &nbsp;•&nbsp; ✈️ Travel</div>
+</div>
+
+<button class="following-btn">Following</button>
+
+</div>
+
+<div class="c4-stats">
+<div class="stat">
+<strong>124</strong>
+<span>Posts</span>
+</div>
+<div class="stat">
+<strong>680</strong>
+<span>Followers</span>
+</div>
+<div class="stat">
+<strong>415</strong>
+<span>Following</span>
+</div>
+</div>
+
+<div class="c4-task">
+Some of Arjun's information can be seen or accessed by people he does not know. Review the privacy settings and make safer choices.
+</div>
+
+<div class="c4-review">
+<button class="btn btn-primary" onclick="openPrivacySettings()">
+REVIEW PRIVACY SETTINGS
+</button>
+</div>
+
+<div class="c4-content">
+
+<div>
+
+<div class="section-title">Recent Posts</div>
+
+<div class="posts">
+
+<div class="post-card">
+<div class="post-image">
+<img src="arjun-post-1.png" alt="Football post">
+</div>
+<div class="post-text">
+Great evening at the football ground ⚽
+</div>
+</div>
+
+<div class="post-card">
+<div class="post-image">
+<img src="arjun-post-2.png" alt="Birthday post">
+</div>
+<div class="post-text">
+Birthday celebrations tomorrow 🎉
+</div>
+</div>
+
+<div class="post-card">
+<div class="post-image">
+<img src="arjun-post-3.png" alt="Shopping post">
+</div>
+<div class="post-text">
+<span class="post-location">🗺️ Phoenix Marketcity</span>
+Shopping here right now!
+</div>
+</div>
+
+</div>
+</div>
+
+<div>
+
+<div class="section-title">Tagged Post</div>
+
+<div class="tag-card">
+
+<div class="tag-image">
+<img src="arjun-tagged-1.png" alt="Tagged photo">
+</div>
+
+<div class="tag-info">
+<strong>Arjun was tagged in a photo</strong>
+<p>A friend's post mentioning Arjun currently appears on his profile automatically.</p>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="c4-footer">
+<button class="btn btn-secondary" onclick="backToC3Success()">Previous</button>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- CHALLENGE 04 PRIVACY -->
+
+<section class="screen" id="c4Privacy">
+<div class="container">
+
+<div class="challenge-label">CHALLENGE 04</div>
+
+<div class="card privacy-card">
+
+<div class="privacy-list">
+
+<div class="privacy-row">
+<div class="privacy-icon">👤</div>
+<div class="privacy-info">
+<div class="privacy-name">ACCOUNT PRIVACY</div>
+<div class="privacy-state" id="accountState">Public</div>
+</div>
+<button class="setting-btn" id="accountBtn" onclick="toggleC4('account')">PUBLIC</button>
+</div>
+
+<div class="privacy-row">
+<div class="privacy-icon">🗺️</div>
+<div class="privacy-info">
+<div class="privacy-name">LOCATION SHARING</div>
+<div class="privacy-state" id="locationState">Sharing On</div>
+</div>
+<button class="setting-btn" id="locationBtn" onclick="toggleC4('location')">ON</button>
+</div>
+
+<div class="privacy-row">
+<div class="privacy-icon">💬</div>
+<div class="privacy-info">
+<div class="privacy-name">MESSAGES</div>
+<div class="privacy-state" id="messagesState">Everyone</div>
+</div>
+<button class="setting-btn" id="messagesBtn" onclick="toggleC4('messages')">EVERYONE</button>
+</div>
+
+<div class="privacy-row">
+<div class="privacy-icon">🏷️</div>
+<div class="privacy-info">
+<div class="privacy-name">TAG APPROVAL</div>
+<div class="privacy-state" id="tagState">Auto Add</div>
+</div>
+<button class="setting-btn" id="tagBtn" onclick="toggleC4('tag')">OFF</button>
+</div>
+
+</div>
+
+<div class="privacy-check">
+
+<div class="privacy-check-title">Privacy Check</div>
+
+<div class="check-grid">
+
+<div class="check-item" id="checkAccount">
+<span>Account</span>
+<strong>Public</strong>
+</div>
+
+<div class="check-item" id="checkLocation">
+<span>Location</span>
+<strong>Sharing On</strong>
+</div>
+
+<div class="check-item" id="checkMessages">
+<span>Messages</span>
+<strong>Everyone</strong>
+</div>
+
+<div class="check-item" id="checkTag">
+<span>Tags</span>
+<strong>Auto Add</strong>
+</div>
+
+</div>
+
+</div>
+
+<div class="result" id="c4Result"></div>
+
+<div class="actions">
+<button class="btn btn-secondary" onclick="backToC4Profile()">Previous</button>
+<button class="btn btn-primary" onclick="submitC4()">SUBMIT</button>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- C4 SUCCESS -->
+
+<section class="screen" id="c4Success">
+<div class="container">
+
+<div class="challenge-label">CHALLENGE 04</div>
 
 <div class="card success-card">
 
-<div class="success-icon">
-✓
-</div>
+<div class="success-icon">✓</div>
 
-<h1>
-Congratulations!
-</h1>
+<h1>Congratulations!</h1>
 
-<p>
-You successfully completed Challenge 03.
-</p>
+<p>You successfully completed Challenge 04.</p>
 
 <div class="success-actions">
 
-<button
-class="btn btn-secondary"
-onclick="backFromC3Success()">
-Previous
-</button>
+<button class="btn btn-secondary" onclick="backFromC4Success()">Previous</button>
 
-<button
-class="btn btn-primary"
-onclick="finishC3()">
-CONTINUE
-</button>
+<button class="btn btn-primary" onclick="finishC4()">MOVE TO NEXT</button>
 
 </div>
 
 </div>
-
 </div>
-
 </section>
-
 
 <script>
 
-/* =====================================================
-   SCREEN CONTROL
-===================================================== */
+/* SCREEN */
 
 function showScreen(id){
-
-document
-.querySelectorAll(".screen")
-.forEach(screen=>{
-screen.classList.remove("active");
-});
-
-document
-.getElementById(id)
-.classList.add("active");
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
-
-/* =====================================================
-   INTRO
-===================================================== */
+/* INTRO */
 
 function startChallenge(){
-
 resetC1();
 resetC2();
 resetC3();
-
+resetC4();
 showScreen("c1Email");
-
 }
 
 function backToIntro(){
-
 resetC1();
 resetC2();
 resetC3();
-
+resetC4();
 showScreen("intro");
-
 }
 
-
-/* =====================================================
-   CHALLENGE 01
-===================================================== */
+/* C1 */
 
 function openC1Answer(){
-
 resetC1();
-
 showScreen("c1Answer");
-
-setTimeout(()=>{
-
-document
-.getElementById("c1Input")
-.focus();
-
-},100);
-
+setTimeout(()=>document.getElementById("c1Input").focus(),100);
 }
-
 
 function backToC1Email(){
-
 resetC1();
-
 showScreen("c1Email");
-
 }
 
-
 function checkC1(){
+const input=document.getElementById("c1Input");
+const result=document.getElementById("c1Result");
 
-const input=
-document.getElementById("c1Input");
+const value=input.value.trim().toLowerCase().replace(/\s+/g,"");
 
-const result=
-document.getElementById("c1Result");
-
-const value=
-input.value
-.trim()
-.toLowerCase()
-.replace(/\s+/g,"");
-
-const correctAnswers=[
+const correct=[
 "micros0ft",
 "micros0ft.com",
 "@micros0ft.com",
 "account-security@micros0ft.com"
 ];
 
-if(correctAnswers.includes(value)){
-
+if(correct.includes(value)){
 showScreen("c1Success");
-
 }else{
-
 result.className="result wrong";
-
-result.textContent=
-"Wrong answer. Try again.";
-
+result.textContent="Wrong answer. Try again.";
 }
-
 }
-
 
 function backFromC1Success(){
-
 resetC1();
-
 showScreen("c1Answer");
-
-setTimeout(()=>{
-
-document
-.getElementById("c1Input")
-.focus();
-
-},100);
-
+setTimeout(()=>document.getElementById("c1Input").focus(),100);
 }
-
 
 function resetC1(){
-
-document
-.getElementById("c1Input")
-.value="";
-
-const result=
-document.getElementById("c1Result");
-
+document.getElementById("c1Input").value="";
+const result=document.getElementById("c1Result");
 result.className="result";
 result.textContent="";
-
 }
 
-
-document
-.getElementById("c1Input")
-.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Enter"){
-checkC1();
-}
-
+document.getElementById("c1Input").addEventListener("keydown",e=>{
+if(e.key==="Enter")checkC1();
 });
 
-
-/* =====================================================
-   CHALLENGE 02
-===================================================== */
+/* C2 */
 
 const correctPasswords=[
 "12345678",
@@ -2311,698 +1572,451 @@ const correctPasswords=[
 "vR7#qL2!xM9@pK4$"
 ];
 
-let dragged=null;
-let target=null;
-let placeAfter=false;
-let ghost=null;
-
-
-/* =====================================================
-   SHUFFLE
-===================================================== */
+let drag={
+item:null,
+ghost:null,
+pointerId:null,
+offsetY:0,
+insertBefore:null
+};
 
 function shuffleArray(array){
-
 const copy=[...array];
-
 for(let i=copy.length-1;i>0;i--){
-
-const j=
-Math.floor(
-Math.random()*(i+1)
-);
-
-[
-copy[i],
-copy[j]
-]=[
-copy[j],
-copy[i]
-];
-
+const j=Math.floor(Math.random()*(i+1));
+[copy[i],copy[j]]=[copy[j],copy[i]];
 }
-
 return copy;
-
 }
 
-
-/* =====================================================
-   PASSWORD CARD
-===================================================== */
-
-function createDragHandle(side){
-
-return`
-
+function createHandle(side){
+return `
 <span class="drag-handle ${side}">
-
-<i></i>
-<i></i>
-
-<i></i>
-<i></i>
-
-<i></i>
-<i></i>
-
-</span>
-
-`;
-
+<i></i><i></i><i></i><i></i><i></i><i></i>
+</span>`;
 }
-
 
 function createPasswordCard(password){
-
-const card=
-document.createElement("div");
-
-card.className=
-"password-item";
-
-card.dataset.password=
-password;
+const card=document.createElement("div");
+card.className="password-item";
+card.dataset.password=password;
 
 card.innerHTML=
+createHandle("drag-left")+
+`<span>${password}</span>`+
+createHandle("drag-right");
 
-createDragHandle("drag-left")
-
-+
-
-`<span>${password}</span>`
-
-+
-
-createDragHandle("drag-right");
-
-card.addEventListener(
-"pointerdown",
-startDrag
-);
-
+card.addEventListener("pointerdown",startPasswordDrag);
 return card;
-
 }
-
-
-/* =====================================================
-   PASSWORD SHUFFLE
-===================================================== */
 
 function shufflePasswords(){
-
-const list=
-document.getElementById(
-"passwordList"
-);
-
+const list=document.getElementById("passwordList");
 list.innerHTML="";
 
-let shuffled=
-shuffleArray(
-correctPasswords
-);
+let shuffled=shuffleArray(correctPasswords);
 
-while(
-
-shuffled.every(
-(value,index)=>
-value===correctPasswords[index]
-)
-
-){
-
-shuffled=
-shuffleArray(
-correctPasswords
-);
-
+while(shuffled.every((v,i)=>v===correctPasswords[i])){
+shuffled=shuffleArray(correctPasswords);
 }
 
-shuffled.forEach(password=>{
-
-list.appendChild(
-createPasswordCard(password)
-);
-
-});
-
+shuffled.forEach(p=>list.appendChild(createPasswordCard(p)));
 }
-
-
-/* =====================================================
-   OPEN CHALLENGE 02
-===================================================== */
 
 function openC2(){
-
 resetC2();
-
 shufflePasswords();
-
 showScreen("c2");
-
 }
 
+/* IMPROVED POINTER DRAG */
 
-/* =====================================================
-   DRAG START
-===================================================== */
+function startPasswordDrag(e){
+if(e.pointerType==="mouse" && e.button!==0)return;
 
-function startDrag(e){
+const item=e.currentTarget;
+const rect=item.getBoundingClientRect();
 
-if(
-e.pointerType==="mouse" &&
-e.button!==0
-){
-return;
-}
+drag.item=item;
+drag.pointerId=e.pointerId;
+drag.offsetY=e.clientY-rect.top;
 
-dragged=
-e.currentTarget;
+item.setPointerCapture(e.pointerId);
+item.classList.add("dragging");
 
-dragged.setPointerCapture(
-e.pointerId
-);
+const ghost=document.createElement("div");
+ghost.className="drag-ghost";
+ghost.textContent=item.dataset.password;
+ghost.style.width=rect.width+"px";
+document.body.appendChild(ghost);
 
-dragged.classList.add(
-"drag-source"
-);
+drag.ghost=ghost;
 
-ghost=
-document.createElement("div");
+movePasswordGhost(e.clientX,e.clientY);
 
-ghost.className=
-"drag-copy";
-
-ghost.textContent=
-dragged.dataset.password;
-
-document.body.appendChild(
-ghost
-);
-
-moveGhost(
-e.clientX,
-e.clientY
-);
-
-dragged.addEventListener(
-"pointermove",
-dragMove
-);
-
-dragged.addEventListener(
-"pointerup",
-endDrag
-);
-
-dragged.addEventListener(
-"pointercancel",
-endDrag
-);
+item.addEventListener("pointermove",movePasswordDrag);
+item.addEventListener("pointerup",endPasswordDrag);
+item.addEventListener("pointercancel",endPasswordDrag);
 
 clearC2Result();
+e.preventDefault();
+}
+
+function movePasswordGhost(x,y){
+if(!drag.ghost)return;
+drag.ghost.style.left=x+"px";
+drag.ghost.style.top=y+"px";
+}
+
+function movePasswordDrag(e){
+if(!drag.item)return;
+
+movePasswordGhost(e.clientX,e.clientY);
+
+const list=document.getElementById("passwordList");
+const cards=[...list.querySelectorAll(".password-item:not(.dragging)")];
+
+let before=null;
+
+for(const card of cards){
+const rect=card.getBoundingClientRect();
+const midpoint=rect.top+rect.height/2;
+
+if(e.clientY<midpoint){
+before=card;
+break;
+}
+}
+
+drag.insertBefore=before;
+
+const currentPlaceholder=document.getElementById("dragDropLine");
+if(currentPlaceholder)currentPlaceholder.remove();
+
+const line=document.createElement("div");
+line.className="drop-line";
+line.id="dragDropLine";
+
+if(before){
+list.insertBefore(line,before);
+}else{
+list.appendChild(line);
+}
 
 e.preventDefault();
-
 }
 
+function endPasswordDrag(e){
+if(!drag.item)return;
 
-/* =====================================================
-   DRAG PREVIEW
-===================================================== */
+const list=document.getElementById("passwordList");
+const line=document.getElementById("dragDropLine");
 
-function moveGhost(x,y){
-
-if(!ghost)return;
-
-ghost.style.left=
-x+"px";
-
-ghost.style.top=
-y+"px";
-
-}
-
-
-/* =====================================================
-   DROP LINES
-===================================================== */
-
-function clearDrop(){
-
-document
-.querySelectorAll(
-".password-item"
-)
-.forEach(card=>{
-
-card.classList.remove(
-"drop-before",
-"drop-after"
-);
-
-});
-
-}
-
-
-/* =====================================================
-   DRAG MOVE
-===================================================== */
-
-function dragMove(e){
-
-if(!dragged)return;
-
-moveGhost(
-e.clientX,
-e.clientY
-);
-
-clearDrop();
-
-if(ghost){
-ghost.style.display="none";
-}
-
-const element=
-document.elementFromPoint(
-e.clientX,
-e.clientY
-);
-
-if(ghost){
-ghost.style.display="block";
-}
-
-const card=
-element
-?element.closest(".password-item")
-:null;
-
-if(
-!card ||
-card===dragged
-){
-
-target=null;
-return;
-
-}
-
-target=card;
-
-const rect=
-card.getBoundingClientRect();
-
-placeAfter=
-e.clientY >
-rect.top+
-rect.height/2;
-
-card.classList.add(
-placeAfter
-?"drop-after"
-:"drop-before"
-);
-
-}
-
-
-/* =====================================================
-   DROP
-===================================================== */
-
-function endDrag(e){
-
-if(!dragged)return;
-
-if(target){
-
-if(placeAfter){
-
-target.after(
-dragged
-);
-
-}else{
-
-target.before(
-dragged
-);
-
-}
-
+if(line){
+list.insertBefore(drag.item,line);
+line.remove();
 }
 
 try{
-
-if(
-dragged.hasPointerCapture(
-e.pointerId
-)
-){
-
-dragged.releasePointerCapture(
-e.pointerId
-);
-
+if(drag.item.hasPointerCapture(e.pointerId)){
+drag.item.releasePointerCapture(e.pointerId);
 }
+}catch(err){}
 
-}catch(error){}
+drag.item.classList.remove("dragging");
 
-dragged.classList.remove(
-"drag-source"
-);
+drag.item.removeEventListener("pointermove",movePasswordDrag);
+drag.item.removeEventListener("pointerup",endPasswordDrag);
+drag.item.removeEventListener("pointercancel",endPasswordDrag);
 
-dragged.removeEventListener(
-"pointermove",
-dragMove
-);
+if(drag.ghost)drag.ghost.remove();
 
-dragged.removeEventListener(
-"pointerup",
-endDrag
-);
-
-dragged.removeEventListener(
-"pointercancel",
-endDrag
-);
-
-clearDrop();
-
-if(ghost){
-ghost.remove();
+drag.item=null;
+drag.ghost=null;
+drag.pointerId=null;
+drag.insertBefore=null;
 }
-
-dragged=null;
-target=null;
-ghost=null;
-
-}
-
-
-/* =====================================================
-   CHECK CHALLENGE 02
-===================================================== */
 
 function getPasswordOrder(){
-
-return[
-...document.querySelectorAll(
-"#passwordList .password-item"
-)
-].map(
-card=>card.dataset.password
-);
-
+return [...document.querySelectorAll("#passwordList .password-item")]
+.map(card=>card.dataset.password);
 }
-
 
 function checkC2(){
+const order=getPasswordOrder();
 
-const order=
-getPasswordOrder();
+const correct=order.every((p,i)=>p===correctPasswords[i]);
 
-const correct=
-order.every(
-(password,index)=>
-password===correctPasswords[index]
-);
-
-const result=
-document.getElementById(
-"c2Result"
-);
+const result=document.getElementById("c2Result");
 
 if(correct){
-
-showScreen(
-"c2Success"
-);
-
+showScreen("c2Success");
 }else{
-
-result.className=
-"result wrong";
-
-result.textContent=
-"Wrong order. Try again.";
-
+result.className="result wrong";
+result.textContent="Wrong order. Try again.";
 }
-
 }
-
-
-/* =====================================================
-   RESET CHALLENGE 02
-===================================================== */
 
 function clearC2Result(){
-
-const result=
-document.getElementById(
-"c2Result"
-);
-
-result.className=
-"result";
-
+const result=document.getElementById("c2Result");
+result.className="result";
 result.textContent="";
-
 }
-
 
 function resetC2(){
-
 clearC2Result();
 
-document
-.getElementById(
-"passwordList"
-)
-.innerHTML="";
+const list=document.getElementById("passwordList");
+list.innerHTML="";
 
-if(ghost){
-ghost.remove();
+if(drag.ghost)drag.ghost.remove();
+
+drag.item=null;
+drag.ghost=null;
+drag.pointerId=null;
+drag.insertBefore=null;
 }
-
-dragged=null;
-target=null;
-ghost=null;
-
-}
-
-
-/* =====================================================
-   C2 NAVIGATION
-===================================================== */
 
 function backToC1(){
-
 resetC2();
 resetC1();
-
-showScreen(
-"c1Answer"
-);
-
-setTimeout(()=>{
-
-document
-.getElementById(
-"c1Input"
-)
-.focus();
-
-},100);
-
+showScreen("c1Answer");
+setTimeout(()=>document.getElementById("c1Input").focus(),100);
 }
-
 
 function backFromC2Success(){
-
 resetC2();
-
 shufflePasswords();
-
-showScreen(
-"c2"
-);
-
+showScreen("c2");
 }
 
-
-/* =====================================================
-   CHALLENGE 03
-===================================================== */
+/* C3 */
 
 function openC3(){
-
 resetC3();
-
-showScreen(
-"c3"
-);
-
-setTimeout(()=>{
-
-document
-.getElementById(
-"c3Input"
-)
-.focus();
-
-},100);
-
+showScreen("c3");
+setTimeout(()=>document.getElementById("c3Input").focus(),100);
 }
-
-
-/* =====================================================
-   CHECK CHALLENGE 03
-===================================================== */
 
 function checkC3(){
+const input=document.getElementById("c3Input");
+const result=document.getElementById("c3Result");
 
-const input=
-document.getElementById(
-"c3Input"
-);
-
-const result=
-document.getElementById(
-"c3Result"
-);
-
-if(
-
-input.value
-.trim()
-.toLowerCase()
-
-===
-
-"rahul@2008"
-
-){
-
-showScreen(
-"c3Success"
-);
-
+if(input.value.trim().toLowerCase()==="rahul@2008"){
+showScreen("c3Success");
 }else{
-
-result.className=
-"result wrong";
-
-result.textContent=
-"Wrong password. Try again.";
-
+result.className="result wrong";
+result.textContent="Wrong password. Try again.";
 }
-
 }
-
-
-/* =====================================================
-   RESET CHALLENGE 03
-===================================================== */
 
 function resetC3(){
-
-document
-.getElementById(
-"c3Input"
-)
-.value="";
-
-const result=
-document.getElementById(
-"c3Result"
-);
-
-result.className=
-"result";
-
+document.getElementById("c3Input").value="";
+const result=document.getElementById("c3Result");
+result.className="result";
 result.textContent="";
-
 }
 
-
-/* =====================================================
-   ENTER KEY
-===================================================== */
-
-document
-.getElementById(
-"c3Input"
-)
-.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Enter"){
-checkC3();
-}
-
+document.getElementById("c3Input").addEventListener("keydown",e=>{
+if(e.key==="Enter")checkC3();
 });
 
-
-/* =====================================================
-   C3 NAVIGATION
-===================================================== */
-
 function backToC2(){
-
 resetC3();
 resetC2();
-
 shufflePasswords();
-
-showScreen(
-"c2"
-);
-
+showScreen("c2");
 }
-
 
 function backFromC3Success(){
-
 resetC3();
-
-showScreen(
-"c3"
-);
-
-setTimeout(()=>{
-
-document
-.getElementById(
-"c3Input"
-)
-.focus();
-
-},100);
-
+showScreen("c3");
+setTimeout(()=>document.getElementById("c3Input").focus(),100);
 }
 
+/* C4 */
 
-/* =====================================================
-   CHALLENGE 04 PLACEHOLDER
-===================================================== */
+const c4State={
+accountPrivate:false,
+locationOff:false,
+messagesFriends:false,
+tagApproval:false
+};
 
-function finishC3(){
+function openC4(){
+resetC4();
+showScreen("c4Profile");
+}
 
-alert(
-"Challenge 04 will connect here."
+function backToC3Success(){
+resetC4();
+showScreen("c3Success");
+}
+
+function openPrivacySettings(){
+renderC4();
+showScreen("c4Privacy");
+}
+
+function backToC4Profile(){
+document.getElementById("c4Result").className="result";
+document.getElementById("c4Result").textContent="";
+showScreen("c4Profile");
+}
+
+function toggleC4(type){
+
+if(type==="account"){
+c4State.accountPrivate=!c4State.accountPrivate;
+}
+
+if(type==="location"){
+c4State.locationOff=!c4State.locationOff;
+}
+
+if(type==="messages"){
+c4State.messagesFriends=!c4State.messagesFriends;
+}
+
+if(type==="tag"){
+c4State.tagApproval=!c4State.tagApproval;
+}
+
+document.getElementById("c4Result").className="result";
+document.getElementById("c4Result").textContent="";
+
+renderC4();
+}
+
+function setPrivacySetting(stateEl,buttonEl,safe,stateUnsafe,stateSafe,buttonUnsafe,buttonSafe){
+stateEl.textContent=safe?stateSafe:stateUnsafe;
+buttonEl.textContent=safe?buttonSafe:buttonUnsafe;
+buttonEl.classList.toggle("safe",safe);
+}
+
+function setCheck(id,safe,unsafeText,safeText){
+const box=document.getElementById(id);
+box.classList.toggle("safe",safe);
+box.querySelector("strong").textContent=safe?"✓ "+safeText:unsafeText;
+}
+
+function renderC4(){
+
+setPrivacySetting(
+document.getElementById("accountState"),
+document.getElementById("accountBtn"),
+c4State.accountPrivate,
+"Public",
+"Friends Only",
+"PUBLIC",
+"FRIENDS ONLY"
 );
 
+setPrivacySetting(
+document.getElementById("locationState"),
+document.getElementById("locationBtn"),
+c4State.locationOff,
+"Sharing On",
+"Sharing Off",
+"ON",
+"OFF"
+);
+
+setPrivacySetting(
+document.getElementById("messagesState"),
+document.getElementById("messagesBtn"),
+c4State.messagesFriends,
+"Everyone",
+"Friends Only",
+"EVERYONE",
+"FRIENDS ONLY"
+);
+
+setPrivacySetting(
+document.getElementById("tagState"),
+document.getElementById("tagBtn"),
+c4State.tagApproval,
+"Auto Add",
+"Approval On",
+"OFF",
+"ON"
+);
+
+setCheck(
+"checkAccount",
+c4State.accountPrivate,
+"Public",
+"Friends Only"
+);
+
+setCheck(
+"checkLocation",
+c4State.locationOff,
+"Sharing On",
+"Sharing Off"
+);
+
+setCheck(
+"checkMessages",
+c4State.messagesFriends,
+"Everyone",
+"Friends Only"
+);
+
+setCheck(
+"checkTag",
+c4State.tagApproval,
+"Auto Add",
+"Approval On"
+);
 }
+
+function c4Secured(){
+return c4State.accountPrivate &&
+c4State.locationOff &&
+c4State.messagesFriends &&
+c4State.tagApproval;
+}
+
+function submitC4(){
+
+const result=document.getElementById("c4Result");
+
+if(c4Secured()){
+result.className="result";
+result.textContent="";
+showScreen("c4Success");
+}else{
+result.className="result wrong";
+result.textContent="Some settings are still unsafe. Try again.";
+}
+}
+
+function backFromC4Success(){
+renderC4();
+showScreen("c4Privacy");
+}
+
+function resetC4(){
+c4State.accountPrivate=false;
+c4State.locationOff=false;
+c4State.messagesFriends=false;
+c4State.tagApproval=false;
+
+const result=document.getElementById("c4Result");
+result.className="result";
+result.textContent="";
+
+renderC4();
+}
+
+function finishC4(){
+alert("Challenge 05 will connect here.");
+}
+
+renderC4();
 
 </script>
 
 </body>
-  </html>
+   </html>
