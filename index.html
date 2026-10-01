@@ -31,6 +31,8 @@ linear-gradient(rgba(235,248,255,.15),rgba(235,248,255,.15)),
 url("cyber-background.png") center center / cover fixed no-repeat;
 }
 
+body.dragging{overflow:hidden}
+
 button,input{font:inherit}
 button{-webkit-user-select:none;user-select:none}
 
@@ -240,6 +242,49 @@ gap:10px;
 100%{transform:scale(1);opacity:1}
 }
 
+/* FINAL COMPLETION */
+
+.final-card{
+max-width:780px;
+margin:auto;
+padding:36px 35px 38px;
+text-align:center;
+}
+
+.final-image{
+width:100%;
+max-width:430px;
+height:270px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto 22px;
+overflow:hidden;
+border-radius:16px;
+}
+
+.final-image img{
+display:block;
+width:100%;
+height:100%;
+object-fit:contain;
+}
+
+.final-card h1{
+margin:0 0 10px;
+font-size:31px;
+font-weight:600;
+line-height:1.25;
+color:var(--navy);
+}
+
+.final-card p{
+margin:0;
+font-size:18px;
+line-height:1.55;
+color:#607b8e;
+}
+
 /* CHALLENGE 01 */
 
 .email-card{
@@ -361,7 +406,7 @@ color:#126caf;
 cursor:pointer;
 }
 
-/* C1 ANSWER - NO ILLUSTRATION */
+/* C1 ANSWER */
 
 .answer-card{
 max-width:680px;
@@ -446,10 +491,17 @@ background:linear-gradient(90deg,#c9d9e5,#76b9e6,#1478e8);
 }
 
 .password-list{
+position:relative;
 display:flex;
 flex-direction:column;
 gap:8px;
+padding:5px 0;
 touch-action:none;
+}
+
+.password-list.drag-active{
+padding-top:10px;
+padding-bottom:10px;
 }
 
 .password-item{
@@ -471,6 +523,23 @@ color:#17384f;
 cursor:grab;
 touch-action:none;
 user-select:none;
+-webkit-user-select:none;
+transition:
+transform .12s ease,
+border-color .12s ease,
+box-shadow .12s ease;
+}
+
+.password-item:active{cursor:grabbing}
+
+.password-item.drag-source{
+opacity:.18;
+border-style:dashed;
+}
+
+.password-item.drag-over{
+border-color:#54a8df;
+box-shadow:0 0 0 3px rgba(74,164,222,.10);
 }
 
 .drag-handle{
@@ -494,28 +563,27 @@ border-radius:50%;
 background:#88a4b7;
 }
 
-.password-item.drag-source{opacity:.22}
-
-.password-item.drop-before:before,
-.password-item.drop-after:after{
-content:"";
-position:absolute;
-left:5px;
-right:5px;
+.drop-marker{
+display:none;
 height:4px;
-border-radius:5px;
+margin:-2px 5px;
+border-radius:6px;
 background:#1688df;
 box-shadow:0 0 0 2px #dff2ff;
-z-index:5;
+pointer-events:none;
 }
 
-.password-item.drop-before:before{top:-6px}
-.password-item.drop-after:after{bottom:-6px}
+.drop-marker.active{display:block}
 
 .drag-copy{
 position:fixed;
-z-index:9999;
-padding:13px 48px;
+left:0;
+top:0;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:10px 48px;
 border:1.5px solid #4da6df;
 border-radius:9px;
 background:#fff;
@@ -526,7 +594,7 @@ font-weight:600;
 text-align:center;
 color:#17384f;
 pointer-events:none;
-transform:translate(-50%,-50%) rotate(1deg);
+will-change:transform;
 }
 
 /* CHALLENGE 03 */
@@ -862,8 +930,6 @@ font-weight:600;
 color:#3180b1;
 }
 
-/* Improved tagged image */
-
 .tag-image{
 width:100%;
 aspect-ratio:16/10;
@@ -898,7 +964,7 @@ color:#738a99;
 
 .c4-footer{padding:0 28px 26px}
 
-/* C4 PRIVACY SETTINGS */
+/* C4 PRIVACY */
 
 .privacy-card{
 max-width:820px;
@@ -916,12 +982,14 @@ background:#fff;
 .setting{
 padding:20px;
 border-bottom:1px solid #e3edf3;
+background:#fff;
 transition:.18s;
 }
 
 .setting:last-child{border-bottom:0}
 
-.setting.safe{background:#f8fdfb}
+/* Safe rows always remain white */
+.setting.safe{background:#fff}
 
 .setting-top{
 display:flex;
@@ -940,9 +1008,8 @@ background:#eaf6fe;
 font-size:22px;
 }
 
-.setting.safe .setting-icon{
-background:#e8f7f0;
-}
+/* Safe icons also remain blue */
+.setting.safe .setting-icon{background:#eaf6fe}
 
 .setting-info{
 flex:1;
@@ -968,8 +1035,6 @@ font-weight:500;
 color:#657d8e;
 white-space:nowrap;
 }
-
-/* segmented controls */
 
 .segmented{
 display:grid;
@@ -999,10 +1064,9 @@ box-shadow:0 2px 7px rgba(42,87,116,.10);
 }
 
 .setting.safe .segment-option.selected{
-color:#197451;
+background:#fff;
+color:#1675ad;
 }
-
-/* switch controls */
 
 .switch-row{
 display:flex;
@@ -1043,19 +1107,12 @@ box-shadow:0 2px 5px rgba(29,61,81,.18);
 transition:.2s;
 }
 
-.switch.on{
-background:#4aa3d8;
-}
+.switch.on{background:#4aa3d8}
 
-.switch.on::after{
-transform:translateX(26px);
-}
+.switch.on::after{transform:translateX(26px)}
 
-.setting.safe .switch.on{
-background:#4fa77d;
-}
-
-/* privacy check */
+/* No green switch state */
+.setting.safe .switch.on{background:#4aa3d8}
 
 .privacy-check{
 margin-top:17px;
@@ -1110,13 +1167,14 @@ font-weight:500;
 color:#a76849;
 }
 
+/* Correct privacy checks remain white */
 .check-item.safe{
-border-color:#c8e4d7;
-background:#f2fbf6;
+border-color:#b9d7e9;
+background:#fff;
 }
 
 .check-item.safe .check-state{
-color:#25805b;
+color:#1675ad;
 }
 
 /* MOBILE */
@@ -1176,10 +1234,7 @@ grid-template-columns:75px 1fr;
 font-size:13px;
 }
 
-.answer-card{
-padding:25px 17px;
-}
-
+.answer-card{padding:25px 17px}
 .answer-card h1{font-size:25px}
 
 .btn{
@@ -1223,10 +1278,16 @@ margin:0;
 }
 
 .password-item{
-min-height:48px;
+min-height:50px;
 padding-left:43px;
 padding-right:43px;
-font-size:15px;
+font-size:14px;
+}
+
+.drag-copy{
+padding-left:43px;
+padding-right:43px;
+font-size:14px;
 }
 
 .profile-layout{
@@ -1295,7 +1356,23 @@ align-items:center;
 
 .success-actions .btn{min-width:170px}
 
-/* C4 MOBILE */
+.final-card{
+padding:27px 17px 30px;
+}
+
+.final-image{
+max-width:340px;
+height:215px;
+margin-bottom:18px;
+}
+
+.final-card h1{
+font-size:26px;
+}
+
+.final-card p{
+font-size:16px;
+}
 
 .c4-cover{height:145px}
 
@@ -1351,9 +1428,7 @@ font-size:9px;
 
 .post-location{font-size:8px}
 
-.tag-image{
-aspect-ratio:16/9;
-}
+.tag-image{aspect-ratio:16/9}
 
 .tag-image img{
 object-fit:cover;
@@ -1362,23 +1437,13 @@ object-position:center;
 
 .c4-footer{padding:0 14px 18px}
 
-/* privacy mobile */
+.privacy-card{padding:15px 12px}
 
-.privacy-card{
-padding:15px 12px;
-}
+.privacy-settings{border-radius:13px}
 
-.privacy-settings{
-border-radius:13px;
-}
+.setting{padding:16px 13px}
 
-.setting{
-padding:16px 13px;
-}
-
-.setting-top{
-gap:11px;
-}
+.setting-top{gap:11px}
 
 .setting-icon{
 width:43px;
@@ -1387,31 +1452,19 @@ font-size:20px;
 }
 
 .setting-label{font-size:13px}
+.setting-description{font-size:11px}
+.setting-current{font-size:12px}
 
-.setting-description{
-font-size:11px;
-}
-
-.setting-current{
-font-size:12px;
-}
-
-.segmented{
-margin-top:12px;
-}
+.segmented{margin-top:12px}
 
 .segment-option{
 min-height:43px;
 font-size:12px;
 }
 
-.switch-row{
-margin-top:9px;
-}
+.switch-row{margin-top:9px}
 
-.check-grid{
-grid-template-columns:1fr 1fr;
-}
+.check-grid{grid-template-columns:1fr 1fr}
 
 }
 
@@ -1474,8 +1527,6 @@ font-size:15px;
 
 <body>
 
-<!-- INTRO -->
-
 <section class="screen active" id="intro">
 <div class="container">
 <div class="card intro-card">
@@ -1494,8 +1545,6 @@ font-size:15px;
 </div>
 </section>
 
-<!-- CHALLENGE 01 EMAIL -->
-
 <section class="screen" id="c1Email">
 <div class="container">
 
@@ -1504,13 +1553,10 @@ font-size:15px;
 <div class="card email-card">
 
 <div class="mail-top">
-
 <div class="microsoft-logo">
 <span></span><span></span><span></span><span></span>
 </div>
-
 <div class="mail-brand">Microsoft 365</div>
-
 </div>
 
 <div class="email-body">
@@ -1518,20 +1564,16 @@ font-size:15px;
 <h1 class="email-subject">Unusual sign-in activity</h1>
 
 <div class="sender">
-
 <div class="sender-avatar">M</div>
-
 <div>
 <div class="sender-name">Microsoft Account Team</div>
 <div class="sender-address">account-security@micros0ft.com</div>
 </div>
-
 </div>
 
 <div class="email-text">
 
 <p>Hello,</p>
-
 <p>We detected unusual sign-in activity on your Microsoft 365 account.</p>
 
 <div class="signin-box">
@@ -1556,8 +1598,6 @@ font-size:15px;
 
 </div>
 </section>
-
-<!-- C1 ANSWER -->
 
 <section class="screen" id="c1Answer">
 <div class="container">
@@ -1587,8 +1627,6 @@ spellcheck="false">
 </div>
 </section>
 
-<!-- C1 SUCCESS -->
-
 <section class="screen" id="c1Success">
 <div class="container">
 
@@ -1611,8 +1649,6 @@ spellcheck="false">
 </div>
 </section>
 
-<!-- CHALLENGE 02 -->
-
 <section class="screen" id="c2">
 <div class="container">
 
@@ -1633,7 +1669,6 @@ spellcheck="false">
 <span>WEAK</span>
 <span>STRONG</span>
 </div>
-
 <div class="strength-line"></div>
 </div>
 
@@ -1654,8 +1689,6 @@ spellcheck="false">
 </div>
 </div>
 </section>
-
-<!-- C2 SUCCESS -->
 
 <section class="screen" id="c2Success">
 <div class="container">
@@ -1678,8 +1711,6 @@ spellcheck="false">
 </div>
 </div>
 </section>
-
-<!-- CHALLENGE 03 -->
 
 <section class="screen" id="c3">
 <div class="container">
@@ -1787,8 +1818,6 @@ spellcheck="false">
 </div>
 </section>
 
-<!-- C3 SUCCESS -->
-
 <section class="screen" id="c3Success">
 <div class="container">
 
@@ -1811,8 +1840,6 @@ spellcheck="false">
 </div>
 </section>
 
-<!-- CHALLENGE 04 PROFILE -->
-
 <section class="screen" id="c4">
 <div class="container">
 
@@ -1831,17 +1858,12 @@ spellcheck="false">
 </div>
 
 <div class="c4-identity">
-
 <div class="c4-name">Arjun Mehta</div>
-
 <div class="c4-handle">@arjun.mehta24</div>
-
 <div class="c4-role">College Student</div>
-
 <div class="c4-interests">
 📷 Photography&nbsp; • &nbsp;⚽ Football&nbsp; • &nbsp;✈️ Travel
 </div>
-
 </div>
 
 <button class="following">Following</button>
@@ -1886,40 +1908,31 @@ REVIEW PRIVACY SETTINGS
 <div class="posts">
 
 <div class="post-card">
-
 <div class="post-image">
 <img src="arjun-post-1.png" alt="Football post">
 </div>
-
 <div class="post-text">
 Great evening at the football ground ⚽
 </div>
-
 </div>
 
 <div class="post-card">
-
 <div class="post-image">
 <img src="arjun-post-2.png" alt="Birthday post">
 </div>
-
 <div class="post-text">
 Birthday celebrations tomorrow 🎉
 </div>
-
 </div>
 
 <div class="post-card">
-
 <div class="post-image">
 <img src="arjun-post-3.png" alt="Shopping post">
 </div>
-
 <div class="post-text">
 <span class="post-location">🗺️ Phoenix Marketcity</span>
 Shopping here right now!
 </div>
-
 </div>
 
 </div>
@@ -1936,13 +1949,10 @@ Shopping here right now!
 </div>
 
 <div class="tag-info">
-
 <strong>Arjun was tagged in a photo</strong>
-
 <p>
 A friend's post mentioning Arjun currently appears on his profile automatically.
 </p>
-
 </div>
 
 </div>
@@ -1958,8 +1968,6 @@ A friend's post mentioning Arjun currently appears on his profile automatically.
 </div>
 </section>
 
-<!-- CHALLENGE 04 PRIVACY -->
-
 <section class="screen" id="c4Privacy">
 <div class="container">
 
@@ -1969,12 +1977,9 @@ A friend's post mentioning Arjun currently appears on his profile automatically.
 
 <div class="privacy-settings">
 
-<!-- ACCOUNT -->
-
 <div class="setting" id="settingAccount">
 
 <div class="setting-top">
-
 <div class="setting-icon">👥</div>
 
 <div class="setting-info">
@@ -1983,46 +1988,32 @@ A friend's post mentioning Arjun currently appears on his profile automatically.
 </div>
 
 <div class="setting-current" id="accountCurrent">Public</div>
-
 </div>
 
 <div class="segmented">
-
-<button
-class="segment-option selected"
-id="accountPublic"
-onclick="setAccount(false)">
+<button class="segment-option selected" id="accountPublic" onclick="setAccount(false)">
 PUBLIC
 </button>
 
-<button
-class="segment-option"
-id="accountFriends"
-onclick="setAccount(true)">
+<button class="segment-option" id="accountFriends" onclick="setAccount(true)">
 FRIENDS ONLY
 </button>
-
 </div>
 
 </div>
-
-<!-- LOCATION -->
 
 <div class="setting" id="settingLocation">
 
 <div class="setting-top">
-
 <div class="setting-icon">🗺️</div>
 
 <div class="setting-info">
 <div class="setting-label">LOCATION SHARING</div>
 <div class="setting-description">Allow posts to share your location</div>
 </div>
-
 </div>
 
 <div class="switch-row">
-
 <div class="switch-state" id="locationState">ON</div>
 
 <button
@@ -2031,17 +2022,13 @@ id="locationSwitch"
 onclick="toggleLocation()"
 aria-label="Location sharing">
 </button>
-
 </div>
 
 </div>
-
-<!-- MESSAGES -->
 
 <div class="setting" id="settingMessages">
 
 <div class="setting-top">
-
 <div class="setting-icon">💬</div>
 
 <div class="setting-info">
@@ -2050,46 +2037,32 @@ aria-label="Location sharing">
 </div>
 
 <div class="setting-current" id="messagesCurrent">Everyone</div>
-
 </div>
 
 <div class="segmented">
-
-<button
-class="segment-option selected"
-id="messagesEveryone"
-onclick="setMessages(false)">
+<button class="segment-option selected" id="messagesEveryone" onclick="setMessages(false)">
 EVERYONE
 </button>
 
-<button
-class="segment-option"
-id="messagesFriends"
-onclick="setMessages(true)">
+<button class="segment-option" id="messagesFriends" onclick="setMessages(true)">
 FRIENDS ONLY
 </button>
-
 </div>
 
 </div>
-
-<!-- TAG APPROVAL -->
 
 <div class="setting" id="settingTags">
 
 <div class="setting-top">
-
 <div class="setting-icon">🏷️</div>
 
 <div class="setting-info">
 <div class="setting-label">TAG APPROVAL</div>
 <div class="setting-description">Review tagged posts before they appear</div>
 </div>
-
 </div>
 
 <div class="switch-row">
-
 <div class="switch-state" id="tagsState">OFF</div>
 
 <button
@@ -2098,28 +2071,22 @@ id="tagsSwitch"
 onclick="toggleTags()"
 aria-label="Tag approval">
 </button>
-
 </div>
 
 </div>
-
-<!-- DISCOVERABILITY -->
 
 <div class="setting" id="settingDiscover">
 
 <div class="setting-top">
-
 <div class="setting-icon">🔎</div>
 
 <div class="setting-info">
 <div class="setting-label">PROFILE DISCOVERABILITY</div>
 <div class="setting-description">Allow unknown people to find the profile</div>
 </div>
-
 </div>
 
 <div class="switch-row">
-
 <div class="switch-state" id="discoverState">ON</div>
 
 <button
@@ -2128,28 +2095,22 @@ id="discoverSwitch"
 onclick="toggleDiscover()"
 aria-label="Profile discoverability">
 </button>
-
 </div>
 
 </div>
-
-<!-- ACTIVE STATUS -->
 
 <div class="setting" id="settingActivity">
 
 <div class="setting-top">
-
 <div class="setting-icon">🟢</div>
 
 <div class="setting-info">
 <div class="setting-label">ACTIVE STATUS</div>
 <div class="setting-description">Show when Arjun is currently online</div>
 </div>
-
 </div>
 
 <div class="switch-row">
-
 <div class="switch-state" id="activityState">ON</div>
 
 <button
@@ -2158,14 +2119,11 @@ id="activitySwitch"
 onclick="toggleActivity()"
 aria-label="Active status">
 </button>
-
 </div>
 
 </div>
 
 </div>
-
-<!-- PRIVACY CHECK -->
 
 <div class="privacy-check">
 
@@ -2215,7 +2173,6 @@ aria-label="Active status">
 <div class="result" id="c4Result"></div>
 
 <div class="actions">
-
 <button class="btn btn-secondary" onclick="backToC4Profile()">
 Previous
 </button>
@@ -2223,39 +2180,26 @@ Previous
 <button class="btn btn-primary" onclick="submitPrivacy()">
 SUBMIT
 </button>
-
 </div>
 
 </div>
 </div>
 </section>
 
-<!-- C4 SUCCESS -->
+<!-- FINAL COMPLETION SCREEN -->
 
-<section class="screen" id="c4Success">
+<section class="screen" id="finalSuccess">
 <div class="container">
 
-<div class="challenge-label">CHALLENGE 04</div>
+<div class="card final-card">
 
-<div class="card success-card">
-
-<div class="success-icon">✓</div>
+<div class="final-image">
+<img src="cyber-complete.png" alt="Cyber challenge completed">
+</div>
 
 <h1>Congratulations!</h1>
 
-<p>You successfully completed Challenge 04.</p>
-
-<div class="success-actions">
-
-<button class="btn btn-secondary" onclick="backFromC4Success()">
-Previous
-</button>
-
-<button class="btn btn-primary" onclick="finishC4()">
-MOVE TO NEXT
-</button>
-
-</div>
+<p>You have successfully completed all Cyber Challenges.</p>
 
 </div>
 </div>
@@ -2335,7 +2279,6 @@ setTimeout(()=>document.getElementById("c1Input").focus(),100);
 function resetC1(){
 
 const input=document.getElementById("c1Input");
-
 if(input)input.value="";
 
 const result=document.getElementById("c1Result");
@@ -2364,21 +2307,21 @@ const correctPasswords=[
 ];
 
 let dragged=null;
-let target=null;
-let placeAfter=false;
 let ghost=null;
 let dragPointerId=null;
+let dragOffsetX=0;
+let dragOffsetY=0;
+let dragWidth=0;
+let dragHeight=0;
+let lastClientY=0;
 
 function shuffleArray(array){
 
 const copy=[...array];
 
 for(let i=copy.length-1;i>0;i--){
-
 const j=Math.floor(Math.random()*(i+1));
-
 [copy[i],copy[j]]=[copy[j],copy[i]];
-
 }
 
 return copy;
@@ -2424,8 +2367,8 @@ while(shuffled.every((v,i)=>v===correctPasswords[i])){
 shuffled=shuffleArray(correctPasswords);
 }
 
-shuffled.forEach(p=>{
-list.appendChild(createPasswordCard(p));
+shuffled.forEach(password=>{
+list.appendChild(createPasswordCard(password));
 });
 
 }
@@ -2439,31 +2382,38 @@ showScreen("c2");
 function startDrag(e){
 
 if(e.pointerType==="mouse"&&e.button!==0)return;
+if(dragged)return;
 
 dragged=e.currentTarget;
 dragPointerId=e.pointerId;
 
 const rect=dragged.getBoundingClientRect();
 
+dragWidth=rect.width;
+dragHeight=rect.height;
+
+dragOffsetX=e.clientX-rect.left;
+dragOffsetY=e.clientY-rect.top;
+lastClientY=e.clientY;
+
 dragged.classList.add("drag-source");
 
-try{
-dragged.setPointerCapture(e.pointerId);
-}catch(error){}
+document.getElementById("passwordList").classList.add("drag-active");
+document.body.classList.add("dragging");
 
 ghost=document.createElement("div");
-
 ghost.className="drag-copy";
 ghost.textContent=dragged.dataset.password;
-ghost.style.width=rect.width+"px";
+ghost.style.width=dragWidth+"px";
+ghost.style.height=dragHeight+"px";
 
 document.body.appendChild(ghost);
 
 moveGhost(e.clientX,e.clientY);
 
-dragged.addEventListener("pointermove",dragMove);
-dragged.addEventListener("pointerup",endDrag);
-dragged.addEventListener("pointercancel",endDrag);
+document.addEventListener("pointermove",dragMove,{passive:false});
+document.addEventListener("pointerup",endDrag,{passive:false});
+document.addEventListener("pointercancel",endDrag,{passive:false});
 
 clearC2Result();
 
@@ -2474,18 +2424,93 @@ function moveGhost(x,y){
 
 if(!ghost)return;
 
-ghost.style.left=x+"px";
-ghost.style.top=y+"px";
+const left=x-dragOffsetX;
+const top=y-dragOffsetY;
+
+ghost.style.transform=
+`translate3d(${left}px,${top}px,0)`;
 
 }
 
-function clearDrop(){
+function clearDragHighlights(){
 
 document
 .querySelectorAll("#passwordList .password-item")
-.forEach(card=>{
-card.classList.remove("drop-before","drop-after");
-});
+.forEach(card=>card.classList.remove("drag-over"));
+
+}
+
+function getDragCards(){
+
+return [
+...document.querySelectorAll("#passwordList .password-item")
+].filter(card=>card!==dragged);
+
+}
+
+function reorderFromPointer(clientY){
+
+if(!dragged)return;
+
+const list=document.getElementById("passwordList");
+const cards=getDragCards();
+
+clearDragHighlights();
+
+if(!cards.length){
+list.appendChild(dragged);
+return;
+}
+
+const listRect=list.getBoundingClientRect();
+
+if(clientY<=listRect.top+18){
+list.insertBefore(dragged,cards[0]);
+cards[0].classList.add("drag-over");
+return;
+}
+
+if(clientY>=listRect.bottom-18){
+list.appendChild(dragged);
+cards[cards.length-1].classList.add("drag-over");
+return;
+}
+
+let inserted=false;
+
+for(const card of cards){
+
+const rect=card.getBoundingClientRect();
+const middle=rect.top+rect.height/2;
+
+if(clientY<middle){
+
+list.insertBefore(dragged,card);
+card.classList.add("drag-over");
+inserted=true;
+break;
+
+}
+
+}
+
+if(!inserted){
+list.appendChild(dragged);
+cards[cards.length-1].classList.add("drag-over");
+}
+
+}
+
+function autoScroll(clientY){
+
+const edge=75;
+const speed=12;
+
+if(clientY<edge){
+window.scrollBy(0,-speed);
+}else if(clientY>window.innerHeight-edge){
+window.scrollBy(0,speed);
+}
 
 }
 
@@ -2493,79 +2518,78 @@ function dragMove(e){
 
 if(!dragged)return;
 
+lastClientY=e.clientY;
+
 moveGhost(e.clientX,e.clientY);
+reorderFromPointer(e.clientY);
+autoScroll(e.clientY);
 
-clearDrop();
-
-if(ghost)ghost.style.visibility="hidden";
-
-const element=document.elementFromPoint(e.clientX,e.clientY);
-
-if(ghost)ghost.style.visibility="visible";
-
-const card=
-element?
-element.closest("#passwordList .password-item"):
-null;
-
-if(!card||card===dragged){
-
-target=null;
-return;
-
+e.preventDefault();
 }
 
-target=card;
-
-const rect=card.getBoundingClientRect();
-
-placeAfter=e.clientY>rect.top+rect.height/2;
-
-card.classList.add(
-placeAfter?
-"drop-after":
-"drop-before"
-);
-
-}
-
-function endDrag(){
+function endDrag(e){
 
 if(!dragged)return;
 
-if(target){
-
-if(placeAfter){
-target.after(dragged);
+if(e&&typeof e.clientY==="number"){
+reorderFromPointer(e.clientY);
 }else{
-target.before(dragged);
+reorderFromPointer(lastClientY);
 }
-
-}
-
-try{
-
-if(dragged.hasPointerCapture(dragPointerId)){
-dragged.releasePointerCapture(dragPointerId);
-}
-
-}catch(error){}
 
 dragged.classList.remove("drag-source");
 
-dragged.removeEventListener("pointermove",dragMove);
-dragged.removeEventListener("pointerup",endDrag);
-dragged.removeEventListener("pointercancel",endDrag);
+clearDragHighlights();
 
-clearDrop();
+const list=document.getElementById("passwordList");
 
-if(ghost)ghost.remove();
+if(list)list.classList.remove("drag-active");
+
+if(ghost){
+ghost.remove();
+ghost=null;
+}
+
+document.body.classList.remove("dragging");
+
+document.removeEventListener("pointermove",dragMove);
+document.removeEventListener("pointerup",endDrag);
+document.removeEventListener("pointercancel",endDrag);
 
 dragged=null;
-target=null;
-ghost=null;
 dragPointerId=null;
+dragOffsetX=0;
+dragOffsetY=0;
+dragWidth=0;
+dragHeight=0;
+lastClientY=0;
 
+if(e)e.preventDefault();
+}
+
+function cancelActiveDrag(){
+
+if(!dragged)return;
+
+dragged.classList.remove("drag-source");
+clearDragHighlights();
+
+const list=document.getElementById("passwordList");
+if(list)list.classList.remove("drag-active");
+
+if(ghost){
+ghost.remove();
+ghost=null;
+}
+
+document.body.classList.remove("dragging");
+
+document.removeEventListener("pointermove",dragMove);
+document.removeEventListener("pointerup",endDrag);
+document.removeEventListener("pointercancel",endDrag);
+
+dragged=null;
+dragPointerId=null;
 }
 
 function getPasswordOrder(){
@@ -2578,10 +2602,13 @@ return [
 
 function checkC2(){
 
+if(dragged)endDrag();
+
 const order=getPasswordOrder();
 
 const correct=
-order.every((p,i)=>p===correctPasswords[i]);
+order.length===correctPasswords.length &&
+order.every((password,index)=>password===correctPasswords[index]);
 
 const result=document.getElementById("c2Result");
 
@@ -2602,6 +2629,8 @@ function clearC2Result(){
 
 const result=document.getElementById("c2Result");
 
+if(!result)return;
+
 result.className="result";
 result.textContent="";
 
@@ -2609,16 +2638,12 @@ result.textContent="";
 
 function resetC2(){
 
+cancelActiveDrag();
 clearC2Result();
 
-document.getElementById("passwordList").innerHTML="";
+const list=document.getElementById("passwordList");
 
-if(ghost)ghost.remove();
-
-dragged=null;
-target=null;
-ghost=null;
-dragPointerId=null;
+if(list)list.innerHTML="";
 
 }
 
@@ -2648,7 +2673,6 @@ showScreen("c2");
 function openC3(){
 
 resetC3();
-
 showScreen("c3");
 
 setTimeout(()=>{
@@ -2662,10 +2686,7 @@ function checkC3(){
 const input=document.getElementById("c3Input");
 const result=document.getElementById("c3Result");
 
-if(
-input.value.trim().toLowerCase()
-==="rahul@2008"
-){
+if(input.value.trim().toLowerCase()==="rahul@2008"){
 
 showScreen("c3Success");
 
@@ -2734,7 +2755,6 @@ activeStatusOff:false
 function openC4(){
 
 resetC4();
-
 showScreen("c4");
 
 }
@@ -2742,7 +2762,6 @@ showScreen("c4");
 function backToC3Success(){
 
 resetC4();
-
 showScreen("c3Success");
 
 }
@@ -2750,13 +2769,13 @@ showScreen("c3Success");
 function openPrivacy(){
 
 renderPrivacy();
-
 showScreen("c4Privacy");
 
 }
 
 function backToC4Profile(){
 
+resetC4();
 showScreen("c4");
 
 }
@@ -2843,8 +2862,6 @@ document
 
 function renderPrivacy(){
 
-/* ACCOUNT */
-
 safeSetting(
 "settingAccount",
 c4State.accountPrivate
@@ -2865,8 +2882,6 @@ selected(
 c4State.accountPrivate
 );
 
-/* LOCATION */
-
 safeSetting(
 "settingLocation",
 c4State.locationOff
@@ -2883,8 +2898,6 @@ document
 "on",
 !c4State.locationOff
 );
-
-/* MESSAGES */
 
 safeSetting(
 "settingMessages",
@@ -2906,8 +2919,6 @@ selected(
 c4State.messagesFriends
 );
 
-/* TAGS */
-
 safeSetting(
 "settingTags",
 c4State.tagApproval
@@ -2924,8 +2935,6 @@ document
 "on",
 c4State.tagApproval
 );
-
-/* DISCOVERABILITY */
 
 safeSetting(
 "settingDiscover",
@@ -2944,8 +2953,6 @@ document
 !c4State.discoverabilityOff
 );
 
-/* ACTIVE STATUS */
-
 safeSetting(
 "settingActivity",
 c4State.activeStatusOff
@@ -2962,8 +2969,6 @@ document
 "on",
 !c4State.activeStatusOff
 );
-
-/* CHECK */
 
 renderCheck(
 "checkAccount",
@@ -3024,7 +3029,6 @@ c4State.activeStatusOff?
 function renderCheck(itemId,stateId,safe,text){
 
 safeCheck(itemId,safe);
-
 document.getElementById(stateId).textContent=text;
 
 }
@@ -3051,7 +3055,7 @@ if(privacySecured()){
 result.className="result";
 result.textContent="";
 
-showScreen("c4Success");
+showScreen("finalSuccess");
 
 }else{
 
@@ -3074,14 +3078,6 @@ result.textContent="";
 
 }
 
-function backFromC4Success(){
-
-renderPrivacy();
-
-showScreen("c4Privacy");
-
-}
-
 function resetC4(){
 
 c4State.accountPrivate=false;
@@ -3092,14 +3088,7 @@ c4State.discoverabilityOff=false;
 c4State.activeStatusOff=false;
 
 clearC4Error();
-
 renderPrivacy();
-
-}
-
-function finishC4(){
-
-alert("Challenge 05 will connect here.");
 
 }
 
@@ -3108,4 +3097,4 @@ renderPrivacy();
 </script>
 
 </body>
-</html>
+  </html>
